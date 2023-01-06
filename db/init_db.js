@@ -4,14 +4,18 @@ const {
   // for example, User
 } = require('./');
 
-async function buildTables() {
+async function dropTables() {
+  console.log("Attempting to drop tables.")
   try {
     client.connect();
-
     // drop tables in correct order
+    await client.query(`
+      DROP TABLE IF EXISTS users;
+    `);
 
-    // build tables in correct order
+    console.log("Tables Successfully Dropped.")
   } catch (error) {
+    console.log("Could not drop tables.")
     throw error;
   }
 }
@@ -25,8 +29,7 @@ async function populateInitialData() {
     throw error;
   }
 }
-
-buildTables()
+  buildTables()
   .then(populateInitialData)
   .catch(console.error)
   .finally(() => client.end());
