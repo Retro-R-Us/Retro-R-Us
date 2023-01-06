@@ -20,6 +20,39 @@ async function dropTables() {
   }
 }
 
+async function buildTables() {
+  console.log("Attempting to build tables.")
+  try {
+    // build tables in correct order
+    // users table
+    await client.query(`
+        CREATE TABLE users (
+          id SERIAL PRIMARY KEY,
+          username varchar(50) UNIQUE NOT NULL,
+          password varchar(50) NOT NULL,
+          email varchar(254) UNIQUE NOT NULL,
+          created_on TIMESTAMP NOT NULL
+          );
+        `);
+
+        // orders table
+
+        // cart table
+
+        // games table
+
+        // consoles table
+
+        // accessories table
+
+        // collectibles table
+    console.log("Tables Successfully built.")
+  } catch (error) {
+    console.log("Could not build tables.")
+    throw error;
+  }
+}
+
 async function populateInitialData() {
   try {
     // create useful starting data by leveraging your
