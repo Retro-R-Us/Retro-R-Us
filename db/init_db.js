@@ -62,7 +62,9 @@ async function populateInitialData() {
     throw error;
   }
 }
-  buildTables()
-  .then(populateInitialData)
-  .catch(console.error)
-  .finally(() => client.end());
+
+dropTables()
+.then(buildTables)
+.then(populateInitialData)
+.catch(console.error)
+.finally(() => client.end());
