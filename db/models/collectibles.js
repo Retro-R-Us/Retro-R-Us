@@ -30,3 +30,22 @@ async function getCollectibleById(collectibleId) {
         throw error;
     }
 };
+
+async function getCollectiblesByConsole(console) {
+    try {
+        const { rows: [collectibles] } = await client.query(`
+            SELECT * FROM collectibles
+            WHERE console=$1;
+        `, [console]);
+
+        if (!collectibles) {
+            return undefined;
+        }
+
+        return collectibles;
+    } catch (error) {
+        throw error;
+    }
+};
+
+
