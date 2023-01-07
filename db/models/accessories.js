@@ -4,7 +4,8 @@ module.exports = {
     // add your database adapter fns here
     getAllAccessories,
     getAccessoryById,
-    getAccessoriesByConsole
+    getAccessoriesByConsole,
+    createAccessoryListing,
 };
 
 // get all accessories
@@ -57,5 +58,18 @@ async function getAccessoriesByConsole(console) {
 }
 
 // create accessory listing
+async function createAccessoryListing({ title, description, console, price }) {
+    try {
+        const { rows: [accessory] } = await client.query(`
+            INSERT INTO accessories(title, description, console, price)
+            VALUES($1, $2, $3, $4)
+            RETURNING *;
+        `, [title, description, console, price]);
+
+        return accessory;
+    } catch (error) {
+        throw error;
+    }   
+}
 
 // delete accessory listing
