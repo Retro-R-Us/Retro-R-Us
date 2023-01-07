@@ -25,12 +25,17 @@ async function createUser(userData) {
         ON CONFLICT (username, email) DO NOTHING
       `, [username, hashedPassword, email]
     );
-
-    return {
-      Success: true,
-      Message: "User registration successful!"
-    }
-    
+      if (username === user.username) {
+        return {
+          Success: true,
+          Message: "User registration successful!"
+        }
+      } else {
+        return {
+          Success: false,
+          Message: "User registration failed."
+        }
+      }
   } catch (error) {
     console.log("Could not create user.");
     throw error;
@@ -56,7 +61,7 @@ async function userLogin ({username, password}) {
       }
     } else {
       const returnValue = {
-        Succes: true,
+        Success: true,
         Message: 'Login Successful',
         userdata: user
       }
@@ -92,8 +97,8 @@ async function getUserByUsername(name) {
       `
         SELECT *
         FROM users
-        WHERE user=$1;
-      `, [user]
+        WHERE username=$1;
+      `, [name]
     )
 
     delete user.password;
