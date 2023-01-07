@@ -5,7 +5,9 @@ const bcrypt = require('bcrypt');
 module.exports = {
   // add your database adapter fns here
   getAllUsers,
-  createUser
+  createUser,
+  getUserByUsername,
+  getUserById
 };
 
 async function createUser(userData) { 
@@ -34,5 +36,57 @@ async function createUser(userData) {
 }
 
 async function getAllUsers() {
-  /* this adapter should fetch a list of users from your db */
+  try {
+    const { rows } = await client.query(
+      `
+        SELECT *
+        FROM users;
+      `
+    )
+    
+    rows.forEach(user => delete user.password)
+    return rows;
+
+  } catch (error) {
+    console.log("Could not get all users.")
+    throw error;
+  }
+}
+
+async function getUserByUsername(name) { 
+  try {
+    const { rows: [user] } = await client.query(
+      `
+        SELECT *
+        FROM users
+        WHERE user=$1;
+      `, [user]
+    )
+
+    delete user.password;
+    return user;
+
+  } catch (error) {
+    console.log("Could not get user by name.");
+    throw error;
+  }
+}
+
+async function getUserById(id) {
+  try {
+    const { rows: [user] } = await client.query(
+      `
+        SELECT *
+        FROM users
+        WHERE id=$1;
+      `, [id]
+    )
+
+    delete user.password;
+    return user;
+
+  } catch (error) {
+    console.log("Could not get user by id.");
+    throw error;
+  }
 }
