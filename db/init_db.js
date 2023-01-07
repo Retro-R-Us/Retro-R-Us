@@ -59,7 +59,7 @@ async function buildTables() {
         // accessories table
     await client.query(`
         CREATE TABLE accessories (
-          accessoryId SERIAL PRIMARY KEY,
+          "accessoryId" SERIAL PRIMARY KEY,
           title varchar(50) NOT NULL,
           description varchar(255) NOT NULL,
           console varchar(50) NOT NULL,
