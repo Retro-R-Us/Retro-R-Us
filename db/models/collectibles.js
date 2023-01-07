@@ -48,4 +48,18 @@ async function getCollectiblesByConsole(console) {
     }
 };
 
+async function createCollectibleListing({ title, description, console, price }) {
+    try {
+        const { rows: [collectibles] } = await client.query(`
+            INSERT INTO collectible(title, description, console, price)
+            VALUES($1, $2, $3, $4)
+            RETURNING *;
+        `, [title, description, console, price]);
+
+        return collectibles;
+    } catch (error) {
+        throw error;
+    }   
+};
+
 
