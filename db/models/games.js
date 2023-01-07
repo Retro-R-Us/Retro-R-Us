@@ -5,7 +5,8 @@ module.exports = {
     getAllGames,
     getGameById,
     getGamesByConsole,
-    getGamesByYear
+    getGamesByYear,
+    createGameListing
 };
 
 // get all games
@@ -75,6 +76,21 @@ async function getGamesByYear(year) {
         }
 
         return games;
+    } catch (error) {
+        throw error;
+    }
+}
+
+// create new game listing
+async function createGameListing({ title, description, console, year, price }) {
+    try {
+        const { rows: [game] } = await client.query(`
+            INSERT INTO games(title, description, console, year, price)
+            VALUES($1, $2, $3, $4, $5)
+            RETURNING *;
+        `, [title, description, console, year, price]);
+
+        return game;
     } catch (error) {
         throw error;
     }
