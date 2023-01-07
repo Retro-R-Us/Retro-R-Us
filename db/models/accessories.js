@@ -1,7 +1,6 @@
 const client = require('../client');
 
 module.exports = {
-    // add your database adapter fns here
     getAllAccessories,
     getAccessoryById,
     getAccessoriesByConsole,
@@ -9,7 +8,7 @@ module.exports = {
     deleteAccessoryListing
 };
 
-// get all accessories
+// returns all accessories
 async function getAllAccessories() {
     const { rows: [accessories] } = await client.query(`
         SELECT * FROM accessories;
@@ -18,7 +17,7 @@ async function getAllAccessories() {
     return accessories;
 }
 
-// get accessory by id
+// returns an accessory by id
 async function getAccessoryById(accessoryId) {
     try {
         const { rows: [accessory] } = await client.query(`
@@ -37,7 +36,7 @@ async function getAccessoryById(accessoryId) {
     }
 }
 
-// get accessories by console
+// returns all accessories by console
 async function getAccessoriesByConsole(console) {
     try {
         const { rows: [accessories] } = await client.query(`
@@ -58,7 +57,7 @@ async function getAccessoriesByConsole(console) {
     }
 }
 
-// create accessory listing
+// create an accessory listing, returns the new accessory
 async function createAccessoryListing({ title, description, console, price }) {
     try {
         const { rows: [accessory] } = await client.query(`
@@ -73,7 +72,7 @@ async function createAccessoryListing({ title, description, console, price }) {
     }   
 }
 
-// delete accessory listing
+// delete accessory listing, returns the deleted accessory
 async function deleteAccessoryListing(accessoryId) {
     try {
         const { rows: [accessory] } = await client.query(`
