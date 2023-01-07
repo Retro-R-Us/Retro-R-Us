@@ -6,6 +6,7 @@ module.exports = {
     getAccessoryById,
     getAccessoriesByConsole,
     createAccessoryListing,
+    deleteAccessoryListing
 };
 
 // get all accessories
@@ -73,3 +74,16 @@ async function createAccessoryListing({ title, description, console, price }) {
 }
 
 // delete accessory listing
+async function deleteAccessoryListing(accessoryId) {
+    try {
+        const { rows: [accessory] } = await client.query(`
+            DELETE FROM accessories
+            WHERE "accessoryId"=$1
+            RETURNING *;
+        `, [accessoryId]);
+
+        return accessory;
+    } catch (error) {
+        throw error;
+    }
+}
