@@ -9,7 +9,7 @@ module.exports = {
 
 async function getAllConsoles() {
     try {
-        const { rows: consoles } = await client.query(`
+        const { rows: [consoles] } = await client.query(`
         SELECT * FROM consoles;
         `);
         return consoles;
@@ -24,7 +24,7 @@ async function getConsolesById(consoleId) {
             rows: [consoles],
         } = await client.query(`
         SELECT * FROM consoles
-        WHERE consoleId=$1;
+        WHERE "consoleId"=$1;
         `,
         [consoleId]
         );
