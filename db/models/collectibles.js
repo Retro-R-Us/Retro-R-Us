@@ -2,7 +2,7 @@ const client = require("./client");
 
 module.exports = {
     getAllCollectibles,
-    getCollectiblesById,
+    getCollectibleById,
     getCollectiblesByConsole,
     createCollectibleListing,
 };
