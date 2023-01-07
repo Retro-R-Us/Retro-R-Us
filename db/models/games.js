@@ -1,7 +1,6 @@
 const client = require('../client');
 
 module.exports = {
-    // add your database adapter fns here
     getAllGames,
     getGameById,
     getGamesByConsole,
@@ -10,7 +9,7 @@ module.exports = {
     deleteGameListing
 };
 
-// get all games
+// returns all games
 async function getAllGames() {
     const { rows: [games] } = await client.query(`
         SELECT * FROM games;
@@ -19,7 +18,7 @@ async function getAllGames() {
     return games;
 }
 
-// get game by ID
+// returns game by id
 async function getGameById(gameId) {
     try {
         const { rows: [game] } = await client.query(`
@@ -40,7 +39,7 @@ async function getGameById(gameId) {
     }
 }
 
-// get all games by console
+// returns all games by console
 async function getGamesByConsole(console) {
     try {
         const { rows: [games] } = await client.query(`
@@ -61,7 +60,7 @@ async function getGamesByConsole(console) {
     }
 }
 
-// get all games by year
+// returns all games by year
 async function getGamesByYear(year) {
     try {
         const { rows: [games] } = await client.query(`
