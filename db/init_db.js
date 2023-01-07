@@ -101,7 +101,7 @@ async function buildTables() {
           "collectibleId" SERIAL PRIMARY KEY,
           title varchar(50) NOT NULL,
           description varchar(50) NOT NULL,
-          console varchar(50) NOT NULL,
+          console varchar(50),
           price numeric(18,2) NOT NULL,
           );
         `);
