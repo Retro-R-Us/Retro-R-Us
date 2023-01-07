@@ -44,7 +44,7 @@ async function buildTables() {
         // games table
     await client.query(`
         CREATE TABLE games (
-          gameId SERIAL PRIMARY KEY,
+          "gameId" SERIAL PRIMARY KEY,
           title varchar(50) NOT NULL,
           description varchar(255) NOT NULL,
           console varchar(50) NOT NULL,
