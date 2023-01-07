@@ -4,7 +4,8 @@ module.exports = {
     // add your database adapter fns here
     getAllGames,
     getGameById,
-    getGamesByConsole
+    getGamesByConsole,
+    getGamesByYear
 };
 
 // get all games
@@ -50,6 +51,27 @@ async function getGamesByConsole(console) {
                 name: 'ErrorGamesNotFound',
                 message: 'Could not find any games by that console'
             };
+        }
+
+        return games;
+    } catch (error) {
+        throw error;
+    }
+}
+
+// get all games by year
+async function getGamesByYear(year) {
+    try {
+        const { rows: [games] } = await client.query(`
+            SELECT * from games
+            WHERE year=$1;
+        `, [year]);
+
+        if (!games) {
+            throw {
+                name: 'ErrorGamesNotFound',
+                message: 'Could not find any games by that year'
+            }
         }
 
         return games;
