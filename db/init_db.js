@@ -2,7 +2,11 @@ const {
   client,
   // declare your model imports here
   // for example, User
-  User
+  User,
+  Acc,
+  Games,
+  Orders,
+  Consoles
 } = require('./');
 
 async function dropTables() {
