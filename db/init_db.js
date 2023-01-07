@@ -41,7 +41,16 @@ async function buildTables() {
         // orders table
 
         // cart table
-
+    await client.query(`
+        CREATE TABLE cart (
+          "cartId" SERIAL PRIMARY KEY,
+          "userId" INTEGER REFERENCES users(id) NOT NULL,
+          "gameId" INTEGER REFERENCES games(gameId),
+          "consoleId" INTEGER REFERENCES console(consoleId),
+          "accessoryId" INTEGER REFERENCES accessory(accessoryId),
+          "collectibleId" INTEGER REFERENCES collectible(collectibleId)
+        );  
+    `);
         // games table
     await client.query(`
         CREATE TABLE games (
