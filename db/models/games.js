@@ -3,7 +3,8 @@ const client = require('../client');
 module.exports = {
     // add your database adapter fns here
     getAllGames,
-    getGameById
+    getGameById,
+    getGamesByConsole
 };
 
 // get all games
@@ -31,6 +32,27 @@ async function getGameById(gameId) {
         }
 
         return game;
+    } catch (error) {
+        throw error;
+    }
+}
+
+// get all games by console
+async function getGamesByConsole(console) {
+    try {
+        const { rows: [games] } = await client.query(`
+            SELECT * FROM games
+            WHERE console=$1;
+        `, [console]);
+
+        if (!games) {
+            throw {
+                name: 'ErrorGamesNotFound',
+                message: 'Could not find any games by that console'
+            };
+        }
+
+        return games;
     } catch (error) {
         throw error;
     }
