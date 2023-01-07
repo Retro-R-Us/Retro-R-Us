@@ -11,12 +11,13 @@ async function dropTables() {
     client.connect();
     // drop tables in correct order
     await client.query(`
-      DROP TABLE IF EXISTS users;
+      DROP TABLE IF EXISTS cart;
+      DROP TABLE IF EXISTS orders;
       DROP TABLE IF EXISTS consoles;
       DROP TABLE IF EXISTS games;
       DROP TABLE IF EXISTS collectibiles;
       DROP TABLE IF EXISTS accessories;
-
+      DROP TABLE IF EXISTS users;
     `);
 
     console.log("Tables Successfully Dropped.")
