@@ -2,7 +2,7 @@ const client = require("./client");
 
 async function createOrder({
     userId, status, cart
-}) {
+    }) {
     try {
         const { rows: [order] } = await client.query(`
         INSERT INTO orders( "userId", status, cart)
@@ -41,12 +41,6 @@ async function getOrdersByUser({username}) {
         WHERE "userId" = $1;
         `, [user.id]);
 
-        const { rows: [games] } = await client.query(`
-        SELECT *
-        From cart
-        JOIN games ON game.id = cart."gameId";
-        `);
-
         return order;
     } catch (error) {
         console.error("Could not get orders");
@@ -54,7 +48,7 @@ async function getOrdersByUser({username}) {
     }
 }
 
-async function getOrderById(id) {
+async function getOrdersById(id) {
     try {
         const { rows: [order] } = await client.query(`
         SELECT *
@@ -71,7 +65,7 @@ async function getOrderById(id) {
 
 async function updateOrder({ id, status, cart }) {
     try {
-        const order = await getOrderById(id);
+        const order = await getOrdersById(id);
         const fields = {};
 
         if (!order) {
@@ -110,6 +104,6 @@ module.exports = {
     createOrder,
     getAllOrders,
     getOrdersByUser,
-    getOrderById,
+    getOrdersById,
     updateOrder,
 }
