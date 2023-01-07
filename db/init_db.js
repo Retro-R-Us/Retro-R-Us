@@ -14,6 +14,7 @@ async function dropTables() {
       DROP TABLE IF EXISTS users;
       DROP TABLE IF EXISTS consoles;
       DROP TABLE IF EXISTS games;
+      DROP TABLE IF EXISTS accessories;
     `);
 
     console.log("Tables Successfully Dropped.")
@@ -75,6 +76,15 @@ async function buildTables() {
         `);
 
         // accessories table
+    await client.query(`
+        CREATE TABLE accessories (
+          "accessoryId" SERIAL PRIMARY KEY,
+          title varchar(50) NOT NULL,
+          description varchar(255) NOT NULL,
+          console varchar(50) NOT NULL,
+          price numeric(18,2) NOT NULL
+          );
+        `);
 
         // collectibles table
 
