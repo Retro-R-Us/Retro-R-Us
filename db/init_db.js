@@ -57,9 +57,9 @@ async function buildTables() {
           "cartId" SERIAL PRIMARY KEY,
           "userId" INTEGER REFERENCES users(id) NOT NULL,
           "gameId" INTEGER REFERENCES games(gameId),
-          "consoleId" INTEGER REFERENCES console(consoleId),
-          "accessoryId" INTEGER REFERENCES accessory(accessoryId),
-          "collectibleId" INTEGER REFERENCES collectible(collectibleId)
+          "consoleId" INTEGER REFERENCES consoles(consoleId),
+          "accessoryId" INTEGER REFERENCES accessories(accessoryId),
+          "collectibleId" INTEGER REFERENCES collectibles(collectibleId)
         );  
     `);
         // games table
