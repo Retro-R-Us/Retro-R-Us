@@ -9,7 +9,8 @@ module.exports = {
   createUser,
   getUserByUsername,
   getUserById,
-  newPassword
+  newPassword,
+  userLogin
 };
 
 async function createUser(userData) { 
@@ -36,6 +37,37 @@ async function createUser(userData) {
   }
 }
 
+async function userLogin ({username, password}) {
+  try {
+    const { rows: [user] } = await client.query(
+      `
+        SELECT *
+        FROM users
+        WHERE username=$1; 
+      `, [username]
+    );
+    
+    const isValid = await bcrypt.compare(user.password, password);
+    if (!isValid) {
+      const invalid = new Error('Username or Password was incorrect.');
+      return {
+        Success: false,
+        Message: invalid
+      }
+    } else {
+      const returnValue = {
+        Succes: true,
+        Message: 'Login Successful',
+        userdata: user
+      }
+      return returnValue;
+    }
+  } catch (error) {
+    console.log("Could not get user data.");
+    throw error;
+  }
+}
+
 async function getAllUsers() {
   try {
     const { rows } = await client.query(
@@ -43,7 +75,7 @@ async function getAllUsers() {
         SELECT *
         FROM users;
       `
-    )
+    );
     
     rows.forEach(user => delete user.password)
     return rows;
