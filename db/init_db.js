@@ -12,6 +12,7 @@ async function dropTables() {
     // drop tables in correct order
     await client.query(`
       DROP TABLE IF EXISTS users;
+      DROP TABLE IF EXISTS consoles;
       DROP TABLE IF EXISTS games;
     `);
 
@@ -54,6 +55,15 @@ async function buildTables() {
         `);
 
         // consoles table
+        await client.query(`
+        CREATE TABLE consoles (
+          "consoleId" SERIAL PRIMARY KEY,
+          title varchar(50) NOT NULL,
+          description varchar(50) NOT NULL,
+          year integer NOT NULL,
+          price numeric(18,2) NOT NULL,
+          );
+        `);
 
         // accessories table
 
