@@ -40,6 +40,13 @@ async function buildTables() {
         `);
 
         // orders table
+    await client.query(`
+        CREATE TABLE orders (
+          "orderId" SERIAL PRIMARY KEY,
+          "userId" INTEGER REFERENCES users(id),
+          status varchar(255) NOT NULL,
+        );
+    `);
 
         // cart table
     await client.query(`
