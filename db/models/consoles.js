@@ -11,15 +11,15 @@ async function getAllConsoles() {
     }
 };
 
-async function getConsolesById(id) {
+async function getConsolesById(consoleId) {
     try {
         const {
             rows: [consoles],
         } = await client.query(`
         SELECT * FROM consoles
-        WHERE id=$1;
+        WHERE consoleId=$1;
         `,
-        [id]
+        [consoleId]
         );
         if (!consoles) {
             return undefined;
@@ -29,6 +29,25 @@ async function getConsolesById(id) {
         throw error;
     }
 };
+
+async function getConsolesByYear(year) {
+    try {
+        const { rows: [consoles],
+         } = await client.query(`
+            SELECT * from consoles
+            WHERE year=$1;
+        `, [year]);
+
+        if (!consoles) {
+            return undefined;
+        }
+
+        return consoles;
+    } catch (error) {
+        throw error;
+    }
+};
+
 
 
 
