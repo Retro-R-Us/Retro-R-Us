@@ -52,16 +52,31 @@ async function updateCart({ id }) {
 
         return updateCart;
     } catch (error) {
-        console.error("Could not update cart")
+        console.error("Could not update cart");
         throw error;
     }
 }
 
+async function destroyCart(id) {
+    try {
+        const { rows: [deleteCart] } = await client.query(`
+        DELETE
+        FROM cart
+        WHERE id=$1
+        RETURNING *;
+        `, [id]);
+
+        return deleteCart;
+    } catch (error) {
+        console.error("Could not delete cart");
+        throw error;
+    }
+}
 
 
 module.exports = {
     addItemToCart,
     getOrderById,
     updateCart,
-
+    destroyCart,
 }
