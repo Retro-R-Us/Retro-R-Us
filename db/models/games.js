@@ -6,7 +6,8 @@ module.exports = {
     getGameById,
     getGamesByConsole,
     getGamesByYear,
-    createGameListing
+    createGameListing,
+    deleteGameListing
 };
 
 // get all games
@@ -89,6 +90,21 @@ async function createGameListing({ title, description, console, year, price }) {
             VALUES($1, $2, $3, $4, $5)
             RETURNING *;
         `, [title, description, console, year, price]);
+
+        return game;
+    } catch (error) {
+        throw error;
+    }
+}
+
+// delete game listing
+async function deleteGameListing(gameId) {
+    try {
+        const { rows: [game] } = await client.query(`
+            DELETE FROM games
+            WHERE "gameId"=$1
+            RETURNING *;
+        `, [gameId]);
 
         return game;
     } catch (error) {
