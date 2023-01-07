@@ -3,7 +3,8 @@ const client = require('../client');
 module.exports = {
     // add your database adapter fns here
     getAllAccessories,
-    getAccessoryById
+    getAccessoryById,
+    getAccessoriesByConsole
 };
 
 // get all accessories
@@ -35,6 +36,25 @@ async function getAccessoryById(accessoryId) {
 }
 
 // get accessories by console
+async function getAccessoriesByConsole(console) {
+    try {
+        const { rows: [accessories] } = await client.query(`
+            SELECT * FROM accessories
+            WHERE console=$1;
+        `, [console]);
+
+        if (!accessories) {
+            throw {
+                name: 'ErrorAccessoriesNotFound',
+                message: 'Could not find any accessories by that console'
+            };
+        }
+
+        return accessories;
+    } catch (error) {
+        throw error;
+    }
+}
 
 // create accessory listing
 
