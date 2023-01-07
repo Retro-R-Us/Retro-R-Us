@@ -1,5 +1,12 @@
 const client = require("./client");
 
+module.exports = {
+    getAllConsoles,
+    getConsolesById,
+    getConsolesByYear,
+    createConsoleListing
+};
+
 async function getAllConsoles() {
     try {
         const { rows: consoles } = await client.query(`
