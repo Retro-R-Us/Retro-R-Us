@@ -1,4 +1,4 @@
-const client = require("./client");
+const client = require("../client");
 
 async function addItemToCart({ orderId, quantity }) {
     try {
@@ -33,11 +33,11 @@ async function getOrderById(id) {
 async function updateCart({ id }) {
     try {
         const order = await getOrderById(id);
-        const fields = {};
+        const fields = {item, quantity};
         if (!order) {
             return;
         }
-        const setString = Object.keys(fields).map((key, index) => `"${key}"=$${index + 1}`)
+        const setString = Object.keys(fields).map((key, index) => `"${key}"=${index + 1}`)
         .join(", ");
 
         if (setString.length === 0) {
