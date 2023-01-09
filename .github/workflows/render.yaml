@@ -1,9 +1,9 @@
 # RENDER BLUEPRINT DOCUMENTATION
-# https://render.com/docs/blueprint-spec#web-services-workers-private-services-and-cron-jobs
+# https://render.com/docs/blueprint-spec#sample-blueprint-spec
 
 services:
 - type: web
-    name: my blog
+    name: Retro-R-Us
     env: node
     repo: https://github.com/Retro-R-Us/Retro-R-Us.git
     branch: master
