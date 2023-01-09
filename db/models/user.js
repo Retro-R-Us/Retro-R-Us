@@ -25,17 +25,10 @@ async function createUser(userData) {
         ON CONFLICT (username, email) DO NOTHING
       `, [username, hashedPassword, email]
     );
-      if (username === user.username) {
         return {
           Success: true,
           Message: "User registration successful!"
         }
-      } else {
-        return {
-          Success: false,
-          Message: "User registration failed."
-        }
-      }
   } catch (error) {
     console.log("Could not create user.");
     throw error;
