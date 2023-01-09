@@ -16,4 +16,21 @@ apiRouter.get('/health', (req, res, next) => {
 const userRouter = require('./user')
 apiRouter.use('/user', userRouter)
 
+apiRouter.get('*', (req, res, next) => {
+  const err = new Error()
+  err.status = 404;
+  next(err)
+})
+
+apiRouter.use((err, req, res, next) => {
+  if (err.status === 404) {
+    err.title = 'Page Not Found'
+    res.status(404);
+    res.send(err);
+  }
+  else {
+    return next();
+  }
+})
+
 module.exports = apiRouter;
