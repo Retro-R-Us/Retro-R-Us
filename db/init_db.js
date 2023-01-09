@@ -55,17 +55,6 @@ async function buildTables() {
         );
     `);
 
-        // cart table
-    await client.query(`
-        CREATE TABLE cart (
-          "cartId" SERIAL PRIMARY KEY,
-          "userId" INTEGER REFERENCES users(id) NOT NULL,
-          "gameId" INTEGER REFERENCES games(gameId),
-          "consoleId" INTEGER REFERENCES consoles(consoleId),
-          "accessoryId" INTEGER REFERENCES accessories(accessoryId),
-          "collectibleId" INTEGER REFERENCES collectibles(collectibleId)
-        );  
-    `);
         // games table
     await client.query(`
         CREATE TABLE games (
@@ -107,9 +96,21 @@ async function buildTables() {
           title varchar(50) NOT NULL,
           description varchar(50) NOT NULL,
           console varchar(50),
-          price numeric(18,2) NOT NULL,
+          price numeric(18,2) NOT NULL
           );
         `);
+
+        // cart table
+      await client.query(`
+        CREATE TABLE cart (
+          "cartId" SERIAL PRIMARY KEY,
+          "userId" INTEGER REFERENCES users(id) NOT NULL,
+          "gameId" INTEGER REFERENCES games("gameId"),
+          "consoleId" INTEGER REFERENCES consoles("consoleId"),
+          "accessoryId" INTEGER REFERENCES accessories("accessoryId"),
+          "collectibleId" INTEGER REFERENCES collectibles("collectibleId")
+          );
+      `);
 
     console.log("Tables Successfully built.")
   } catch (error) {
