@@ -8,7 +8,6 @@ const {
   Orders,
   Consoles
 } = require('./');
-const { createUser } = require('./models/user');
 
 async function dropTables() {
   console.log("Attempting to drop tables.")
@@ -129,7 +128,7 @@ async function populateInitialData() {
     console.log("Creating starting users.");
 
   //***** INITIAL USERS ***** */
-  class User {
+  class buildUser {
     constructor(username, password, email, admin) {
     this.username = username,
     this.password = password,
@@ -138,28 +137,127 @@ async function populateInitialData() {
     }
   }
 
-  const user1 = new User("The Grim Reaper", "deathman", "Reaper@hell.com");
-  const user2 = new User("The Devil", "HellBoss", "TheBoss@hell.com");
-  const user3 = new User("Demon", "freakazoid", "freakazoid1@hell.com");
-  const admin1 = new User("Matt", "123123", "somedude@gmail.com", true);
+  const user1 = new buildUser("The Grim Reaper", "deathman", "Reaper@hell.com");
+  const user2 = new buildUser("The Devil", "HellBoss", "TheBoss@hell.com");
+  const user3 = new buildUser("Demon", "freakazoid", "freakazoid1@hell.com");
+  const admin1 = new buildUser("Matt", "123123", "somedude@gmail.com", true);
   const users = [user1, user2, user3, admin1]
 
   const createdUsers = await Promise.all(users.map(async (user) => {
-    const response = await createUser(user);
+    const response = await User.createUser(user);
     console.log("Create User Response:", response)
   }))
 
   //***** INITIAL GAMES ***** */
+  class Game {
+    constructor(title, desc, console, year, price) {
+      this.title = title,
+      this.description = desc,
+      this.console = console,
+      this.year = year,
+      this.price = price
+    }
+  }
+
+  const game1 = new Game(
+      "Donkey Kong", 
+      "Badass monkeys kicking the shit out of enemies and collecting those bananas",
+      "N64",
+      "1999",
+      19.99
+    )
+  const game2 = new Game(
+      "Crash Bandicoot: WARPED!", 
+      "a platform game in which the player takes control of Crash and Coco Bandicoot, who must travel back and forward in time and gather 25 crystals before Uka Uka and Doctor Neo Cortex can do so.",
+      "Playstation",
+      "1998",
+      19.99
+    )
+  const game3 = new Game(
+    "Halo: Combat Evolved",
+    "a first-person shooter (FPS). The game features vehicles, ranging from armored 4x4s and tanks to alien hovercraft and aircraft. The game also allows vehicle use for pilots and mounted gun operators.",
+    "Xbox",
+    "2001",
+    29.99
+  )
+
+  const games = [game1, game2, game3];
+  const createdGames = await Promise.all(games.map(async (game) =>  {
+    const response = await Games.createGameListing(game);
+    console.log("Initial Games Created:", response);
+  }))
 
   //***** INITIAL CONSOLES ***** */
+  class createConsole {
+    constructor(title, desc, year, price) {
+      this.title = title,
+      this.description = desc,
+      this.year = year,
+      this.price = price
+    }
+  }
+
+  const con1 = new createConsole()
+  const con2 = new createConsole()
+  const con3 = new createConsole()
+
 
   //***** INITIAL COLLECTIBLES ***** */
+  class createCol {
+    constructor(title, desc, console, price) {
+      this.title = title,
+      this.description = desc,
+      this.console = console,
+      this.price = price
+    }
+  }
+
+  const coll1 = new createConsole()
+  const coll2 = new createConsole()
+  const coll3 = new createConsole()
 
   //***** INITIAL ACCESSORIES ***** */
+  class createAcc {
+    constructor(title, desc, console, year, price) {
+      this.title = title,
+      this.description = desc,
+      this.console = console,
+      this.price = price
+    }
+  }
+
+  const acc1 = new createConsole()
+  const acc2 = new createConsole()
+  const acc3 = new createConsole()
 
   //***** INITIAL ORDERS ***** */
+  class createOr {
+    constructor(userId, status) {
+      this.userId = userId,
+      this.status = status
+    }
+  }
+
+  const order1 = new createConsole()
+  const order2 = new createConsole()
+  const order3 = new createConsole()
 
   //***** INITIAL CART ***** */
+  class createCart {
+    constructor(orderId, quantity, userId, gameId, consoleId, accessoryId, collectibleId) {
+      this.orderId = orderId,
+      this.quantity = quantity,
+      this.userId = userId,
+      this.gameId = gameId,
+      this.consoleId = consoleId,
+      this.accessoryId = accessoryId,
+      this.collectibleId = collectibleId
+    }
+  }
+
+  const cart1 = new createConsole()
+  const cart2 = new createConsole()
+  const cart3 = new createConsole()
 
 
   // create useful starting data by leveraging your
