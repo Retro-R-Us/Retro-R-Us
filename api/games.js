@@ -13,3 +13,5 @@ gamesRouter.get('/', async (req, res, next) => {
         next(error);
     }
 });
+
+module.exports = gamesRouter;
