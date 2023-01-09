@@ -1,14 +1,5 @@
 const client = require('../client');
 
-module.exports = {
-    getAllGames,
-    getGameById,
-    getGamesByConsole,
-    getGamesByYear,
-    createGameListing,
-    deleteGameListing
-};
-
 // returns all games
 async function getAllGames() {
     const { rows: [games] } = await client.query(`
@@ -110,3 +101,12 @@ async function deleteGameListing(gameId) {
         throw error;
     }
 }
+
+module.exports = {
+    getAllGames,
+    getGameById,
+    getGamesByConsole,
+    getGamesByYear,
+    createGameListing,
+    deleteGameListing
+};
