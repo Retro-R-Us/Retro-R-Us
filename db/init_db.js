@@ -8,6 +8,7 @@ const {
   Orders,
   Consoles
 } = require('./');
+const { createUser } = require('./models/user');
 
 async function dropTables() {
   console.log("Attempting to drop tables.")
@@ -39,12 +40,12 @@ async function buildTables() {
     await client.query(`
         CREATE TABLE users (
           id SERIAL PRIMARY KEY,
-          username varchar(50) UNIQUE NOT NULL,
-          password varchar(50) NOT NULL,
-          email varchar(254) UNIQUE NOT NULL,
-          admin BOOLEAN NOT NULL,
+          username varchar(255) UNIQUE NOT NULL,
+          password varchar(255) NOT NULL,
+          email varchar(255) UNIQUE NOT NULL,
+          admin BOOLEAN DEFAULT false,
           "adminPass" varchar(50),
-          created_on TIMESTAMP NOT NULL
+          "createdOn" TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
           );
         `);
 
