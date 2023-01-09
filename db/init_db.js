@@ -42,6 +42,8 @@ async function buildTables() {
           username varchar(50) UNIQUE NOT NULL,
           password varchar(50) NOT NULL,
           email varchar(254) UNIQUE NOT NULL,
+          admin BOOLEAN NOT NULL,
+          "adminPass" varchar(50),
           created_on TIMESTAMP NOT NULL
           );
         `);
