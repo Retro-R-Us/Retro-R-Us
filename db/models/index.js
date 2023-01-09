@@ -7,7 +7,9 @@ module.exports = {
   User: require('./user'),
   Consoles: require('./consoles'),
   Orders: require('./orders'),
-  Games: require('./games')
+  Games: require('./games'),
+  Collectibles: require('./collectibles'),
+  Cart: require('./cart')
 };
 
 // then, in your API, you'll require the appropriate model
