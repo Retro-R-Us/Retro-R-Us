@@ -109,11 +109,7 @@ async function buildTables() {
           "consoleId" INTEGER REFERENCES consoles("consoleId"),
           "accessoryId" INTEGER REFERENCES accessories("accessoryId"),
           "collectibleId" INTEGER REFERENCES collectibles("collectibleId")
-        );  
           );
-        );  
-          );
-        );  
       `);
 
     console.log("Tables Successfully built.")
