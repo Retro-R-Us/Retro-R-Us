@@ -28,7 +28,36 @@ userRouter.get('/admin', async (req, res, next) => {
 })
 
 userRouter.post('/login', async (req, res, next) => {
+    try {
+        const { username, password } = req.body;
+
+        const user = await User.getUserByUsername(username);
     
+        if (!(username && password)) {
+            const err = new Error()
+            err.status = 400;
+            err.message = "Username/Password field missing. Please fill out both fields."
+            res.status(400)
+            next(err)
+        } else if (!(user.id && user.email && user.username)) {
+            const err = new Error()
+            err.status = 400;
+            err.message = "User does not exist. Please sign up for an account."
+            res.status(400)
+            next(err)
+        } else {
+            const hashedPassword = await bcrypt.hash(password, SALT)
+            const user = await User.userLogin(req.body);
+            const token = jwt.sign({username: username}, hashedPassword)
+            user.userData.token = token;
+            console.log("USER DATA:", user)
+            res.status(200);
+            res.send(user);
+        }
+        
+    } catch (error) {
+        next(error)
+    }
 })
 
 userRouter.post('/register', async (req, res, next) => {
