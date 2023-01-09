@@ -1,6 +1,7 @@
 const express = require('express');
 const userRouter = express.Router();
 const jwt = require('jsonwebtoken')
+const { PK } = require('./PK')
 const bcrypt = require('bcrypt')
 const { User } = require('../db/models/index');
 const SALT = 10;
@@ -46,13 +47,12 @@ userRouter.post('/login', async (req, res, next) => {
             res.status(400)
             next(err)
         } else {
-            const hashedPassword = await bcrypt.hash(password, SALT)
-            const user = await User.userLogin(req.body);
-            const token = jwt.sign({username: username}, hashedPassword)
-            user.userData.token = token;
-            console.log("USER DATA:", user)
-            res.status(200);
-            res.send(user);
+            const login = await User.userLogin(req.body);
+            const token = jwt.sign({username: username}, PK)
+            login.userdata.token = token;
+            console.log(login)
+            res.status(202);
+            res.send(login);
         }
         
     } catch (error) {
@@ -71,7 +71,7 @@ userRouter.post('/register', async (req, res, next) => {
             });
         } else {
             const response = await User.createUser(req.body);
-            res.status(200)
+            res.status(201)
             res.send(response)
         }
     } catch (error) {
