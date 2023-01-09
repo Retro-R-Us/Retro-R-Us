@@ -45,7 +45,7 @@ async function userLogin ({username, password}) {
       `, [username]
     );
     
-    const isValid = await bcrypt.compare(user.password, password);
+    const isValid = await bcrypt.compare(password, user.password);
     if (!isValid) {
       const invalid = new Error('Username or Password was incorrect.');
       return {
@@ -53,12 +53,12 @@ async function userLogin ({username, password}) {
         Message: invalid
       }
     } else {
-      const returnValue = {
+      delete user.password;
+      return {
         Success: true,
         Message: 'Login Successful',
         userdata: user
-      }
-      return returnValue;
+      };
     }
   } catch (error) {
     console.log("Could not get user data.");
