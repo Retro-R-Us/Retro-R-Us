@@ -14,4 +14,9 @@ apiRouter.get('/health', (req, res, next) => {
 
 // place your routers here
 
+// GAMES ROUTER
+const gamesRouter = require('./games'); // import the games router
+apiRouter.use('/games', gamesRouter); // mount the games router on /api/games
+
+
 module.exports = apiRouter;
