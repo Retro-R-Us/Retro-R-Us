@@ -1,12 +1,10 @@
 const express = require('express');
-const gamesRouter = require('./games');
+const gamesRouter = express.Router();
 
 const {
-    // put db methods here
+    getAllGames
 } = require('../db');
 
-// as of now, i havent configured the http routes yet
-// gets all games
 gamesRouter.get('/', async (req, res, next) => {
     try {
         const allGames = await getAllGames();
