@@ -128,10 +128,44 @@ async function populateInitialData() {
   try {
     console.log("Creating starting users.");
 
+  //***** INITIAL USERS ***** */
+  class User {
+    constructor(username, password, email, admin) {
+    this.username = username,
+    this.password = password,
+    this.email = email,
+    this.admin = admin
+    }
+  }
 
-    // create useful starting data by leveraging your
-    // Model.method() adapters to seed your db, for example:
-    // const user1 = await User.createUser({ ...user info goes here... })
+  const user1 = new User("The Grim Reaper", "deathman", "Reaper@hell.com");
+  const user2 = new User("The Devil", "HellBoss", "TheBoss@hell.com");
+  const user3 = new User("Demon", "freakazoid", "freakazoid1@hell.com");
+  const admin1 = new User("Matt", "123123", "somedude@gmail.com", true);
+  const users = [user1, user2, user3, admin1]
+
+  const createdUsers = await Promise.all(users.map(async (user) => {
+    const response = await createUser(user);
+    console.log("Create User Response:", response)
+  }))
+
+  //***** INITIAL GAMES ***** */
+
+  //***** INITIAL CONSOLES ***** */
+
+  //***** INITIAL COLLECTIBLES ***** */
+
+  //***** INITIAL ACCESSORIES ***** */
+
+  //***** INITIAL ORDERS ***** */
+
+  //***** INITIAL CART ***** */
+
+
+  // create useful starting data by leveraging your
+  // Model.method() adapters to seed your db, for example:
+  // const user1 = await User.createUser({ ...user info goes here... })
+  
   } catch (error) {
     throw error;
   }
