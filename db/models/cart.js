@@ -30,10 +30,9 @@ async function getOrderById(id) {
     }
 }
 
-async function updateCart({ id }) {
+async function updateCart({ id, ...fields }) {
     try {
         const order = await getOrderById(id);
-        const fields = {item, quantity};
         if (!order) {
             return;
         }
