@@ -19,7 +19,7 @@ async function dropTables() {
       DROP TABLE IF EXISTS orders;
       DROP TABLE IF EXISTS consoles;
       DROP TABLE IF EXISTS games;
-      DROP TABLE IF EXISTS collectibiles;
+      DROP TABLE IF EXISTS collectibles;
       DROP TABLE IF EXISTS accessories;
       DROP TABLE IF EXISTS users;
     `);
@@ -53,7 +53,7 @@ async function buildTables() {
         CREATE TABLE orders (
           "orderId" SERIAL PRIMARY KEY,
           "userId" INTEGER REFERENCES users(id),
-          status varchar(255) NOT NULL,
+          status varchar(255) NOT NULL
         );
     `);
 
@@ -76,7 +76,7 @@ async function buildTables() {
           title varchar(50) NOT NULL,
           description varchar(50) NOT NULL,
           year integer NOT NULL,
-          price numeric(18,2) NOT NULL,
+          price numeric(18,2) NOT NULL
           );
         `);
 
