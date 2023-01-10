@@ -72,6 +72,22 @@ async function createAccessoryListing({ title, description, console, price }) {
     }   
 }
 
+// update accessory listing, returns the updated accessory
+async function updateAccessoryListing({ title, description, console, price }) {
+    try {
+        const { rows: [accessory] } = await client.query(`
+            UPDATE accessories
+            SET title=$1, description=$2, console=$3, price=$4
+            WHERE "accessoryId"=$5
+            RETURNING *;
+        `, [title, description, console, price, accessoryId]);
+
+        return accessory;
+    } catch (error) {
+        throw error;
+    }
+}   
+
 // delete accessory listing, returns the deleted accessory
 async function deleteAccessoryListing(accessoryId) {
     try {
