@@ -1,6 +1,6 @@
 const express = require('express');
 const cartRouter = express.Router;
-const { addItemToCart, updateCart, destroyCart, getOrderById } = require('../db');
+const { Cart } = require('../db/models/index');
 
 cartRouter.post("/", async (req, res, next) => {
     try {
