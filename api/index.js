@@ -16,6 +16,9 @@ apiRouter.get('/health', (req, res, next) => {
 const userRouter = require('./user')
 apiRouter.use('/user', userRouter)
 
+const consolesRouter = require('./consoles')
+apiRoputer.use('/consoles', consolesRouter)
+
 apiRouter.get('*', (req, res, next) => {
   const err = new Error()
   err.status = 404;
