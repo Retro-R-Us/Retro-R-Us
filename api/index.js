@@ -1,5 +1,3 @@
-const { Router } = require('express');
-
 const apiRouter = require('express').Router();
 
 apiRouter.get('/', (req, res, next) => {
