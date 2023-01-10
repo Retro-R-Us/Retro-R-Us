@@ -20,4 +20,22 @@ gamesRouter.get('/:gameId', async (req, res, next) => {
     }
 });
 
+gamesRouter.get('/console/:console', async (req, res, next) => {
+    try {
+        const games = await Games.getGamesByConsole(req.params.console);
+        res.send(games);
+    } catch (error) {
+        next(error);
+    }
+});
+
+gamesRouter.get('/year/:year', async (req, res, next) => {
+    try {
+        const games = await Games.getGamesByYear(req.params.year);
+        res.send(games);
+    } catch (error) {
+        next(error);
+    }
+});
+
 module.exports = gamesRouter;
