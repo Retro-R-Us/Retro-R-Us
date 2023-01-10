@@ -2,12 +2,12 @@ const express = require('express');
 const gamesRouter = express.Router();
 
 const {
-    getAllGames
-} = require('../db');
+    Games
+} = require('../db/models/index');
 
 gamesRouter.get('/', async (req, res, next) => {
     try {
-        const allGames = await getAllGames();
+        const allGames = await Games.getAllGames();
         res.send(allGames);
     } catch (error) {
         next(error);
