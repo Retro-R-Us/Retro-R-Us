@@ -87,6 +87,32 @@ async function createGameListing({ title, description, console, year, price }) {
     }
 }
 
+// update game listing
+async function updateGameListing(gameId, fields = {}) {
+    // build the set string
+    const setString = Object.keys(fields).map(
+        (key, index) => `"${key}"=$${index + 1}`
+    ).join(', ');
+
+    // return early if this is called without fields
+    if (setString.length === 0) {
+        return;
+    }
+
+    try {
+        const { rows: [game] } = await client.query(`
+            UPDATE games
+            SET ${setString}
+            WHERE "gameId"=${gameId}
+            RETURNING *;
+        `, Object.values(fields));
+
+        return game;
+    } catch (error) {
+        throw error;
+    }
+}
+
 // delete game listing
 async function deleteGameListing(gameId) {
     try {
@@ -108,5 +134,6 @@ module.exports = {
     getGamesByConsole,
     getGamesByYear,
     createGameListing,
+    updateGameListing,
     deleteGameListing
 };
