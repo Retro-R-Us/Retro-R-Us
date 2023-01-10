@@ -88,25 +88,16 @@ async function createGameListing({ title, description, console, year, price }) {
 }
 
 // update game listing
-async function updateGameListing(gameId, fields = {}) {
-    // build the set string
-    const setString = Object.keys(fields).map(
-        (key, index) => `"${key}"=$${index + 1}`
-    ).join(', ');
-
-    // return early if this is called without fields
-    if (setString.length === 0) {
-        return;
-    }
-
+async function updateGameListing(gameId, { title, description, console, year, price }) {
+    
     try {
         const { rows: [game] } = await client.query(`
-            UPDATE games
-            SET ${setString}
-            WHERE "gameId"=${gameId}
+            UPDATE accessories
+            SET title=$1, description=$2, console=$3, year=$4, price=5$
+            WHERE "gameId"=$6
             RETURNING *;
-        `, Object.values(fields));
-
+        `, [title, description, console, year, price, gameId]);
+        
         return game;
     } catch (error) {
         throw error;
