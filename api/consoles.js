@@ -34,3 +34,21 @@ consolesRouter.get('/:consoleId', async (request, response, next) => {
         next(error);
     }
 });
+
+consolesRouter.patch('/:consoleId', async (request, response, next) => {
+    try {
+        const consoleToUpdate = await Console.getConsolesById(request.params.consoleId);
+        if (!consoleToUpdate) {
+            throw {
+                name: 'ErrorConsoleNotFound',
+                message: 'Could not find a console by that consoleId'
+            };
+        }
+
+        const updatedConsole = await Console.updateGameListing(request.params.consoleId, request.body);
+        response.send(updatedConsole);
+    } catch (error) {
+        console.log("An error occured while updating a game listing");
+        next(error);
+    }
+    });
