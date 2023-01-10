@@ -1,3 +1,6 @@
+const { Router } = require('express');
+const cartRouter = require('./cart');
+
 const apiRouter = require('express').Router();
 
 apiRouter.get('/', (req, res, next) => {
@@ -13,5 +16,9 @@ apiRouter.get('/health', (req, res, next) => {
 });
 
 // place your routers here
+
+//ROUTER: /api/cart
+const cartRouter = require('./cart');
+Router.use("/cart", cartRouter);
 
 module.exports = apiRouter;
