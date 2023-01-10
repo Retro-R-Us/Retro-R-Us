@@ -38,4 +38,14 @@ gamesRouter.get('/year/:year', async (req, res, next) => {
     }
 });
 
+gamesRouter.post('/', async (req, res, next) => {
+    try {
+        const game = await Games.createGameListing(req.body);
+        res.send(game);
+    } catch (error) {
+        next(error);
+    }
+});
+
+
 module.exports = gamesRouter;
