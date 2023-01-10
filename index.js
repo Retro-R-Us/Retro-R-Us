@@ -6,6 +6,7 @@ const server = express();
 // from localhost:3000 to localhost:4000 in local dev env
 const cors = require('cors');
 server.use(cors());
+require('dotenv').config();
 
 // create logs for everything
 const morgan = require('morgan');
