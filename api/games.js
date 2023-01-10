@@ -11,9 +11,44 @@ gamesRouter.get('/', async (req, res, next) => {
     }
 });
 
+gamesRouter.post('/', async (req, res, next) => {
+    try {
+        const game = await Games.createGameListing(req.body);
+        res.send(game);
+    } catch (error) {
+        next(error);
+    }
+});
+
+gamesRouter.delete('/:gameId', async (req, res, next) => {
+    try {
+        const gameToDelete = await Games.getGameById(req.params.gameId);
+        if (!gameToDelete) {
+            throw {
+                name: 'ErrorGameNotFound',
+                message: 'Could not find a game by that gameId'
+            };
+        }
+
+        const deletedGame = await Games.deleteGameListing(req.params.gameId);
+        res.send(deletedGame);
+    } catch (error) {
+        next(error);
+    }
+});
+
 gamesRouter.get('/:gameId', async (req, res, next) => {
     try {
         const game = await Games.getGameById(req.params.gameId);
+        res.send(game);
+    } catch (error) {
+        next(error);
+    }
+});
+
+gamesRouter.patch('/:gameId', async (req, res, next) => {
+    try {
+        const game = await Games.updateGameListing(req.params.gameId, req.body);
         res.send(game);
     } catch (error) {
         next(error);
@@ -37,15 +72,5 @@ gamesRouter.get('/year/:year', async (req, res, next) => {
         next(error);
     }
 });
-
-gamesRouter.post('/', async (req, res, next) => {
-    try {
-        const game = await Games.createGameListing(req.body);
-        res.send(game);
-    } catch (error) {
-        next(error);
-    }
-});
-
 
 module.exports = gamesRouter;
