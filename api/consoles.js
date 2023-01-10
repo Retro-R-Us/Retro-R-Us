@@ -24,3 +24,13 @@ consolesRouter.post('/', async (request, response, next) => {
         next(error);
     }
 });
+
+consolesRouter.get('/:consoleId', async (request, response, next) => {
+    try {
+        const console = await Console.getConsolesById(request.params.consoleId);
+        response.send(console);
+    } catch (error) {
+        console.log("An error occured while getting a console by that ID");
+        next(error);
+    }
+});
