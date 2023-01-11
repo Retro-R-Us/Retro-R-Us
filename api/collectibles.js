@@ -23,3 +23,13 @@ collectiblesRouter.post('/', async (request, response, next) => {
         next(error);
     }
 });
+
+collectiblesRouter.get('/:collectibleId', async (request, response, next) => {
+    try {
+        const collectible = await Collectibles.getCollectiblesById(request.params.collectibleId);
+        response.send(collectible);
+    } catch (error) {
+        console.log("An error occured while getting a collectible by that ID");
+        next(error);
+    }
+});
