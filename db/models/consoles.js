@@ -4,7 +4,8 @@ module.exports = {
     getAllConsoles,
     getConsolesById,
     getConsolesByYear,
-    createConsoleListing
+    createConsoleListing,
+    deleteConsoleListing
 };
 
 async function getAllConsoles() {
@@ -68,6 +69,20 @@ async function createConsoleListing({ title, description, year, price }) {
         throw error;
     }
 };
+
+async function deleteConsoleListing(consoleId) {
+    try {
+        const { rows: [consoles] } = await client.query(`
+            DELETE FROM consoles
+            WHERE "consoleId"=$1
+            RETURNING *; 
+        `, [consoleId]);
+        
+        return consoles;
+    } catch (error) {
+        throw(error);
+    }
+}
 
 
 
