@@ -65,5 +65,21 @@ accessoriesRouter.patch('/:accessoryId', async (req, res, next) => {
 });
 
 // delete an accessory listing
+accessoriesRouter.delete('/:accessoryId', async (req, res, next) => {
+    try {
+        const accessoryToDelete = await Acc.getAccessoryById(req.params.accessoryId);
+        if (!accessoryToDelete) {
+            throw {
+                name: 'ErrorAccessoryNotFound',
+                message: 'Could not find an accessory by that accessoryId'
+            };
+        }
+
+        const deletedAccessory = await Acc.deleteAccessoryListing(req.params.accessoryId);
+        res.send(deletedAccessory);
+    } catch (error) {
+        next(error);
+    }
+});
 
 module.exports = accessoriesRouter;
