@@ -12,12 +12,23 @@ apiRouter.get('/health', (req, res, next) => {
   });
 });
 
-// place your routers here
-const userRouter = require('./user')
-apiRouter.use('/user', userRouter)
+const userRouter = require('./user');
+apiRouter.use('/user', userRouter);
 
-const consolesRouter = require('./consoles')
-apiRoputer.use('/consoles', consolesRouter)
+const accessoriesRouter = require('./accessories');
+apiRouter.use('/accessories', accessoriesRouter);
+
+const consolesRouter = require('./consoles');
+apiRouter.use('/consoles', consolesRouter);
+
+const ordersRouter = require('./orders');
+apiRouter.use("/order", ordersRouter);
+
+const gamesRouter = require('./games'); // import the games router
+apiRouter.use('/games', gamesRouter); // mount the games router on /api/games
+
+const cartRouter = require('./cart');
+apiRouter.use('/cart', cartRouter);
 
 const collectiblesRouter = require('./collectibles')
 apiRouter.use('/collectibles', collectiblesRouter)
@@ -35,17 +46,8 @@ apiRouter.use((err, req, res, next) => {
     res.send(err);
   }
   else {
-    return next();
+    return next(err);
   }
 })
-
-// GAMES ROUTER
-const gamesRouter = require('./games'); // import the games router
-apiRouter.use('/games', gamesRouter); // mount the games router on /api/games
-
-
-//ROUTER: /api/cart
-const cartRouter = require('./cart');
-Router.use("/cart", cartRouter);
 
 module.exports = apiRouter;

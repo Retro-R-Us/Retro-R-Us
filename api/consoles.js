@@ -2,7 +2,6 @@ const express = require('express');
 const consolesRouter = express.Router();
 const { Consoles } = require('../db/models/index');
 const jwt = require('jsonwebtoken');
-const { PK } = require('./PK');
 
 
 consolesRouter.get('/', async(request, response, next) => {
@@ -51,15 +50,15 @@ consolesRouter.patch('/:consoleId', async (request, response, next) => {
         console.log("An error occured while updating a console listing");
         next(error);
     }
-    });
+});
 
-    consolesRouter.get('/year/:year', async (request, response, next) => {
-        try {
-            const consoles = await Consoles.getConsolesByYear(request.params.year);
-            response.send(consoles);
-        } catch (error) {
-            next(error);
-        }
-    }); 
-
+consolesRouter.get('/year/:year', async (request, response, next) => {
+    try {
+        const consoles = await Consoles.getConsolesByYear(request.params.year);
+        response.send(consoles);
+    } catch (error) {
+        next(error);
+    }
+}); 
+    
     module.exports = consolesRouter;
