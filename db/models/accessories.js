@@ -5,7 +5,8 @@ module.exports = {
     getAccessoryById,
     getAccessoriesByConsole,
     createAccessoryListing,
-    deleteAccessoryListing
+    deleteAccessoryListing,
+    updateAccessoryListing
 };
 
 // returns all accessories
