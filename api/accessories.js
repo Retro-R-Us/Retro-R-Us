@@ -47,6 +47,22 @@ accessoriesRouter.post('/', async (req, res, next) => {
 });
 
 // update an accessory listing
+accessoriesRouter.patch('/:accessoryId', async (req, res, next) => {
+    try {
+        const accessoryToUpdate = await Acc.getAccessoryById(req.params.accessoryId);
+        if (!accessoryToUpdate) {
+            throw {
+                name: 'ErrorAccessoryNotFound',
+                message: 'Could not find an accessory by that accessoryId'
+            };
+        }
+
+        const updatedAccessory = await Acc.updateAccessoryListing(req.params.accessoryId, req.body);
+        res.send(updatedAccessory);
+    } catch (error) {
+        next(error);
+    }
+});
 
 // delete an accessory listing
 
