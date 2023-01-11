@@ -13,3 +13,13 @@ collectiblesRouter.get('/', async(request, response, next) => {
         next(error)
     }
 });
+
+collectiblesRouter.post('/', async (request, response, next) => {
+    try {
+        const newCollectible = await Collectibles.createCollectiblesListing(request.body);
+        response.send(newCollectible);
+    } catch (error) {
+        console.log("An error occured while creating a new collectible listing");
+        next(error);
+    }
+});
