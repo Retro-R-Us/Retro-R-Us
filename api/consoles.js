@@ -45,10 +45,10 @@ consolesRouter.patch('/:consoleId', async (request, response, next) => {
             };
         }
 
-        const updatedConsole = await Console.updateGameListing(request.params.consoleId, request.body);
+        const updatedConsole = await Console.updateConsoleListing(request.params.consoleId, request.body);
         response.send(updatedConsole);
     } catch (error) {
-        console.log("An error occured while updating a game listing");
+        console.log("An error occured while updating a console listing");
         next(error);
     }
     });
