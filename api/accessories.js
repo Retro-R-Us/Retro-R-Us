@@ -14,6 +14,15 @@ accessoriesRouter.get('/', async (req, res, next) => {
 });
 
 // get accessory by id
+accessoriesRouter.get('/:accessoryId', async (req, res, next) => {
+    try {
+        const accessory = await Acc.getAccessoryById(req.params.accessoryId);
+        res.send(accessory);
+    } catch (error) {
+        console.log("An error occured while retrieving an accessory by that ID");
+        next(error);
+    }
+});
 
 // get accessories by console
 
