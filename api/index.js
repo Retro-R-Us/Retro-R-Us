@@ -38,4 +38,8 @@ const gamesRouter = require('./games'); // import the games router
 apiRouter.use('/games', gamesRouter); // mount the games router on /api/games
 
 
+//ROUTER: /api/cart
+const cartRouter = require('./cart');
+Router.use("/cart", cartRouter);
+
 module.exports = apiRouter;
