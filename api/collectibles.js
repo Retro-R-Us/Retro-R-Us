@@ -33,3 +33,21 @@ collectiblesRouter.get('/:collectibleId', async (request, response, next) => {
         next(error);
     }
 });
+
+collectiblesRouter.patch('/:collectibleId', async (request, response, next) => {
+    try {
+        const collectibleToUpdate = await Collectibles.getCollectiblesById(request.params.collectibleId);
+        if (!collectibleToUpdate) {
+            throw {
+                name: 'ErrorCollectibleNotFound',
+                message: 'Could not find a collectible by that collectibleId'
+            };
+        }
+
+        const updatedCollectible = await Collectibles.updateCollectiblesListing(request.params.collectibleId, request.body);
+        response.send(updatedCollectible);
+    } catch (error) {
+        console.log("An error occured while updating a collectible listing");
+        next(error);
+    }
+    });
