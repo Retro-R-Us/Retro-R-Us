@@ -16,6 +16,9 @@ apiRouter.get('/health', (req, res, next) => {
 const userRouter = require('./user')
 apiRouter.use('/user', userRouter)
 
+const accessoriesRouter = require('./accessories')
+apiRouter.use('/accessories', accessoriesRouter)
+
 const consolesRouter = require('./consoles')
 apiRoputer.use('/consoles', consolesRouter)
 
