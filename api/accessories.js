@@ -25,6 +25,15 @@ accessoriesRouter.get('/:accessoryId', async (req, res, next) => {
 });
 
 // get accessories by console
+accessoriesRouter.get('/console/:console', async (req, res, next) => {
+    try {
+        const accessories = await Acc.getAccessoriesByConsole(req.params.console);
+        res.send(accessories);
+    } catch (error) {
+        console.log("An error occured while retrieving accessories by that console");
+        next(error);
+    }
+});
 
 // create an accessory listing
 
