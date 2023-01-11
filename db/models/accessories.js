@@ -74,7 +74,7 @@ async function createAccessoryListing({ title, description, console, price }) {
 }
 
 // update accessory listing, returns the updated accessory
-async function updateAccessoryListing({ title, description, console, price }) {
+async function updateAccessoryListing(accessoryId, { title, description, console, price }) {
     try {
         const { rows: [accessory] } = await client.query(`
             UPDATE accessories
