@@ -27,7 +27,7 @@ consolesRouter.post('/', async (request, response, next) => {
 
 consolesRouter.get('/:consoleId', async (request, response, next) => {
     try {
-        const console = await Console.getConsolesById(request.params.consoleId);
+        const console = await Consoles.getConsolesById(request.params.consoleId);
         response.send(console);
     } catch (error) {
         console.log("An error occured while getting a console by that ID");
@@ -37,7 +37,7 @@ consolesRouter.get('/:consoleId', async (request, response, next) => {
 
 consolesRouter.patch('/:consoleId', async (request, response, next) => {
     try {
-        const consoleToUpdate = await Console.getConsolesById(request.params.consoleId);
+        const consoleToUpdate = await Consoles.getConsolesById(request.params.consoleId);
         if (!consoleToUpdate) {
             throw {
                 name: 'ErrorConsoleNotFound',
@@ -45,7 +45,7 @@ consolesRouter.patch('/:consoleId', async (request, response, next) => {
             };
         }
 
-        const updatedConsole = await Console.updateConsoleListing(request.params.consoleId, request.body);
+        const updatedConsole = await Consoles.updateConsoleListing(request.params.consoleId, request.body);
         response.send(updatedConsole);
     } catch (error) {
         console.log("An error occured while updating a console listing");
