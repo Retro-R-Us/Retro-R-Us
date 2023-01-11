@@ -12,20 +12,23 @@ apiRouter.get('/health', (req, res, next) => {
   });
 });
 
-const userRouter = require('./user')
-apiRouter.use('/user', userRouter)
+const userRouter = require('./user');
+apiRouter.use('/user', userRouter);
 
-const accessoriesRouter = require('./accessories')
-apiRouter.use('/accessories', accessoriesRouter)
+const accessoriesRouter = require('./accessories');
+apiRouter.use('/accessories', accessoriesRouter);
 
-const consolesRouter = require('./consoles')
-apiRoputer.use('/consoles', consolesRouter)
+const consolesRouter = require('./consoles');
+apiRouter.use('/consoles', consolesRouter);
 
-const cartRouter = require('./order');
-apiRouter.use("/order", cartRouter);
+const ordersRouter = require('./orders');
+apiRouter.use("/order", ordersRouter);
 
 const gamesRouter = require('./games'); // import the games router
 apiRouter.use('/games', gamesRouter); // mount the games router on /api/games
+
+const cartRouter = require('./cart');
+apiRouter.use('/cart', cartRouter);
 
 apiRouter.get('*', (req, res, next) => {
   const err = new Error()
@@ -40,7 +43,7 @@ apiRouter.use((err, req, res, next) => {
     res.send(err);
   }
   else {
-    return next();
+    return next(err);
   }
 })
 
