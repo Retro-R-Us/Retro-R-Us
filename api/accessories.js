@@ -36,6 +36,15 @@ accessoriesRouter.get('/console/:console', async (req, res, next) => {
 });
 
 // create an accessory listing
+accessoriesRouter.post('/', async (req, res, next) => {
+    try {
+        const newAccessory = await Acc.createAccessoryListing(req.body);
+        res.send(newAccessory);
+    } catch (error) {
+        console.log("An error occured while creating a new accessory listing");
+        next(error);
+    }
+});
 
 // update an accessory listing
 
