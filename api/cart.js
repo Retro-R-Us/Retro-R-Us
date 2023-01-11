@@ -33,7 +33,7 @@ cartRouter.patch("/:cartId", async (req, res, next) => {
         const { cartId } = req.params;
         const cart = await Cart.getOrderById(id);
         if (req.cart === cart.cartId) {
-            const updatedCart = await updateCart(cartId);
+            const updatedCart = await Cart.updateCart({id: cartId, ...req.body});
             res.send(updatedCart);
         }
         
