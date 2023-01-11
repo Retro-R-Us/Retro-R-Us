@@ -1,14 +1,5 @@
 const client = require('../client');
 
-module.exports = {
-    getAllGames,
-    getGameById,
-    getGamesByConsole,
-    getGamesByYear,
-    createGameListing,
-    deleteGameListing
-};
-
 // returns all games
 async function getAllGames() {
     const { rows: [games] } = await client.query(`
@@ -96,6 +87,23 @@ async function createGameListing({ title, description, console, year, price }) {
     }
 }
 
+// update game listing
+async function updateGameListing(gameId, { title, description, console, year, price }) {
+    
+    try {
+        const { rows: [game] } = await client.query(`
+            UPDATE accessories
+            SET title=$1, description=$2, console=$3, year=$4, price=5$
+            WHERE "gameId"=$6
+            RETURNING *;
+        `, [title, description, console, year, price, gameId]);
+        
+        return game;
+    } catch (error) {
+        throw error;
+    }
+}
+
 // delete game listing
 async function deleteGameListing(gameId) {
     try {
@@ -110,3 +118,13 @@ async function deleteGameListing(gameId) {
         throw error;
     }
 }
+
+module.exports = {
+    getAllGames,
+    getGameById,
+    getGamesByConsole,
+    getGamesByYear,
+    createGameListing,
+    updateGameListing,
+    deleteGameListing
+};

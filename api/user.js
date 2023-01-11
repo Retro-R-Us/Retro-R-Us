@@ -1,8 +1,8 @@
 const express = require('express');
 const userRouter = express.Router();
-const jwt = require('jsonwebtoken')
-const { PK } = require('./PK')
-const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken');
+const { JWT_SECRET } = process.env
+const bcrypt = require('bcrypt');
 const { User } = require('../db/models/index');
 const SALT = 10;
 
@@ -48,7 +48,7 @@ userRouter.post('/login', async (req, res, next) => {
             next(err)
         } else {
             const login = await User.userLogin(req.body);
-            const token = jwt.sign({username: username}, PK)
+            const token = jwt.sign({username: username}, JWT_SECRET)
             login.userdata.token = token;
             console.log(login)
             res.status(202);
