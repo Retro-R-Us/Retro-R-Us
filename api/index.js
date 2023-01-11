@@ -19,6 +19,9 @@ apiRouter.use('/user', userRouter)
 const accessoriesRouter = require('./accessories')
 apiRouter.use('/accessories', accessoriesRouter)
 
+const consolesRouter = require('./consoles')
+apiRoputer.use('/consoles', consolesRouter)
+
 apiRouter.get('*', (req, res, next) => {
   const err = new Error()
   err.status = 404;
@@ -40,5 +43,9 @@ apiRouter.use((err, req, res, next) => {
 const gamesRouter = require('./games'); // import the games router
 apiRouter.use('/games', gamesRouter); // mount the games router on /api/games
 
+
+//ROUTER: /api/cart
+const cartRouter = require('./cart');
+Router.use("/cart", cartRouter);
 
 module.exports = apiRouter;
