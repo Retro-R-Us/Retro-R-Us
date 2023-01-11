@@ -1,5 +1,5 @@
 const express = require('express');
-const ordersRouter = express.Router;
+const ordersRouter = express.Router();
 const { Orders } = require('../db/models/index');
 
 ordersRouter.get('/', async (req, res, next) => {
