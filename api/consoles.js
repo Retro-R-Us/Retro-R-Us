@@ -52,3 +52,14 @@ consolesRouter.patch('/:consoleId', async (request, response, next) => {
         next(error);
     }
     });
+
+    consolesRouter.get('/year/:year', async (request, response, next) => {
+        try {
+            const consoles = await Consoles.getConsolesByYear(request.params.year);
+            response.send(consoles);
+        } catch (error) {
+            next(error);
+        }
+    }); 
+
+    module.exports = consolesRouter;
