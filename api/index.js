@@ -19,6 +19,6 @@ apiRouter.get('/health', (req, res, next) => {
 
 //ROUTER: /api/cart
 const cartRouter = require('./cart');
-Router.use("/cart", cartRouter);
+apiRouter.use("/cart", cartRouter);
 
 module.exports = apiRouter;

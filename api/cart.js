@@ -1,11 +1,14 @@
 const express = require('express');
 const cartRouter = express.Router;
-const { addItemToCart, updateCart, destroyCart, getOrderById } = require('../db');
+const { cart } = require('../db/models/index');
 
 cartRouter.post("/", async (req, res, next) => {
     try {
         const { orderId, quantity } = req.body;
-        const newOrder = await addItemToCart ({ orderId, quantity });
+        if (!quantity) {
+            return;
+        }
+        const newOrder = await cart.addItemToCart ({ orderId, quantity });
         res.send(newOrder);
     } catch (error) {
         console.error("Could not add item to cart")
@@ -18,7 +21,7 @@ cartRouter.delete("/:cartId", async (req, res, next) => {
         const { cartId } = req.params;
         const cart = await getOrderById(id);
         if (req.cart === cart.cartId) {
-            const deletedCart = await destroyCart(cartId);
+            const deletedCart = await cart.destroyCart(cartId);
             res.send(deletedCart);
         }
 
@@ -33,7 +36,7 @@ cartRouter.patch("/:cartId", async (req, res, next) => {
         const { cartId } = req.params;
         const cart = await getOrderById(id);
         if (req.cart === cart.cartId) {
-            const updatedCart = await updateCart(cartId);
+            const updatedCart = await cart.updateCart(cartId);
             res.send(updatedCart);
         }
         
