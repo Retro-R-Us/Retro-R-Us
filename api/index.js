@@ -19,6 +19,9 @@ apiRouter.use('/user', userRouter)
 const consolesRouter = require('./consoles')
 apiRoputer.use('/consoles', consolesRouter)
 
+const collectiblesRouter = require('./collectibles')
+apiRouter.use('/collectibles', collectiblesRouter)
+
 apiRouter.get('*', (req, res, next) => {
   const err = new Error()
   err.status = 404;
