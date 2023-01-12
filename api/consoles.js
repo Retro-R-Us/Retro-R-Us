@@ -61,5 +61,24 @@ consolesRouter.patch('/:consoleId', async (request, response, next) => {
             next(error);
         }
     }); 
+    
+    consolesRouter.delete('/:consoleId', async (request, response, next) => {
+        try {
+            const consoleToDelete = await Games.getConsolesById(request.params.consoleId);
+            if (!consoleToDelete) {
+                throw {
+                    name: 'ErrorGameNotFound',
+                    message: 'Could not find a console by that gameId'
+                };
+            }
+    
+            const deletedConsole = await Games.deleteconsoleListing(request.params.consoleId);
+            response.send(deletedConsole);
+        } catch (error) {
+            next(error);
+        }
+    });
+
+
 
     module.exports = consolesRouter;
