@@ -2,7 +2,7 @@
 const { Client } = require('pg');
 
 // change the DB_NAME string to whatever your group decides on
-const DB_NAME = 'Retro-R-Us';
+const DB_NAME = 'retro_r_us';
 
 const DB_URL =
   process.env.DATABASE_URL || `postgres://localhost:5432/${DB_NAME}`;
