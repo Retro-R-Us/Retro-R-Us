@@ -50,3 +50,22 @@ collectiblesRouter.patch('/:collectibleId', async (request, response, next) => {
         next(error);
     }
     });
+
+    collectiblesRouter.delete('/:collectibleId', async (request, response, next) => {
+        try {
+            const collectibleToDelete = await Collectibles.getCollectiblesById(request.params.collectibleId);
+            if (!collectibleToDelete) {
+                throw {
+                    name: 'ErrorCollectibleNotFound',
+                    message: 'Could not find a collectible by that collectibleId'
+                };
+            }
+    
+            const deletedCollectible = await Collectibles.deleteCollectiblesListing(request.params.collectibleId);
+            response.send(deletedCollectible);
+        } catch (error) {
+            next(error);
+        }
+    });
+
+    module.exports = collectiblesRouter;
