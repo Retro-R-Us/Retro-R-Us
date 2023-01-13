@@ -50,32 +50,34 @@ consolesRouter.patch('/:consoleId', async (request, response, next) => {
         console.log("An error occured while updating a console listing");
         next(error);
     }
-    });
+});
 
-    consolesRouter.get('/year/:year', async (request, response, next) => {
-        try {
-            const consoles = await Consoles.getConsolesByYear(request.params.year);
-            response.send(consoles);
-        } catch (error) {
-            next(error);
+consolesRouter.get('/year/:year', async (request, response, next) => {
+    try {
+        const consoles = await Consoles.getConsolesByYear(request.params.year);
+        response.send(consoles);
+    } catch (error) {
+        next(error);
+    }
+ });
+    
+
+consolesRouter.delete('/:consoleId', async (request, response, next) => {
+    try {
+        const consoleToDelete = await Games.getConsolesById(request.params.consoleId);
+        if (!consoleToDelete) {
+            throw {
+                name: 'ErrorGameNotFound',
+                message: 'Could not find a console by that gameId'
+            };
         }
-    });
+
+        const deletedConsole = await Games.deleteconsoleListing(request.params.consoleId);
+        response.send(deletedConsole);
+    } catch (error) {
+        next(error);
+    }
+});
     
-    consolesRouter.delete('/:consoleId', async (request, response, next) => {
-        try {
-            const consoleToDelete = await Games.getConsolesById(request.params.consoleId);
-            if (!consoleToDelete) {
-                throw {
-                    name: 'ErrorGameNotFound',
-                    message: 'Could not find a console by that gameId'
-                };
-            }
-    
-            const deletedConsole = await Games.deleteconsoleListing(request.params.consoleId);
-            response.send(deletedConsole);
-        } catch (error) {
-            next(error);
-        }
-    });
-    
-    module.exports = consolesRouter;
+
+module.exports = consolesRouter;
