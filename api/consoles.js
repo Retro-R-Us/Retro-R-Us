@@ -2,7 +2,6 @@ const express = require('express');
 const consolesRouter = express.Router();
 const { Consoles } = require('../db/models/index');
 const jwt = require('jsonwebtoken');
-const { PK } = require('./PK');
 
 
 consolesRouter.get('/', async(request, response, next) => {
@@ -60,7 +59,7 @@ consolesRouter.patch('/:consoleId', async (request, response, next) => {
         } catch (error) {
             next(error);
         }
-    }); 
+    });
     
     consolesRouter.delete('/:consoleId', async (request, response, next) => {
         try {
@@ -79,7 +78,4 @@ consolesRouter.patch('/:consoleId', async (request, response, next) => {
         }
     });
     
-
-
-
     module.exports = consolesRouter;

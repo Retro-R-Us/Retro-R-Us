@@ -2,7 +2,6 @@ const express = require('express');
 const collectiblesRouter = express.Router();
 const { Collectibles } = require('../db/models/index');
 const jwt = require('jsonwebtoken');
-const { PK } = require('./PK');
 
 collectiblesRouter.get('/', async(request, response, next) => {
     try {
