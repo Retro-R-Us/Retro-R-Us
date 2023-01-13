@@ -64,15 +64,15 @@ consolesRouter.get('/year/:year', async (request, response, next) => {
 
 consolesRouter.delete('/:consoleId', async (request, response, next) => {
     try {
-        const consoleToDelete = await Games.getConsolesById(request.params.consoleId);
+        const consoleToDelete = await Consoles.getConsolesById(request.params.consoleId);
         if (!consoleToDelete) {
             throw {
-                name: 'ErrorGameNotFound',
-                message: 'Could not find a console by that gameId'
+                name: 'ErrorConsoleNotFound',
+                message: 'Could not find a console by that consoleId'
             };
         }
 
-        const deletedConsole = await Games.deleteconsoleListing(request.params.consoleId);
+        const deletedConsole = await Consoles.deleteConsoleListing(request.params.consoleId);
         response.send(deletedConsole);
     } catch (error) {
         next(error);
