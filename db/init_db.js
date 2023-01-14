@@ -37,85 +37,85 @@ async function buildTables() {
     // build tables in correct order
     // users table
     await client.query(`
-        CREATE TABLE users (
-          id SERIAL PRIMARY KEY,
-          username varchar(255) UNIQUE NOT NULL,
-          password varchar(255) NOT NULL,
-          email varchar(255) UNIQUE NOT NULL,
-          admin BOOLEAN DEFAULT false,
-          "adminPass" varchar(50),
-          "createdOn" TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
-          );
-        `);
-
-        // orders table
-    await client.query(`
-        CREATE TABLE orders (
-          "orderId" SERIAL PRIMARY KEY,
-          "userId" INTEGER REFERENCES users(id),
-          status varchar(255) NOT NULL,
-          "createdOn" TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
-        );
+      CREATE TABLE users (
+        id SERIAL PRIMARY KEY,
+        username varchar(255) UNIQUE NOT NULL,
+        password varchar(255) NOT NULL,
+        email varchar(255) UNIQUE NOT NULL,
+        admin BOOLEAN DEFAULT false,
+        "adminPass" varchar(50),
+        "createdOn" TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+      );
     `);
 
-        // games table
+    // orders table
     await client.query(`
-        CREATE TABLE games (
-          "gameId" SERIAL PRIMARY KEY,
-          title varchar(50) NOT NULL,
-          description varchar(255) NOT NULL,
-          console varchar(50) NOT NULL,
-          year integer NOT NULL,
-          price numeric(18,2) NOT NULL
-          );
-        `);
+      CREATE TABLE orders (
+        "orderId" SERIAL PRIMARY KEY,
+        "userId" INTEGER REFERENCES users(id),
+        status varchar(255) NOT NULL,
+        "createdOn" TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
 
-        // consoles table
-        await client.query(`
-        CREATE TABLE consoles (
-          "consoleId" SERIAL PRIMARY KEY,
-          title varchar(50) NOT NULL,
-          description varchar(50) NOT NULL,
-          year integer NOT NULL,
-          price numeric(18,2) NOT NULL
-          );
-        `);
-
-        // accessories table
+    // games table
     await client.query(`
-        CREATE TABLE accessories (
-          "accessoryId" SERIAL PRIMARY KEY,
-          title varchar(50) NOT NULL,
-          description varchar(255) NOT NULL,
-          console varchar(50) NOT NULL,
-          price numeric(18,2) NOT NULL
-          );
-        `);
+      CREATE TABLE games (
+        "gameId" SERIAL PRIMARY KEY,
+        title varchar(50) NOT NULL,
+        description varchar(255) NOT NULL,
+        console varchar(50) NOT NULL,
+        year integer NOT NULL,
+        price numeric(18,2) NOT NULL
+      );
+    `);
 
-        // collectibles table
-        await client.query(`
-        CREATE TABLE collectibles (
-          "collectibleId" SERIAL PRIMARY KEY,
-          title varchar(50) NOT NULL,
-          description varchar(50) NOT NULL,
-          console varchar(50),
-          price numeric(18,2) NOT NULL
-          );
-        `);
+    // consoles table
+    await client.query(`
+      CREATE TABLE consoles (
+        "consoleId" SERIAL PRIMARY KEY,
+        title varchar(50) NOT NULL,
+        description varchar(50) NOT NULL,
+        year integer NOT NULL,
+        price numeric(18,2) NOT NULL
+      );
+    `);
 
-        // cart table
-      await client.query(`
-        CREATE TABLE cart (
-          "cartId" SERIAL PRIMARY KEY,
-          "orderId" INTEGER REFERENCES orders("orderId"),
-          quantity INTEGER NOT NULL,
-          "userId" INTEGER REFERENCES users(id) NOT NULL,
-          "gameId" INTEGER REFERENCES games("gameId"),
-          "consoleId" INTEGER REFERENCES consoles("consoleId"),
-          "accessoryId" INTEGER REFERENCES accessories("accessoryId"),
-          "collectibleId" INTEGER REFERENCES collectibles("collectibleId")
-          );
-      `);
+    // accessories table
+    await client.query(`
+      CREATE TABLE accessories (
+        "accessoryId" SERIAL PRIMARY KEY,
+        title varchar(50) NOT NULL,
+        description varchar(255) NOT NULL,
+        console varchar(50) NOT NULL,
+        price numeric(18,2) NOT NULL
+      );
+    `);
+
+    // collectibles table
+    await client.query(`
+      CREATE TABLE collectibles (
+        "collectibleId" SERIAL PRIMARY KEY,
+        title varchar(50) NOT NULL,
+        description varchar(50) NOT NULL,
+        console varchar(50),
+        price numeric(18,2) NOT NULL
+      );
+    `);
+
+    // cart table
+    await client.query(`
+      CREATE TABLE cart (
+        "cartId" SERIAL PRIMARY KEY,
+        "orderId" INTEGER REFERENCES orders("orderId"),
+        quantity INTEGER NOT NULL,
+        "userId" INTEGER REFERENCES users(id) NOT NULL,
+        "gameId" INTEGER REFERENCES games("gameId"),
+        "consoleId" INTEGER REFERENCES consoles("consoleId"),
+        "accessoryId" INTEGER REFERENCES accessories("accessoryId"),
+        "collectibleId" INTEGER REFERENCES collectibles("collectibleId")
+      );
+    `);
 
     console.log("Tables Successfully built.")
   } catch (error) {
@@ -128,69 +128,74 @@ async function populateInitialData() {
   try {
     console.log("Creating starting users.");
 
-  //***** INITIAL USERS ***** */
-  class buildUser {
-    constructor(username, password, email, admin) {
-    this.username = username,
-    this.password = password,
-    this.email = email,
-    this.admin = admin
+    //***** INITIAL USERS ***** */
+    class buildUser {
+      constructor(username, password, email, admin) {
+      this.username = username,
+      this.password = password,
+      this.email = email,
+      this.admin = admin
+      }
     }
-  }
 
-  const user1 = new buildUser("The Grim Reaper", "deathman", "Reaper@hell.com");
-  const user2 = new buildUser("The Devil", "HellBoss", "TheBoss@hell.com");
-  const user3 = new buildUser("Demon", "freakazoid", "freakazoid1@hell.com");
-  const admin1 = new buildUser("Matt", "123123", "admin1@gmail.com", true);
-  const admin2 = new buildUser("Jasmine", "456456", "admin2@gmail.com", true);
-  const admin3 = new buildUser("Marty", "789789", "admin3@gmail.com", true);
-  const admin4 = new buildUser("Kelan", "147147", "admin4@gmail.com", true);
-  const users = [user1, user2, user3, admin1, admin2, admin3, admin4]
+    const user1 = new buildUser("The Grim Reaper", "deathman", "Reaper@hell.com");
+    const user2 = new buildUser("The Devil", "HellBoss", "TheBoss@hell.com");
+    const user3 = new buildUser("Demon", "freakazoid", "freakazoid1@hell.com");
+    const admin1 = new buildUser("Matt", "123123", "admin1@gmail.com", true);
+    const admin2 = new buildUser("Jasmine", "456456", "admin2@gmail.com", true);
+    const admin3 = new buildUser("Marty", "789789", "admin3@gmail.com", true);
+    const admin4 = new buildUser("Kelan", "147147", "admin4@gmail.com", true);
 
-  const createdUsers = await Promise.all(users.map(async (user) => {
-    const response = await User.createUser(user);
-    console.log("Create User Response:", response)
-  }))
+    const users = [user1, user2, user3, admin1, admin2, admin3, admin4]
 
-  //***** INITIAL GAMES ***** */
-  class Game {
-    constructor(title, desc, console, year, price) {
-      this.title = title,
-      this.description = desc,
-      this.console = console,
-      this.year = year,
-      this.price = price
+    const createdUsers = await Promise.all(users.map(async (user) => {
+      const response = await User.createUser(user);
+      console.log("Create User Response:", response)
+    }))
+
+    //***** INITIAL GAMES ***** */
+    class Game {
+      constructor(title, desc, console, year, price) {
+        this.title = title,
+        this.description = desc,
+        this.console = console,
+        this.year = year,
+        this.price = price
+      }
     }
-  }
 
-  const game1 = new Game(
+    const game1 = new Game(
       "Donkey Kong", 
       "Badass monkeys kicking the shit out of enemies and collecting those bananas",
       "N64",
       "1999",
       19.99
     )
-  const game2 = new Game(
+
+    const game2 = new Game(
       "Crash Bandicoot: WARPED!", 
       "a platform game in which the player takes control of Crash and Coco Bandicoot, who must travel back and forward in time and gather 25 crystals before Uka Uka and Doctor Neo Cortex can do so.",
       "Playstation",
       "1998",
       19.99
     )
-  const game3 = new Game(
-    "Halo: Combat Evolved",
-    "a first-person shooter (FPS). The game features vehicles, ranging from armored 4x4s and tanks to alien hovercraft and aircraft. The game also allows vehicle use for pilots and mounted gun operators.",
-    "Xbox",
-    "2001",
-    29.99
-  )
-  const game4 = new Game(
-    "Silent Hill",
-    "A survival horror game with lots of fog and lose of sanity, you play as Harry Mason looking for your missing daughter. Parent of the year award here.",
-    "Playstation",
-    "1999",
-    24.99
-  )
+
+    const game3 = new Game(
+      "Halo: Combat Evolved",
+      "a first-person shooter (FPS). The game features vehicles, ranging from armored 4x4s and tanks to alien hovercraft and aircraft. The game also allows vehicle use for pilots and mounted gun operators.",
+      "Xbox",
+      "2001",
+      29.99
+    )
+
+    const game4 = new Game(
+      "Silent Hill",
+      "A survival horror game with lots of fog and lose of sanity, you play as Harry Mason looking for your missing daughter. Parent of the year award here.",
+      "Playstation",
+      "1999",
+      24.99
+    )
+
   const game5 = new Game(
     "Resident Evil 4",
     "Play as Leon S. Kennedy in this third person shooter trying to save the president's daughter. Visit rural Spain as you battle the infected villagers and hope to survive this nightmare.",
@@ -198,6 +203,7 @@ async function populateInitialData() {
     "2005",
     39.99
   )
+
   const game6 = new Game(
     "Mario Kart Double Dash!!",
     "Enjoy having a backseat driver but they throw things out the side of the kart for you! All your favorite characters are back for more karting fun.",
@@ -205,6 +211,7 @@ async function populateInitialData() {
     "2003",
     19.99
   )
+
   const game7 = new Game(
     "Guitar Hero",
     "Wanna pretend to be a rock star? Well then play along with your favorite rock tunes, in style with a plastic guitar.",
@@ -212,6 +219,7 @@ async function populateInitialData() {
     "2005",
     9.99
   )
+
   const game8 = new Game(
     "Assassin's Creed III",
     "An action-adventure game where you play as an assassin throughout the ages. This open world games in third person takes you back to 18th Century America.",
@@ -219,6 +227,7 @@ async function populateInitialData() {
     "2012",
     39.99
   )
+
   const game9 = new Game(
     "Diner Dash",
     "Want to feel the stress of owning a restaurant? Perfect! Play as Flo and try to keep all your customers happy and make sure it all doesn't burn down.",
@@ -227,7 +236,7 @@ async function populateInitialData() {
     9.99
   )
 
-  const games = [game1, game2, game3];
+  const games = [game1, game2, game3, game4, game5, game6, game7, game8, game9];
   const createdGames = await Promise.all(games.map(async (game) =>  {
     const response = await Games.createGameListing(game);
     console.log("Initial Games Created:", response);
@@ -249,12 +258,14 @@ async function populateInitialData() {
     "1996",
     99.99
   )
+
   const con2 = new createConsole(
     "Playstation",
     "The PlayStation is a home video game console developed and marketed by Sony Computer Entertainment. The console was released on December 3, 1994 in Japan, September 9, 1995 in North America, October 29, 1995 in Europe, and November 15, 1995 in Australia.",
     "1994",
     99.99
   )
+  
   const con3 = new createConsole(
     "Xbox",
     "The Xbox is a home video game console and the first installment in the Xbox series of consoles manufactured by Microsoft. It was released on November 15, 2001 in North America, followed by Australia, Europe and Japan in 2002.",
@@ -264,7 +275,7 @@ async function populateInitialData() {
 
   const consoles = [con1, con2, con3];
   const createdConsoles = await Promise.all(consoles.map(async (console) =>  {
-    const response = await Consoles.createConsolesListing(consoles);
+    const response = await Consoles.createConsoleListing(consoles);
     console.log("Initial Consoles Created:", response);
   }))
 
@@ -299,7 +310,7 @@ async function populateInitialData() {
 
   const collectibles = [coll1, coll2, coll3];
   const createdCollectibles = await Promise.all(collectibles.map(async (collectible) =>  {
-    const response = await Collectibles.createCollectiblesListing(collectible);
+    const response = await Collectibles.createCollectibleListing(collectible);
     console.log("Initial Collectibles Created:", response);
   }))
 
@@ -334,7 +345,7 @@ async function populateInitialData() {
 
   const accessories = [acc1, acc2, acc3];
   const createdAccessories = await Promise.all(accessories.map(async (accessory) =>  {
-    const response = await Acc.createAccessoriesListing(accessory);
+    const response = await Acc.createAccessoryListing(accessory);
     console.log("Initial Accessories Created:", response);
   }));
 
