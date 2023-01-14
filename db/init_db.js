@@ -1,13 +1,12 @@
 const {
   client,
-  // declare your model imports here
-  // for example, User
   User,
   Collectibles,
   Acc,
   Games,
   Orders,
-  Consoles
+  Consoles,
+  Cart
 } = require('./');
 
 async function dropTables() {
@@ -292,7 +291,7 @@ async function populateInitialData() {
 
   const accessories = [acc1, acc2, acc3];
   const createdAccessories = await Promise.all(accessories.map(async (accessory) =>  {
-    const response = await Accessories.createAccessoriesListing(accessory);
+    const response = await Acc.createAccessoriesListing(accessory);
     console.log("Initial Accessories Created:", response);
   }));
 
@@ -316,6 +315,12 @@ async function populateInitialData() {
     k163fab3572,
     "Pending"
   )
+
+  const orders = [order1, order2, order3];
+  const createdOrders = await Promise.all(orders.map(async (order) =>  {
+    const response = await Orders.createOrderListing(order);
+    console.log("Initial Orders Created:", response);
+  }))
 
   //***** INITIAL CART ***** */
   class createCart {
@@ -358,9 +363,11 @@ async function populateInitialData() {
     1
   )
 
-  // create useful starting data by leveraging your
-  // Model.method() adapters to seed your db, for example:
-  // const user1 = await User.createUser({ ...user info goes here... })
+  const carts = [cart1, cart2, cart3];
+  const createdCarts = await Promise.all(carts.map(async (cart) =>  {
+    const response = await Cart.createCartListing(cart);
+    console.log("Initial Carts Created:", response);
+  }))
   
   } catch (error) {
     throw error;
