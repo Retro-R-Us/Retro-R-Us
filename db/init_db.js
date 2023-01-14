@@ -53,7 +53,8 @@ async function buildTables() {
         CREATE TABLE orders (
           "orderId" SERIAL PRIMARY KEY,
           "userId" INTEGER REFERENCES users(id),
-          status varchar(255) NOT NULL
+          status varchar(255) NOT NULL,
+          "createdOn" TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
         );
     `);
 
