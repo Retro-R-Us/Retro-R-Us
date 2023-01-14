@@ -423,7 +423,28 @@ async function populateInitialData() {
       19.99
     )
 
-    const accessories = [acc1, acc2, acc3];
+    const acc4 = new createAcc(
+      "Nintendo 64 Memory Card",
+      "The Nintendo 64 Memory Card is a removable memory card for the Nintendo 64 video game console. It was released in Japan on June 23, 1996, in North America on September 29, 1996, and in Europe on March 29, 1997.",
+      "N64",
+      9.99
+    )
+
+    const acc5 = new createAcc(
+      "Playstation Memory Card",
+      "The PlayStation Memory Card is a removable memory card for the PlayStation video game console. It was released in Japan on December 3, 1997, in North America on March 3, 1998, and in Europe on March 27, 1998.",
+      "Playstation",
+      9.99
+    )
+
+    const acc6 = new createAcc(
+      "Xbox Memory Card",
+      "The Xbox Memory Card is a removable memory card for the Xbox video game console. It was released in Japan on November 22, 2001, in North America on November 15, 2001, and in Europe on November 23, 2001.",
+      "Xbox",
+      9.99
+    )
+
+    const accessories = [acc1, acc2, acc3, acc4, acc5, acc6];
     const createdAccessories = await Promise.all(accessories.map(async (accessory) =>  {
       const response = await Acc.createAccessoryListing(accessory);
       console.log("Initial Accessories Created:", response);
