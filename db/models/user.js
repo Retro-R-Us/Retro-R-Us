@@ -10,7 +10,8 @@ module.exports = {
   getUserByUsername,
   getUserById,
   newPassword,
-  userLogin
+  userLogin,
+  getPass
 };
 
 async function createUser(userData) { 
@@ -118,6 +119,32 @@ async function getUserById(id) {
 
   } catch (error) {
     console.log("Could not get user by id.");
+    throw error;
+  }
+}
+
+async function getPass (username, password) {
+  try {
+    const { rows: [user] } = await client.query(
+      `
+        SELECT *
+        FROM users;
+      `
+    )
+    const isValid = await bcrypt.compare(user.password, password);
+    if (!isValid) {
+      const invalid = new Error('Old password is incorrect.')
+      return {
+        Success: false,
+        Message: invalid
+      }
+    } else {
+      return {
+        Success: true
+      }
+    }
+
+  } catch (error) {
     throw error;
   }
 }
