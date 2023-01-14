@@ -367,7 +367,28 @@ async function populateInitialData() {
       49.99
     )
 
-    const collectibles = [coll1, coll2, coll3];
+    const coll4 = new createCol(
+      "Mario Plush",
+      "This is a plush of Mario from the Super Mario Bros. series. It is a 1:1 scale replica of the character, and is made of fabric.",
+      "N64",
+      19.99
+    )
+
+    const coll5 = new createCol(
+      "Crash Bandicoot Plush",
+      "This is a plush of Crash Bandicoot from the Crash Bandicoot series. It is a 1:1 scale replica of the character, and is made of fabric.",
+      "Playstation",
+      19.99
+    )
+
+    const coll6 = new createCol(
+      "Master Chief Plush",
+      "This is a plush of Master Chief from the Halo series. It is a 1:1 scale replica of the character, and is made of fabric.",
+      "Xbox",
+      19.99
+    )
+
+    const collectibles = [coll1, coll2, coll3, coll4, coll5, coll6];
     const createdCollectibles = await Promise.all(collectibles.map(async (collectible) =>  {
       const response = await Collectibles.createCollectibleListing(collectible);
       console.log("Initial Collectibles Created:", response);
@@ -481,7 +502,7 @@ async function populateInitialData() {
       const response = await Cart.createCartListing(cart);
       console.log("Initial Carts Created:", response);
     }))
-    
+
   } catch (error) {
     throw error;
   }
