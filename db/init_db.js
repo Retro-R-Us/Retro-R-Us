@@ -183,6 +183,48 @@ async function populateInitialData() {
     "2001",
     29.99
   )
+  const game4 = new Game(
+    "Silent Hill",
+    "A survival horror game with lots of fog and lose of sanity, you play as Harry Mason looking for your missing daughter. Parent of the year award here.",
+    "Playstation",
+    "1999",
+    24.99
+  )
+  const game5 = new Game(
+    "Resident Evil 4",
+    "Play as Leon S. Kennedy in this third person shooter trying to save the president's daughter. Visit rural Spain as you battle the infected villagers and hope to survive this nightmare.",
+    "Playstation 2",
+    "2005",
+    39.99
+  )
+  const game6 = new Game(
+    "Mario Kart Double Dash!!",
+    "Enjoy having a backseat driver but they throw things out the side of the kart for you! All your favorite characters are back for more karting fun.",
+    "GameCube",
+    "2003",
+    19.99
+  )
+  const game7 = new Game(
+    "Guitar Hero",
+    "Wanna pretend to be a rock star? Well then play along with your favorite rock tunes, in style with a plastic guitar.",
+    "Playstation 2",
+    "2005",
+    9.99
+  )
+  const game8 = new Game(
+    "Assassin's Creed III",
+    "An action-adventure game where you play as an assassin throughout the ages. This open world games in third person takes you back to 18th Century America.",
+    "XBOX 360",
+    "2012",
+    39.99
+  )
+  const game9 = new Game(
+    "Diner Dash",
+    "Want to feel the stress of owning a restaurant? Perfect! Play as Flo and try to keep all your customers happy and make sure it all doesn't burn down.",
+    "PSP",
+    "2007",
+    9.99
+  )
 
   const games = [game1, game2, game3];
   const createdGames = await Promise.all(games.map(async (game) =>  {
