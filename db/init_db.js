@@ -236,6 +236,8 @@ async function populateInitialData() {
     9.99
   )
 
+
+
   const games = [game1, game2, game3, game4, game5, game6, game7, game8, game9];
   const createdGames = await Promise.all(games.map(async (game) =>  {
     const response = await Games.createGameListing(game);
@@ -265,7 +267,7 @@ async function populateInitialData() {
     "1994",
     99.99
   )
-  
+
   const con3 = new createConsole(
     "Xbox",
     "The Xbox is a home video game console and the first installment in the Xbox series of consoles manufactured by Microsoft. It was released on November 15, 2001 in North America, followed by Australia, Europe and Japan in 2002.",
@@ -273,7 +275,42 @@ async function populateInitialData() {
     99.99
   )
 
-  const consoles = [con1, con2, con3];
+  const con4 = new createConsole(
+    "GameCube",
+    "The GameCube is a home video game console released by Nintendo in Japan on September 14, 2001; in North America on November 18, 2001; in Europe on May 3, 2002; and in Australia on May 17, 2002.",
+    "2001",
+    99.99
+  )
+
+  const con5 = new createConsole(
+    "Playstation 2",
+    "The PlayStation 2 is a home video game console that was developed by Sony Computer Entertainment. It is the successor to the original PlayStation, and is the second installment in the PlayStation lineup of consoles.",
+    "2000",
+    99.99
+  )
+
+  const con6 = new createConsole(
+    "Xbox 360",
+    "The Xbox 360 is a home video game console developed by Microsoft. As the successor to the original Xbox, it is the second console in the Xbox series.",
+    "2005",
+    99.99
+  )
+
+  const con7 = new createConsole(
+    "PSP",
+    "The PlayStation Portable is a handheld game console developed and marketed by Sony Computer Entertainment. Development of the handheld was announced during E3 2003, and it was unveiled on May 11, 2004, at a Sony press conference before E3 2004.",
+    "2004",
+    99.99
+  )
+
+  const con8 = new createConsole(
+    "GameBoy",
+    "The GameBoy is a handheld game console developed and manufactured by Nintendo. The first handheld in the industry to use replaceable cartridges, as opposed to built-in games, it was released in Japan on April 21, 1989, and in North America on July 31, 1989.",
+    "1989",
+    99.99
+  )
+
+  const consoles = [con1, con2, con3, con4, con5, con6, con7, con8];
   const createdConsoles = await Promise.all(consoles.map(async (console) =>  {
     const response = await Consoles.createConsoleListing(consoles);
     console.log("Initial Consoles Created:", response);
