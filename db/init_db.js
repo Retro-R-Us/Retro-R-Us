@@ -196,270 +196,292 @@ async function populateInitialData() {
       24.99
     )
 
-  const game5 = new Game(
-    "Resident Evil 4",
-    "Play as Leon S. Kennedy in this third person shooter trying to save the president's daughter. Visit rural Spain as you battle the infected villagers and hope to survive this nightmare.",
-    "Playstation 2",
-    "2005",
-    39.99
-  )
+    const game5 = new Game(
+      "Resident Evil 4",
+      "Play as Leon S. Kennedy in this third person shooter trying to save the president's daughter. Visit rural Spain as you battle the infected villagers and hope to survive this nightmare.",
+      "Playstation 2",
+      "2005",
+      39.99
+    )
 
-  const game6 = new Game(
-    "Mario Kart Double Dash!!",
-    "Enjoy having a backseat driver but they throw things out the side of the kart for you! All your favorite characters are back for more karting fun.",
-    "GameCube",
-    "2003",
-    19.99
-  )
+    const game6 = new Game(
+      "Mario Kart Double Dash!!",
+      "Enjoy having a backseat driver but they throw things out the side of the kart for you! All your favorite characters are back for more karting fun.",
+      "GameCube",
+      "2003",
+      19.99
+    )
 
-  const game7 = new Game(
-    "Guitar Hero",
-    "Wanna pretend to be a rock star? Well then play along with your favorite rock tunes, in style with a plastic guitar.",
-    "Playstation 2",
-    "2005",
-    9.99
-  )
+    const game7 = new Game(
+      "Guitar Hero",
+      "Wanna pretend to be a rock star? Well then play along with your favorite rock tunes, in style with a plastic guitar.",
+      "Playstation 2",
+      "2005",
+      9.99
+    )
 
-  const game8 = new Game(
-    "Assassin's Creed III",
-    "An action-adventure game where you play as an assassin throughout the ages. This open world games in third person takes you back to 18th Century America.",
-    "XBOX 360",
-    "2012",
-    39.99
-  )
+    const game8 = new Game(
+      "Assassin's Creed III",
+      "An action-adventure game where you play as an assassin throughout the ages. This open world games in third person takes you back to 18th Century America.",
+      "XBOX 360",
+      "2012",
+      39.99
+    )
 
-  const game9 = new Game(
-    "Diner Dash",
-    "Want to feel the stress of owning a restaurant? Perfect! Play as Flo and try to keep all your customers happy and make sure it all doesn't burn down.",
-    "PSP",
-    "2007",
-    9.99
-  )
+    const game9 = new Game(
+      "Diner Dash",
+      "Want to feel the stress of owning a restaurant? Perfect! Play as Flo and try to keep all your customers happy and make sure it all doesn't burn down.",
+      "PSP",
+      "2007",
+      9.99
+    )
 
+    const game10 = new Game(
+      "Final Fantasy VII",
+      "A role-playing game where you play as Cloud Strife and his friends as they try to save the world from the evil Shinra Corporation.",
+      "Playstation",
+      "1997",
+      19.99
+    )
 
+    const game11 = new Game(
+      "Super Mario 64",
+      "The first 3D Mario game where you play as Mario and his friends as they try to save Princess Peach from Bowser.",
+      "N64",
+      "1996",
+      19.99
+    )
 
-  const games = [game1, game2, game3, game4, game5, game6, game7, game8, game9];
-  const createdGames = await Promise.all(games.map(async (game) =>  {
-    const response = await Games.createGameListing(game);
-    console.log("Initial Games Created:", response);
-  }))
+    const game12 = new Game(
+      "Super Smash Bros. Melee",
+      "The second installment of the Super Smash Bros. series where you play as your favorite Nintendo characters and try to knock each other out of the arena.",
+      "GameCube",
+      "2001",
+      19.99
+    )
 
-  //***** INITIAL CONSOLES ***** */
-  class createConsole {
-    constructor(title, desc, year, price) {
-      this.title = title,
-      this.description = desc,
-      this.year = year,
-      this.price = price
+    const games = [game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12];
+    const createdGames = await Promise.all(games.map(async (game) =>  {
+      const response = await Games.createGameListing(game);
+      console.log("Initial Games Created:", response);
+    }))
+
+    //***** INITIAL CONSOLES ***** */
+    class createConsole {
+      constructor(title, desc, year, price) {
+        this.title = title,
+        this.description = desc,
+        this.year = year,
+        this.price = price
+      }
     }
-  }
 
-  const con1 = new createConsole(
-    "Nintendo 64",
-    "The Nintendo 64 is a home video game console developed and released by Nintendo in 1996. It is Nintendo's third home console, following the Nintendo Entertainment System (NES) and Super Nintendo Entertainment System (SNES).",
-    "1996",
-    99.99
-  )
+    const con1 = new createConsole(
+      "Nintendo 64",
+      "The Nintendo 64 is a home video game console developed and released by Nintendo in 1996. It is Nintendo's third home console, following the Nintendo Entertainment System (NES) and Super Nintendo Entertainment System (SNES).",
+      "1996",
+      99.99
+    )
 
-  const con2 = new createConsole(
-    "Playstation",
-    "The PlayStation is a home video game console developed and marketed by Sony Computer Entertainment. The console was released on December 3, 1994 in Japan, September 9, 1995 in North America, October 29, 1995 in Europe, and November 15, 1995 in Australia.",
-    "1994",
-    99.99
-  )
+    const con2 = new createConsole(
+      "Playstation",
+      "The PlayStation is a home video game console developed and marketed by Sony Computer Entertainment. The console was released on December 3, 1994 in Japan, September 9, 1995 in North America, October 29, 1995 in Europe, and November 15, 1995 in Australia.",
+      "1994",
+      99.99
+    )
 
-  const con3 = new createConsole(
-    "Xbox",
-    "The Xbox is a home video game console and the first installment in the Xbox series of consoles manufactured by Microsoft. It was released on November 15, 2001 in North America, followed by Australia, Europe and Japan in 2002.",
-    "2001",
-    99.99
-  )
+    const con3 = new createConsole(
+      "Xbox",
+      "The Xbox is a home video game console and the first installment in the Xbox series of consoles manufactured by Microsoft. It was released on November 15, 2001 in North America, followed by Australia, Europe and Japan in 2002.",
+      "2001",
+      99.99
+    )
 
-  const con4 = new createConsole(
-    "GameCube",
-    "The GameCube is a home video game console released by Nintendo in Japan on September 14, 2001; in North America on November 18, 2001; in Europe on May 3, 2002; and in Australia on May 17, 2002.",
-    "2001",
-    99.99
-  )
+    const con4 = new createConsole(
+      "GameCube",
+      "The GameCube is a home video game console released by Nintendo in Japan on September 14, 2001; in North America on November 18, 2001; in Europe on May 3, 2002; and in Australia on May 17, 2002.",
+      "2001",
+      99.99
+    )
 
-  const con5 = new createConsole(
-    "Playstation 2",
-    "The PlayStation 2 is a home video game console that was developed by Sony Computer Entertainment. It is the successor to the original PlayStation, and is the second installment in the PlayStation lineup of consoles.",
-    "2000",
-    99.99
-  )
+    const con5 = new createConsole(
+      "Playstation 2",
+      "The PlayStation 2 is a home video game console that was developed by Sony Computer Entertainment. It is the successor to the original PlayStation, and is the second installment in the PlayStation lineup of consoles.",
+      "2000",
+      99.99
+    )
 
-  const con6 = new createConsole(
-    "Xbox 360",
-    "The Xbox 360 is a home video game console developed by Microsoft. As the successor to the original Xbox, it is the second console in the Xbox series.",
-    "2005",
-    99.99
-  )
+    const con6 = new createConsole(
+      "Xbox 360",
+      "The Xbox 360 is a home video game console developed by Microsoft. As the successor to the original Xbox, it is the second console in the Xbox series.",
+      "2005",
+      99.99
+    )
 
-  const con7 = new createConsole(
-    "PSP",
-    "The PlayStation Portable is a handheld game console developed and marketed by Sony Computer Entertainment. Development of the handheld was announced during E3 2003, and it was unveiled on May 11, 2004, at a Sony press conference before E3 2004.",
-    "2004",
-    99.99
-  )
+    const con7 = new createConsole(
+      "PSP",
+      "The PlayStation Portable is a handheld game console developed and marketed by Sony Computer Entertainment. Development of the handheld was announced during E3 2003, and it was unveiled on May 11, 2004, at a Sony press conference before E3 2004.",
+      "2004",
+      99.99
+    )
 
-  const con8 = new createConsole(
-    "GameBoy",
-    "The GameBoy is a handheld game console developed and manufactured by Nintendo. The first handheld in the industry to use replaceable cartridges, as opposed to built-in games, it was released in Japan on April 21, 1989, and in North America on July 31, 1989.",
-    "1989",
-    99.99
-  )
+    const con8 = new createConsole(
+      "GameBoy",
+      "The GameBoy is a handheld game console developed and manufactured by Nintendo. The first handheld in the industry to use replaceable cartridges, as opposed to built-in games, it was released in Japan on April 21, 1989, and in North America on July 31, 1989.",
+      "1989",
+      99.99
+    )
 
-  const consoles = [con1, con2, con3, con4, con5, con6, con7, con8];
-  const createdConsoles = await Promise.all(consoles.map(async (console) =>  {
-    const response = await Consoles.createConsoleListing(consoles);
-    console.log("Initial Consoles Created:", response);
-  }))
+    const consoles = [con1, con2, con3, con4, con5, con6, con7, con8];
+    const createdConsoles = await Promise.all(consoles.map(async (console) =>  {
+      const response = await Consoles.createConsoleListing(consoles);
+      console.log("Initial Consoles Created:", response);
+    }))
 
-  //***** INITIAL COLLECTIBLES ***** */
-  class createCol {
-    constructor(title, desc, console, price) {
-      this.title = title,
-      this.description = desc,
-      this.console = console,
-      this.price = price
+    //***** INITIAL COLLECTIBLES ***** */
+    class createCol {
+      constructor(title, desc, console, price) {
+        this.title = title,
+        this.description = desc,
+        this.console = console,
+        this.price = price
+      }
     }
-  }
 
-  const coll1 = new createCol(
-    "Mario Statue",
-    "This is a statue of Mario from the Super Mario Bros. series. It is a 1:1 scale replica of the character, and is made of plastic.",
-    "N64",
-    49.99
-  )
-  const coll2 = new createCol(
-    "Crash Bandicoot Statue",
-    "This is a statue of Crash Bandicoot from the Crash Bandicoot series. It is a 1:1 scale replica of the character, and is made of plastic.",
-    "Playstation",
-    49.99
-  )
-  const coll3 = new createCol(
-    "Master Chief Statue",
-    "This is a statue of Master Chief from the Halo series. It is a 1:1 scale replica of the character, and is made of plastic.",
-    "Xbox",
-    49.99
-  )
+    const coll1 = new createCol(
+      "Mario Statue",
+      "This is a statue of Mario from the Super Mario Bros. series. It is a 1:1 scale replica of the character, and is made of plastic.",
+      "N64",
+      49.99
+    )
+    const coll2 = new createCol(
+      "Crash Bandicoot Statue",
+      "This is a statue of Crash Bandicoot from the Crash Bandicoot series. It is a 1:1 scale replica of the character, and is made of plastic.",
+      "Playstation",
+      49.99
+    )
+    const coll3 = new createCol(
+      "Master Chief Statue",
+      "This is a statue of Master Chief from the Halo series. It is a 1:1 scale replica of the character, and is made of plastic.",
+      "Xbox",
+      49.99
+    )
 
-  const collectibles = [coll1, coll2, coll3];
-  const createdCollectibles = await Promise.all(collectibles.map(async (collectible) =>  {
-    const response = await Collectibles.createCollectibleListing(collectible);
-    console.log("Initial Collectibles Created:", response);
-  }))
+    const collectibles = [coll1, coll2, coll3];
+    const createdCollectibles = await Promise.all(collectibles.map(async (collectible) =>  {
+      const response = await Collectibles.createCollectibleListing(collectible);
+      console.log("Initial Collectibles Created:", response);
+    }))
 
-  //***** INITIAL ACCESSORIES ***** */
-  class createAcc {
-    constructor(title, desc, console, year, price) {
-      this.title = title,
-      this.description = desc,
-      this.console = console,
-      this.price = price
+    //***** INITIAL ACCESSORIES ***** */
+    class createAcc {
+      constructor(title, desc, console, year, price) {
+        this.title = title,
+        this.description = desc,
+        this.console = console,
+        this.price = price
+      }
     }
-  }
 
-  const acc1 = new createAcc(
-    "Nintendo 64 Controller",
-    "The Nintendo 64 controller is the standard game controller included with the Nintendo 64 video game console. It was released in Japan on June 23, 1996, in North America on September 29, 1996, and in Europe on March 29, 1997.",
-    "N64",
-    26.99
-  )
-  const acc2 = new createAcc(
-    "Playstation Controller",
-    "The DualShock is the first gamepad to feature force feedback, which was originally developed by Immersion Corporation. The DualShock was the first gamepad to feature an analog stick, which was originally developed by Sega for the Saturn.",
-    "Playstation",
-    18.99
-  )
-  const acc3 = new createAcc(
-    "Xbox Controller",
-    "The Xbox controller is the primary game controller for the Xbox video game console, also known as the Xbox OG, and was introduced at the Game Developers Conference on May 12, 2000.",
-    "Xbox",
-    19.99
-  )
+    const acc1 = new createAcc(
+      "Nintendo 64 Controller",
+      "The Nintendo 64 controller is the standard game controller included with the Nintendo 64 video game console. It was released in Japan on June 23, 1996, in North America on September 29, 1996, and in Europe on March 29, 1997.",
+      "N64",
+      26.99
+    )
+    const acc2 = new createAcc(
+      "Playstation Controller",
+      "The DualShock is the first gamepad to feature force feedback, which was originally developed by Immersion Corporation. The DualShock was the first gamepad to feature an analog stick, which was originally developed by Sega for the Saturn.",
+      "Playstation",
+      18.99
+    )
+    const acc3 = new createAcc(
+      "Xbox Controller",
+      "The Xbox controller is the primary game controller for the Xbox video game console, also known as the Xbox OG, and was introduced at the Game Developers Conference on May 12, 2000.",
+      "Xbox",
+      19.99
+    )
 
-  const accessories = [acc1, acc2, acc3];
-  const createdAccessories = await Promise.all(accessories.map(async (accessory) =>  {
-    const response = await Acc.createAccessoryListing(accessory);
-    console.log("Initial Accessories Created:", response);
-  }));
+    const accessories = [acc1, acc2, acc3];
+    const createdAccessories = await Promise.all(accessories.map(async (accessory) =>  {
+      const response = await Acc.createAccessoryListing(accessory);
+      console.log("Initial Accessories Created:", response);
+    }));
 
-  //***** INITIAL ORDERS ***** */
-  class createOr {
-    constructor(userId, status) {
-      this.userId = userId,
-      this.status = status
+    //***** INITIAL ORDERS ***** */
+    class createOr {
+      constructor(userId, status) {
+        this.userId = userId,
+        this.status = status
+      }
     }
-  }
 
-  const order1 = new createOr(
-    a915h523h432,
-    "Success"
-  )
-  const order2 = new createOr(
-    a92hg523h762,
-    "Pending"
-  )
-  const order3 = new createOr(
-    k163fab3572,
-    "Pending"
-  )
+    const order1 = new createOr(
+      a915h523h432,
+      "Success"
+    )
+    const order2 = new createOr(
+      a92hg523h762,
+      "Pending"
+    )
+    const order3 = new createOr(
+      k163fab3572,
+      "Pending"
+    )
 
-  const orders = [order1, order2, order3];
-  const createdOrders = await Promise.all(orders.map(async (order) =>  {
-    const response = await Orders.createOrderListing(order);
-    console.log("Initial Orders Created:", response);
-  }))
+    const orders = [order1, order2, order3];
+    const createdOrders = await Promise.all(orders.map(async (order) =>  {
+      const response = await Orders.createOrderListing(order);
+      console.log("Initial Orders Created:", response);
+    }))
 
-  //***** INITIAL CART ***** */
-  class createCart {
-    constructor(orderId, quantity, userId, gameId, consoleId, accessoryId, collectibleId) {
-      this.orderId = orderId,
-      this.quantity = quantity,
-      this.userId = userId,
-      this.gameId = gameId,
-      this.consoleId = consoleId,
-      this.accessoryId = accessoryId,
-      this.collectibleId = collectibleId
+    //***** INITIAL CART ***** */
+    class createCart {
+      constructor(orderId, quantity, userId, gameId, consoleId, accessoryId, collectibleId) {
+        this.orderId = orderId,
+        this.quantity = quantity,
+        this.userId = userId,
+        this.gameId = gameId,
+        this.consoleId = consoleId,
+        this.accessoryId = accessoryId,
+        this.collectibleId = collectibleId
+      }
     }
-  }
 
-  const cart1 = new createCart(
-    a82h,
-    1,
-    a915h523h432,
-    null,
-    null,
-    null,
-    1
-  )
-  const cart2 = new createCart(
-    a72b,
-    1,
-    a92hg523h762,
-    2,
-    null,
-    null,
-    null
-  )
-  const cart3 = new createCart(
-    a82h,
-    1,
-    k163fab3572,
-    null,
-    3,
-    null,
-    1
-  )
+    const cart1 = new createCart(
+      a82h,
+      1,
+      a915h523h432,
+      null,
+      null,
+      null,
+      1
+    )
+    const cart2 = new createCart(
+      a72b,
+      1,
+      a92hg523h762,
+      2,
+      null,
+      null,
+      null
+    )
+    const cart3 = new createCart(
+      a82h,
+      1,
+      k163fab3572,
+      null,
+      3,
+      null,
+      1
+    )
 
-  const carts = [cart1, cart2, cart3];
-  const createdCarts = await Promise.all(carts.map(async (cart) =>  {
-    const response = await Cart.createCartListing(cart);
-    console.log("Initial Carts Created:", response);
-  }))
-  
+    const carts = [cart1, cart2, cart3];
+    const createdCarts = await Promise.all(carts.map(async (cart) =>  {
+      const response = await Cart.createCartListing(cart);
+      console.log("Initial Carts Created:", response);
+    }))
+    
   } catch (error) {
     throw error;
   }
