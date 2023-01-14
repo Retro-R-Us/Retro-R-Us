@@ -2,12 +2,47 @@ const express = require('express');
 const userRouter = express.Router();
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = process.env
-const bcrypt = require('bcrypt');
-const { User } = require('../db/models/index');
-const SALT = 10;
+const { User, Orders } = require('../db/models/index');
 
 userRouter.get('/me', async (req, res, next) => {
-    
+    try {
+        const { username } = req.body;
+        const { authorization } = req.headers;
+
+        if (authorization === undefined) {
+            res.status(401)
+            res.send({
+                error: "Not Authorized",
+                name: "Auth Error",
+                message: "You must be logged in to perform this action"
+              })
+        }
+
+        const tokenString = authorization.slice(7, -1);
+        const tokenCheck = jwt.decode(tokenString);
+
+        if (tokenCheck.username !== username) {
+            res.status(401)
+            res.send({
+                Success: false,
+                name: "Token Error",
+                error: "Token Invalid",
+                message: "Your token does not match your username."
+        })
+        } else {
+            const user = await User.getUserByUsername(username);
+            const orders = await Orders.getOrdersByUser({username: username});
+            const userData = {
+                Success: true,
+                user: user,
+                orders: orders
+            }
+            res.send(userData)
+        }
+
+    } catch (error) {
+        next(error)
+    }
 })
 
 userRouter.get('/admin', async (req, res, next) => {
@@ -79,8 +114,59 @@ userRouter.post('/register', async (req, res, next) => {
     }
 })
 
-userRouter.patch('/update', (req, res, next) => {
+userRouter.patch('/update', async (req, res, next) => {
+    try {
+        const { username, oldPassword, newPassword } = req.body;
+        const { authorization } = req.headers;
 
+        if (authorization === undefined) {
+            res.status(401)
+            res.send({
+                Success: false,
+                name: "Token Error",
+                error: "No Token supplied",
+                message: "You must be logged in to perform this action"
+            })
+        } else if (!newPassword) {
+            res.status(401)
+            res.send({
+                Success: false,
+                name: "Password Error",
+                error: "Missing Password",
+                message: "Please include your new password with this request."
+        })
+        };
+
+        const tokenString = authorization.slice(7, -1);
+        const tokenCheck = jwt.decode(tokenString);
+
+        if (tokenCheck.username !== username) {
+            res.status(401)
+            res.send({
+                Success: false,
+                name: "Token Error",
+                error: "Token Invalid",
+                message: "This is not your token"
+        })
+        }
+
+        const userPass = await User.getPass(username, oldPassword);
+        if (!userPass.Success) {
+            res.status(400)
+            res.send({
+                Success: false,
+                name: "Password Error",
+                error: "Bad Password",
+                message: "Your password is incorrect. Please try again."
+            })
+        } else {
+            const response = await User.newPassword(req.body);
+            res.send(response);
+        }
+
+    } catch (error) {
+        next(error)
+    }
 })
 
 module.exports = userRouter;
