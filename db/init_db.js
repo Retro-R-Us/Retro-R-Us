@@ -304,9 +304,18 @@ async function populateInitialData() {
     }
   }
 
-  const order1 = new createOr()
-  const order2 = new createOr()
-  const order3 = new createOr()
+  const order1 = new createOr(
+    a915h523h432,
+    "Success"
+  )
+  const order2 = new createOr(
+    a92hg523h762,
+    "Pending"
+  )
+  const order3 = new createOr(
+    k163fab3572,
+    "Pending"
+  )
 
   //***** INITIAL CART ***** */
   class createCart {
@@ -321,10 +330,33 @@ async function populateInitialData() {
     }
   }
 
-  const cart1 = new createCart()
-  const cart2 = new createCart()
-  const cart3 = new createCart()
-
+  const cart1 = new createCart(
+    a82h,
+    1,
+    a915h523h432,
+    null,
+    null,
+    null,
+    1
+  )
+  const cart2 = new createCart(
+    a72b,
+    1,
+    a92hg523h762,
+    2,
+    null,
+    null,
+    null
+  )
+  const cart3 = new createCart(
+    a82h,
+    1,
+    k163fab3572,
+    null,
+    3,
+    null,
+    1
+  )
 
   // create useful starting data by leveraging your
   // Model.method() adapters to seed your db, for example:
