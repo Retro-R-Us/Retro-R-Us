@@ -1,12 +1,12 @@
 const {
   client,
-  // declare your model imports here
-  // for example, User
   User,
+  Collectibles,
   Acc,
   Games,
   Orders,
-  Consoles
+  Consoles,
+  Cart
 } = require('./');
 
 async function dropTables() {
@@ -183,6 +183,48 @@ async function populateInitialData() {
     "2001",
     29.99
   )
+  const game4 = new Game(
+    "Silent Hill",
+    "A survival horror game with lots of fog and lose of sanity, you play as Harry Mason looking for your missing daughter. Parent of the year award here.",
+    "Playstation",
+    "1999",
+    24.99
+  )
+  const game5 = new Game(
+    "Resident Evil 4",
+    "Play as Leon S. Kennedy in this third person shooter trying to save the president's daughter. Visit rural Spain as you battle the infected villagers and hope to survive this nightmare.",
+    "Playstation 2",
+    "2005",
+    39.99
+  )
+  const game6 = new Game(
+    "Mario Kart Double Dash!!",
+    "Enjoy having a backseat driver but they throw things out the side of the kart for you! All your favorite characters are back for more karting fun.",
+    "GameCube",
+    "2003",
+    19.99
+  )
+  const game7 = new Game(
+    "Guitar Hero",
+    "Wanna pretend to be a rock star? Well then play along with your favorite rock tunes, in style with a plastic guitar.",
+    "Playstation 2",
+    "2005",
+    9.99
+  )
+  const game8 = new Game(
+    "Assassin's Creed III",
+    "An action-adventure game where you play as an assassin throughout the ages. This open world games in third person takes you back to 18th Century America.",
+    "XBOX 360",
+    "2012",
+    39.99
+  )
+  const game9 = new Game(
+    "Diner Dash",
+    "Want to feel the stress of owning a restaurant? Perfect! Play as Flo and try to keep all your customers happy and make sure it all doesn't burn down.",
+    "PSP",
+    "2007",
+    9.99
+  )
 
   const games = [game1, game2, game3];
   const createdGames = await Promise.all(games.map(async (game) =>  {
@@ -200,10 +242,30 @@ async function populateInitialData() {
     }
   }
 
-  const con1 = new createConsole()
-  const con2 = new createConsole()
-  const con3 = new createConsole()
+  const con1 = new createConsole(
+    "Nintendo 64",
+    "The Nintendo 64 is a home video game console developed and released by Nintendo in 1996. It is Nintendo's third home console, following the Nintendo Entertainment System (NES) and Super Nintendo Entertainment System (SNES).",
+    "1996",
+    99.99
+  )
+  const con2 = new createConsole(
+    "Playstation",
+    "The PlayStation is a home video game console developed and marketed by Sony Computer Entertainment. The console was released on December 3, 1994 in Japan, September 9, 1995 in North America, October 29, 1995 in Europe, and November 15, 1995 in Australia.",
+    "1994",
+    99.99
+  )
+  const con3 = new createConsole(
+    "Xbox",
+    "The Xbox is a home video game console and the first installment in the Xbox series of consoles manufactured by Microsoft. It was released on November 15, 2001 in North America, followed by Australia, Europe and Japan in 2002.",
+    "2001",
+    99.99
+  )
 
+  const consoles = [con1, con2, con3];
+  const createdConsoles = await Promise.all(consoles.map(async (console) =>  {
+    const response = await Consoles.createConsolesListing(consoles);
+    console.log("Initial Consoles Created:", response);
+  }))
 
   //***** INITIAL COLLECTIBLES ***** */
   class createCol {
@@ -215,9 +277,30 @@ async function populateInitialData() {
     }
   }
 
-  const coll1 = new createConsole()
-  const coll2 = new createConsole()
-  const coll3 = new createConsole()
+  const coll1 = new createCol(
+    "Mario Statue",
+    "This is a statue of Mario from the Super Mario Bros. series. It is a 1:1 scale replica of the character, and is made of plastic.",
+    "N64",
+    49.99
+  )
+  const coll2 = new createCol(
+    "Crash Bandicoot Statue",
+    "This is a statue of Crash Bandicoot from the Crash Bandicoot series. It is a 1:1 scale replica of the character, and is made of plastic.",
+    "Playstation",
+    49.99
+  )
+  const coll3 = new createCol(
+    "Master Chief Statue",
+    "This is a statue of Master Chief from the Halo series. It is a 1:1 scale replica of the character, and is made of plastic.",
+    "Xbox",
+    49.99
+  )
+
+  const collectibles = [coll1, coll2, coll3];
+  const createdCollectibles = await Promise.all(collectibles.map(async (collectible) =>  {
+    const response = await Collectibles.createCollectiblesListing(collectible);
+    console.log("Initial Collectibles Created:", response);
+  }))
 
   //***** INITIAL ACCESSORIES ***** */
   class createAcc {
@@ -229,9 +312,30 @@ async function populateInitialData() {
     }
   }
 
-  const acc1 = new createConsole()
-  const acc2 = new createConsole()
-  const acc3 = new createConsole()
+  const acc1 = new createAcc(
+    "Nintendo 64 Controller",
+    "The Nintendo 64 controller is the standard game controller included with the Nintendo 64 video game console. It was released in Japan on June 23, 1996, in North America on September 29, 1996, and in Europe on March 29, 1997.",
+    "N64",
+    26.99
+  )
+  const acc2 = new createAcc(
+    "Playstation Controller",
+    "The DualShock is the first gamepad to feature force feedback, which was originally developed by Immersion Corporation. The DualShock was the first gamepad to feature an analog stick, which was originally developed by Sega for the Saturn.",
+    "Playstation",
+    18.99
+  )
+  const acc3 = new createAcc(
+    "Xbox Controller",
+    "The Xbox controller is the primary game controller for the Xbox video game console, also known as the Xbox OG, and was introduced at the Game Developers Conference on May 12, 2000.",
+    "Xbox",
+    19.99
+  )
+
+  const accessories = [acc1, acc2, acc3];
+  const createdAccessories = await Promise.all(accessories.map(async (accessory) =>  {
+    const response = await Acc.createAccessoriesListing(accessory);
+    console.log("Initial Accessories Created:", response);
+  }));
 
   //***** INITIAL ORDERS ***** */
   class createOr {
@@ -241,9 +345,24 @@ async function populateInitialData() {
     }
   }
 
-  const order1 = new createConsole()
-  const order2 = new createConsole()
-  const order3 = new createConsole()
+  const order1 = new createOr(
+    a915h523h432,
+    "Success"
+  )
+  const order2 = new createOr(
+    a92hg523h762,
+    "Pending"
+  )
+  const order3 = new createOr(
+    k163fab3572,
+    "Pending"
+  )
+
+  const orders = [order1, order2, order3];
+  const createdOrders = await Promise.all(orders.map(async (order) =>  {
+    const response = await Orders.createOrderListing(order);
+    console.log("Initial Orders Created:", response);
+  }))
 
   //***** INITIAL CART ***** */
   class createCart {
@@ -258,14 +377,39 @@ async function populateInitialData() {
     }
   }
 
-  const cart1 = new createConsole()
-  const cart2 = new createConsole()
-  const cart3 = new createConsole()
+  const cart1 = new createCart(
+    a82h,
+    1,
+    a915h523h432,
+    null,
+    null,
+    null,
+    1
+  )
+  const cart2 = new createCart(
+    a72b,
+    1,
+    a92hg523h762,
+    2,
+    null,
+    null,
+    null
+  )
+  const cart3 = new createCart(
+    a82h,
+    1,
+    k163fab3572,
+    null,
+    3,
+    null,
+    1
+  )
 
-
-  // create useful starting data by leveraging your
-  // Model.method() adapters to seed your db, for example:
-  // const user1 = await User.createUser({ ...user info goes here... })
+  const carts = [cart1, cart2, cart3];
+  const createdCarts = await Promise.all(carts.map(async (cart) =>  {
+    const response = await Cart.createCartListing(cart);
+    console.log("Initial Carts Created:", response);
+  }))
   
   } catch (error) {
     throw error;
