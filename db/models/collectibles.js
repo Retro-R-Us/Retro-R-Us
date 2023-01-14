@@ -5,6 +5,7 @@ module.exports = {
     getCollectibleById,
     getCollectiblesByConsole,
     createCollectibleListing,
+    deleteCollectiblesListing
 };
 async function getAllCollectibles() {
     const { rows: [collectibles] } = await client.query(`
@@ -61,5 +62,20 @@ async function createCollectibleListing({ title, description, console, price }) 
         throw error;
     }   
 };
+
+async function deleteCollectiblesListing(collectibleId) {
+    try {
+        const { rows: [collectibles] } = await client.query(`
+            DELETE FROM collectibles
+            WHERE "collectibleId"=$1
+            RETURNING *; 
+        `, [collectibleId]);
+        
+        return collectibles;
+    } catch (error) {
+        throw(error);
+    }
+}
+
 
 

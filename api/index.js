@@ -30,6 +30,9 @@ apiRouter.use('/games', gamesRouter); // mount the games router on /api/games
 const cartRouter = require('./cart');
 apiRouter.use('/cart', cartRouter);
 
+const collectiblesRouter = require('./collectibles')
+apiRouter.use('/collectibles', collectiblesRouter)
+
 apiRouter.get('*', (req, res, next) => {
   const err = new Error()
   err.status = 404;
