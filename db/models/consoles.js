@@ -5,7 +5,8 @@ module.exports = {
     getConsolesById,
     getConsolesByYear,
     createConsoleListing,
-    deleteConsoleListing
+    deleteConsoleListing,
+    updateConsoleListing
 };
 
 async function getAllConsoles() {
@@ -83,6 +84,21 @@ async function deleteConsoleListing(consoleId) {
         throw(error);
     }
 }
+
+async function updateConsoleListing(consoleId, { title, description, price }) {
+    try {
+        const { rows: [consoles] } = await client.query(`
+            UPDATE consoles
+            SET title=$1, description=$2, price=$3
+            WHERE "collectibleId"=$4
+            RETURNING *;
+        `, [title, description, price, consoleId]);
+
+        return consoles;
+    } catch (error) {
+        throw error;
+    }
+}   
 
 
 
