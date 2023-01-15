@@ -15,7 +15,7 @@ collectiblesRouter.get('/', async(request, response, next) => {
 
 collectiblesRouter.post('/', async (request, response, next) => {
     try {
-        const newCollectible = await Collectibles.createCollectiblesListing(request.body);
+        const newCollectible = await Collectibles.createCollectibleListing(request.body);
         response.send(newCollectible);
     } catch (error) {
         console.log("An error occured while creating a new collectible listing");
@@ -25,7 +25,7 @@ collectiblesRouter.post('/', async (request, response, next) => {
 
 collectiblesRouter.get('/:collectibleId', async (request, response, next) => {
     try {
-        const collectible = await Collectibles.getCollectiblesById(request.params.collectibleId);
+        const collectible = await Collectibles.getCollectibleById(request.params.collectibleId);
         response.send(collectible);
     } catch (error) {
         console.log("An error occured while getting a collectible by that ID");
@@ -35,7 +35,7 @@ collectiblesRouter.get('/:collectibleId', async (request, response, next) => {
 
 collectiblesRouter.patch('/:collectibleId', async (request, response, next) => {
     try {
-        const collectibleToUpdate = await Collectibles.getCollectiblesById(request.params.collectibleId);
+        const collectibleToUpdate = await Collectibles.getCollectibleById(request.params.collectibleId);
         if (!collectibleToUpdate) {
             throw {
                 name: 'ErrorCollectibleNotFound',
@@ -53,7 +53,7 @@ collectiblesRouter.patch('/:collectibleId', async (request, response, next) => {
 
 collectiblesRouter.delete('/:collectibleId', async (request, response, next) => {
     try {
-        const collectibleToDelete = await Collectibles.getCollectiblesById(request.params.collectibleId);
+        const collectibleToDelete = await Collectibles.getCollectibleById(request.params.collectibleId);
         if (!collectibleToDelete) {
             throw {
                 name: 'ErrorCollectibleNotFound',
