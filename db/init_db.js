@@ -62,9 +62,9 @@ async function buildTables() {
     await client.query(`
       CREATE TABLE games (
         "gameId" SERIAL PRIMARY KEY,
-        title varchar(50) NOT NULL,
+        title varchar(255) NOT NULL,
         description varchar(255) NOT NULL,
-        console varchar(50) NOT NULL,
+        console varchar(255) NOT NULL,
         year integer NOT NULL,
         price numeric(18,2) NOT NULL
       );
@@ -74,8 +74,8 @@ async function buildTables() {
     await client.query(`
       CREATE TABLE consoles (
         "consoleId" SERIAL PRIMARY KEY,
-        title varchar(50) NOT NULL,
-        description varchar(50) NOT NULL,
+        title varchar(100) NOT NULL,
+        description varchar(255) NOT NULL,
         year integer NOT NULL,
         price numeric(18,2) NOT NULL
       );
@@ -85,7 +85,7 @@ async function buildTables() {
     await client.query(`
       CREATE TABLE accessories (
         "accessoryId" SERIAL PRIMARY KEY,
-        title varchar(50) NOT NULL,
+        title varchar(100) NOT NULL,
         description varchar(255) NOT NULL,
         console varchar(50) NOT NULL,
         price numeric(18,2) NOT NULL
@@ -96,8 +96,8 @@ async function buildTables() {
     await client.query(`
       CREATE TABLE collectibles (
         "collectibleId" SERIAL PRIMARY KEY,
-        title varchar(50) NOT NULL,
-        description varchar(50) NOT NULL,
+        title varchar(100) NOT NULL,
+        description varchar(255) NOT NULL,
         console varchar(50),
         price numeric(18,2) NOT NULL
       );
@@ -126,7 +126,7 @@ async function buildTables() {
 
 async function populateInitialData() {
   try {
-    console.log("Creating starting users.");
+    console.log("Creating Initial users.");
 
     //***** INITIAL USERS ***** */
     class buildUser {
@@ -148,12 +148,12 @@ async function populateInitialData() {
 
     const users = [user1, user2, user3, admin1, admin2, admin3, admin4]
 
-    const createdUsers = await Promise.all(users.map(async (user) => {
-      const response = await User.createUser(user);
-      console.log("Create User Response:", response)
-    }))
+    const createdUsers = await Promise.all(users.map(user => User.createUser(user)))
+      console.log("Created Users:", createdUsers)
 
     //***** INITIAL GAMES ***** */
+
+    console.log("Creating Initial Games")
     class Game {
       constructor(title, desc, console, year, price) {
         this.title = title,
@@ -223,7 +223,7 @@ async function populateInitialData() {
     const game8 = new Game(
       "Assassin's Creed III",
       "An action-adventure game where you play as an assassin throughout the ages. This open world games in third person takes you back to 18th Century America.",
-      "XBOX 360",
+      "Xbox 360",
       "2012",
       39.99
     )
@@ -261,12 +261,13 @@ async function populateInitialData() {
     )
 
     const games = [game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12];
-    const createdGames = await Promise.all(games.map(async (game) =>  {
-      const response = await Games.createGameListing(game);
-      console.log("Initial Games Created:", response);
-    }))
+  
+    const createdGames = await Promise.all(games.map(game =>  Games.createGameListing(game)))
+    console.log(`Created Games:`, createdGames);
 
     //***** INITIAL CONSOLES ***** */
+    console.log("Creating Initial Consoles")
+
     class createConsole {
       constructor(title, desc, year, price) {
         this.title = title,
@@ -278,14 +279,14 @@ async function populateInitialData() {
 
     const con1 = new createConsole(
       "Nintendo 64",
-      "The Nintendo 64 is a home video game console developed and released by Nintendo in 1996. It is Nintendo's third home console, following the Nintendo Entertainment System (NES) and Super Nintendo Entertainment System (SNES).",
+      "The Nintendo 64 is a home video game console developed and released by Nintendo in 1996. Nintendo's third home console, following the Nintendo Entertainment System (NES) and Super Nintendo Entertainment System (SNES).",
       "1996",
       99.99
     )
 
     const con2 = new createConsole(
       "Playstation",
-      "The PlayStation is a home video game console developed and marketed by Sony Computer Entertainment. The console was released on December 3, 1994 in Japan, September 9, 1995 in North America, October 29, 1995 in Europe, and November 15, 1995 in Australia.",
+      "The PlayStation is a video game console developed and marketed by Sony Computer Entertainment. The console was released on December 3, 1994 in Japan, September 9, 1995 in North America, October 29, 1995 in Europe, and November 15, 1995 in Australia.",
       "1994",
       99.99
     )
@@ -327,16 +328,15 @@ async function populateInitialData() {
 
     const con8 = new createConsole(
       "GameBoy",
-      "The GameBoy is a handheld game console developed and manufactured by Nintendo. The first handheld in the industry to use replaceable cartridges, as opposed to built-in games, it was released in Japan on April 21, 1989, and in North America on July 31, 1989.",
+      "The GameBoy is a handheld game console developed and manufactured by Nintendo. The first handheld in the industry to use replaceable cartridges. It was released in Japan on April 21, 1989, and in North America on July 31, 1989.",
       "1989",
       99.99
     )
 
     const consoles = [con1, con2, con3, con4, con5, con6, con7, con8];
-    const createdConsoles = await Promise.all(consoles.map(async (console) =>  {
-      const response = await Consoles.createConsoleListing(consoles);
-      console.log("Initial Consoles Created:", response);
-    }))
+
+    const createdConsoles = await Promise.all(consoles.map(somecon => Consoles.createConsoleListing(somecon)))
+    console.log("Created Consoles:", createdConsoles);
 
     //***** INITIAL COLLECTIBLES ***** */
     class createCol {
@@ -389,10 +389,8 @@ async function populateInitialData() {
     )
 
     const collectibles = [coll1, coll2, coll3, coll4, coll5, coll6];
-    const createdCollectibles = await Promise.all(collectibles.map(async (collectible) =>  {
-      const response = await Collectibles.createCollectibleListing(collectible);
-      console.log("Initial Collectibles Created:", response);
-    }))
+    const createdCollectibles = await Promise.all(collectibles.map(collectible =>  Collectibles.createCollectibleListing(collectible)));
+    console.log("Collectibles Created:", createdCollectibles);
 
     //***** INITIAL ACCESSORIES ***** */
     class createAcc {
