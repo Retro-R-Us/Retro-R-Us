@@ -339,6 +339,9 @@ async function populateInitialData() {
     console.log("Created Consoles:", createdConsoles);
 
     //***** INITIAL COLLECTIBLES ***** */
+    console.log("Creating Initial Collectibles")
+
+
     class createCol {
       constructor(title, desc, console, price) {
         this.title = title,
@@ -390,11 +393,13 @@ async function populateInitialData() {
 
     const collectibles = [coll1, coll2, coll3, coll4, coll5, coll6];
     const createdCollectibles = await Promise.all(collectibles.map(collectible =>  Collectibles.createCollectibleListing(collectible)));
-    console.log("Collectibles Created:", createdCollectibles);
+    console.log("Created Collectibles:", createdCollectibles);
 
     //***** INITIAL ACCESSORIES ***** */
+    console.log("Creating Initial Accessories")
+
     class createAcc {
-      constructor(title, desc, console, year, price) {
+      constructor(title, desc, console, price) {
         this.title = title,
         this.description = desc,
         this.console = console,
@@ -443,12 +448,12 @@ async function populateInitialData() {
     )
 
     const accessories = [acc1, acc2, acc3, acc4, acc5, acc6];
-    const createdAccessories = await Promise.all(accessories.map(async (accessory) =>  {
-      const response = await Acc.createAccessoryListing(accessory);
-      console.log("Initial Accessories Created:", response);
-    }));
+    const createdAccessories = await Promise.all(accessories.map(accessory =>  Acc.createAccessoryListing(accessory)))
+    console.log("Created Accessories:", createdAccessories);
 
     //***** INITIAL ORDERS ***** */
+    console.log("Creating Initial Fake Orders")
+
     class createOr {
       constructor(userId, status) {
         this.userId = userId,
@@ -457,25 +462,25 @@ async function populateInitialData() {
     }
 
     const order1 = new createOr(
-      a915h523h432,
+      1,
       "Success"
     )
     const order2 = new createOr(
-      a92hg523h762,
+      2,
       "Pending"
     )
     const order3 = new createOr(
-      k163fab3572,
+      3,
       "Pending"
     )
 
     const orders = [order1, order2, order3];
-    const createdOrders = await Promise.all(orders.map(async (order) =>  {
-      const response = await Orders.createOrderListing(order);
-      console.log("Initial Orders Created:", response);
-    }))
+    const createdOrders = await Promise.all(orders.map(order =>  Orders.createOrder(order)))
+    console.log("Fake Orders:", createdOrders);
 
     //***** INITIAL CART ***** */
+    console.log("Creating Initial Fake Carts")
+
     class createCart {
       constructor(orderId, quantity, userId, gameId, consoleId, accessoryId, collectibleId) {
         this.orderId = orderId,
@@ -489,27 +494,27 @@ async function populateInitialData() {
     }
 
     const cart1 = new createCart(
-      a82h,
       1,
-      a915h523h432,
+      1,
+      1,
       null,
       null,
       null,
       1
     )
     const cart2 = new createCart(
-      a72b,
+      2,
       1,
-      a92hg523h762,
+      2,
       2,
       null,
       null,
       null
     )
     const cart3 = new createCart(
-      a82h,
+      3,
       1,
-      k163fab3572,
+      3,
       null,
       3,
       null,
@@ -517,10 +522,8 @@ async function populateInitialData() {
     )
 
     const carts = [cart1, cart2, cart3];
-    const createdCarts = await Promise.all(carts.map(async (cart) =>  {
-      const response = await Cart.createCartListing(cart);
-      console.log("Initial Carts Created:", response);
-    }))
+    const createdCarts = await Promise.all(carts.map(cart =>  Cart.addItemToCart(cart)))
+    console.log("Fake Carts Created:", createdCarts)
 
   } catch (error) {
     throw error;
