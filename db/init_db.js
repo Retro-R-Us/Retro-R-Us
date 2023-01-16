@@ -53,7 +53,7 @@ async function buildTables() {
       CREATE TABLE orders (
         "orderId" SERIAL PRIMARY KEY,
         "userId" INTEGER REFERENCES users(id),
-        status varchar(255) NOT NULL,
+        status varchar(50) NOT NULL,
         "createdOn" TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
       );
     `);
@@ -62,9 +62,9 @@ async function buildTables() {
     await client.query(`
       CREATE TABLE games (
         "gameId" SERIAL PRIMARY KEY,
-        title varchar(255) NOT NULL,
+        title varchar(100) NOT NULL,
         description varchar(255) NOT NULL,
-        console varchar(255) NOT NULL,
+        console varchar(50) NOT NULL,
         year integer NOT NULL,
         price numeric(18,2) NOT NULL
       );
