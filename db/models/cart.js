@@ -1,12 +1,12 @@
 const client = require("../client");
 
-async function addItemToCart({ orderId, quantity }) {
+async function addItemToCart({ orderId, quantity, userId }) {
     try {
         const { rows: [newOrder] } = await client.query(`
-        INSERT INTO cart("orderId", quantity)
-        VALUES ($1, $2)
+        INSERT INTO cart("orderId", quantity, "userId")
+        VALUES ($1, $2, $3)
         RETURNING *;
-        `, [orderId, quantity]);
+        `, [orderId, quantity, userId]);
 
         return newOrder;
     } catch (error) {
