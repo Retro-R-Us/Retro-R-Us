@@ -15,16 +15,18 @@ module.exports = {
 };
 
 async function createUser(userData) {
-  const { username, email, admin } = userData;
+  const { username, email } = userData;
   const hashedPassword = await bcrypt.hash(userData.password, SALT);
-
+  if (!userData.admin) {
+    userData.admin = false;
+  }
   try {
     const { rows: [user] } = await client.query(
       `
         INSERT INTO users (username, password, email, admin)
         VALUES ($1, $2, $3, $4)
         ON CONFLICT (username) DO NOTHING;
-      `, [username, hashedPassword, email, admin]
+      `, [username, hashedPassword, email, userData.admin]
     );
         return {
           Success: true,
