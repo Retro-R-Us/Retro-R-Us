@@ -60,7 +60,7 @@ async function getConsolesByYear(year) {
 async function createConsoleListing({ title, description, year, price }) {
     try {
         const { rows: [consoles] } = await client.query(`
-            INSERT INTO games(title, description, year, price)
+            INSERT INTO consoles (title, description, year, price)
             VALUES($1, $2, $3, $4)
             RETURNING *;
         `, [title, description, year, price]);
