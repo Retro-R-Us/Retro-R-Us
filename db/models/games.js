@@ -2,7 +2,7 @@ const client = require('../client');
 
 // returns all games
 async function getAllGames() {
-    const { rows: [games] } = await client.query(`
+    const { rows: games } = await client.query(`
         SELECT * FROM games;
     `);
 
