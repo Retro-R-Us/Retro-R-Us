@@ -9,11 +9,16 @@ module.exports = {
     updateCollectiblesListing
 };
 async function getAllCollectibles() {
+   try {
     const { rows: [collectibles] } = await client.query(`
         SELECT * FROM collectibles;
     `);
 
     return collectibles;
+    
+    } catch (error) {
+    throw error:
+   }
 };
 
 async function getCollectibleById(collectibleId) {
