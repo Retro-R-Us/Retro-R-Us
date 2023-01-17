@@ -17,7 +17,7 @@ async function getAllCollectibles() {
     return collectibles;
     
     } catch (error) {
-    throw error:
+    throw error;
    }
 };
 
