@@ -42,7 +42,7 @@ async function buildTables() {
         username varchar(255) UNIQUE NOT NULL,
         password varchar(255) NOT NULL,
         email varchar(255) UNIQUE NOT NULL,
-        admin BOOLEAN DEFAULT false,
+        admin BOOLEAN NOT NULL,
         "adminPass" varchar(50),
         "createdOn" TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
       );
@@ -131,10 +131,10 @@ async function populateInitialData() {
     //***** INITIAL USERS ***** */
     class buildUser {
       constructor(username, password, email, admin) {
-      this.username = username,
-      this.password = password,
-      this.email = email,
-      this.admin = admin
+        this.username = username,
+        this.password = password,
+        this.email = email,
+        this.admin = admin || false
       }
     }
 
@@ -147,7 +147,6 @@ async function populateInitialData() {
     const admin4 = new buildUser("Kelan", "147147", "admin4@gmail.com", true);
 
     const users = [user1, user2, user3, admin1, admin2, admin3, admin4]
-
     const createdUsers = await Promise.all(users.map(user => User.createUser(user)))
       console.log("Created Users:", createdUsers)
 
