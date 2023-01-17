@@ -31,7 +31,7 @@ userRouter.get('/me', async (req, res, next) => {
         })
         } else {
             const user = await User.getUserByUsername(username);
-            const orders = await Orders.getOrdersByUser({username: username});
+            const orders = await Orders.getOrdersByUser(user.id);
             const userData = {
                 Success: true,
                 user: user,
