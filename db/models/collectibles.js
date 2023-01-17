@@ -5,14 +5,20 @@ module.exports = {
     getCollectibleById,
     getCollectiblesByConsole,
     createCollectibleListing,
-    deleteCollectiblesListing
+    deleteCollectiblesListing,
+    updateCollectiblesListing
 };
 async function getAllCollectibles() {
+   try {
     const { rows: [collectibles] } = await client.query(`
         SELECT * FROM collectibles;
     `);
 
     return collectibles;
+    
+    } catch (error) {
+    throw error:
+   }
 };
 
 async function getCollectibleById(collectibleId) {
@@ -76,6 +82,21 @@ async function deleteCollectiblesListing(collectibleId) {
         throw(error);
     }
 }
+
+async function updateCollectiblesListing(collectibleId, { title, description, console, price }) {
+    try {
+        const { rows: [collectibles] } = await client.query(`
+            UPDATE collectibles
+            SET title=$1, description=$2, console=$3, price=$4
+            WHERE "collectibleId"=$5
+            RETURNING *;
+        `, [title, description, console, price, collectibleId]);
+
+        return collectibles;
+    } catch (error) {
+        throw error;
+    }
+}   
 
 
 
