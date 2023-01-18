@@ -14,17 +14,19 @@ module.exports = {
   getPass
 };
 
-async function createUser(userData) { 
-  const { username, password, email, admin, adminPass } = userData;
-
+async function createUser(userData) {
+  const { username, email } = userData;
+  const hashedPassword = await bcrypt.hash(userData.password, SALT);
+  if (!userData.admin) {
+    userData.admin = false;
+  }
   try {
-    const hashedPassword = await bcrypt.hash(password, SALT);
     const { rows: [user] } = await client.query(
       `
-        INSERT INTO users (username, password, email, admin, "adminPass")
-        VALUES ($1, $2, $3, $4, $5)
+        INSERT INTO users (username, password, email, admin)
+        VALUES ($1, $2, $3, $4)
         ON CONFLICT (username) DO NOTHING;
-      `, [username, hashedPassword, email, admin, adminPass]
+      `, [username, hashedPassword, email, userData.admin]
     );
         return {
           Success: true,
@@ -128,10 +130,11 @@ async function getPass (username, password) {
     const { rows: [user] } = await client.query(
       `
         SELECT *
-        FROM users;
-      `
+        FROM users
+        WHERE username=$1;
+      `,[username]
     )
-    const isValid = await bcrypt.compare(user.password, password);
+    const isValid = await bcrypt.compare(password, user.password);
     if (!isValid) {
       const invalid = new Error('Old password is incorrect.')
       return {
@@ -159,7 +162,7 @@ async function newPassword ({username, oldPassword, newPassword}) {
         WHERE username=$1;
       `, [username]
     );
-    const isValid = await bcrypt.compare(user.password, oldPassword);
+    const isValid = await bcrypt.compare(oldPassword, user.password);
     if (!isValid) {
       const invalid = new Error('Old password is incorrect.')
       return {

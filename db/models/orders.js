@@ -29,15 +29,13 @@ async function getAllOrders() {
     }
 }
 
-async function getOrdersByUser({username}) {
+async function getOrdersByUser(id) {
     try {
-        const user = await getUserByUsername(username);
         const { rows: [order] } = await client.query(`
         SELECT *
         FROM orders
-        JOIN users ON orders."userId" = users.id
-        WHERE "userId" = $1;
-        `, [user.id]);
+        WHERE "userId"=$1;
+        `, [id]);
 
         return order;
     } catch (error) {
