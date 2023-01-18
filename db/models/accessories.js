@@ -32,6 +32,8 @@ async function getAccessoryById(accessoryId) {
                 message: 'Could not find an accessory by that accessoryId'
             };
         }
+
+        return accessory;
     } catch (error) {
         throw error;
     }
