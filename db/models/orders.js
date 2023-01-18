@@ -51,7 +51,7 @@ async function getOrdersById(id) {
         const { rows: [order] } = await client.query(`
         SELECT *
         FROM orders
-        WHERE id=$1;
+        WHERE "orderId"=$1;
         `, [id]);
 
         return order;
@@ -86,7 +86,7 @@ async function updateOrder({ id, status, cart }) {
         const { rows: [updateOrder] } = await client.query(`
         UPDATE orders
         SET ${setString}
-        WHERE id=${id}
+        WHERE "orderId"=${id}
         RETURNING *;
         `, Object.values(fields));
 
