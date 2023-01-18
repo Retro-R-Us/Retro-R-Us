@@ -11,7 +11,7 @@ module.exports = {
 
 // returns all accessories
 async function getAllAccessories() {
-    const { rows: [accessories] } = await client.query(`
+    const { rows: accessories } = await client.query(`
         SELECT * FROM accessories;
     `);
 
