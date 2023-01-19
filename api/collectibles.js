@@ -68,4 +68,14 @@ collectiblesRouter.delete('/:collectibleId', async (request, response, next) => 
     }
 });
 
+collectiblesRouter.get('/console/:console', async (request, response, next) => {
+    try {
+        const collectibles = await Collectibles.getCollectiblesByConsole(request.params.console);
+        response.send(collectibles);
+    } catch (error) {
+        console.log("An error occured while getting collectibles by that console");
+        next(error);
+    }
+});
+
     module.exports = collectiblesRouter;

@@ -11,7 +11,7 @@ module.exports = {
 
 async function getAllConsoles() {
     try {
-        const { rows: [consoles] } = await client.query(`
+        const { rows: consoles } = await client.query(`
         SELECT * FROM consoles;
         `);
         return consoles;
@@ -43,7 +43,7 @@ async function getConsolesByYear(year) {
     try {
         const { rows: [consoles],
          } = await client.query(`
-            SELECT * from consoles
+            SELECT * FROM consoles
             WHERE year=$1;
         `, [year]);
 
@@ -90,7 +90,7 @@ async function updateConsoleListing(consoleId, { title, description, price }) {
         const { rows: [consoles] } = await client.query(`
             UPDATE consoles
             SET title=$1, description=$2, price=$3
-            WHERE "collectibleId"=$4
+            WHERE "consoleId"=$4
             RETURNING *;
         `, [title, description, price, consoleId]);
 

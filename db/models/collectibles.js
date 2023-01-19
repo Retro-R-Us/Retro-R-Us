@@ -10,7 +10,7 @@ module.exports = {
 };
 async function getAllCollectibles() {
    try {
-    const { rows: [collectibles] } = await client.query(`
+    const { rows: collectibles } = await client.query(`
         SELECT * FROM collectibles;
     `);
 
