@@ -392,7 +392,7 @@ async function populateInitialData() {
 
     const collectibles = [coll1, coll2, coll3, coll4, coll5, coll6];
     const createdCollectibles = await Promise.all(collectibles.map(collectible =>  Collectibles.createCollectibleListing(collectible)));
-    console.log("Created Collectibles:", createdCollectibles);
+    console.log("Initial Collectibles Created")
 
     //***** INITIAL ACCESSORIES ***** */
     console.log("Creating Initial Accessories")
