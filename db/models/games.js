@@ -2,7 +2,7 @@ const client = require('../client');
 
 // returns all games
 async function getAllGames() {
-    const { rows: [games] } = await client.query(`
+    const { rows: games } = await client.query(`
         SELECT * FROM games;
     `);
 
@@ -93,7 +93,7 @@ async function updateGameListing(gameId, { title, description, console, year, pr
     try {
         const { rows: [game] } = await client.query(`
             UPDATE accessories
-            SET title=$1, description=$2, console=$3, year=$4, price=5$
+            SET title=$1, description=$2, console=$3, year=$4, price=$5
             WHERE "gameId"=$6
             RETURNING *;
         `, [title, description, console, year, price, gameId]);
