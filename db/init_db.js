@@ -522,7 +522,7 @@ async function populateInitialData() {
 
     const carts = [cart1, cart2, cart3];
     const createdCarts = await Promise.all(carts.map(cart =>  Cart.addItemToCart(cart)))
-    console.log("Fake Carts Created:", createdCarts)
+    console.log("Initial Fake Carts Created")
 
   } catch (error) {
     throw error;
