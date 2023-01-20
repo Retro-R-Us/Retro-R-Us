@@ -448,7 +448,7 @@ async function populateInitialData() {
 
     const accessories = [acc1, acc2, acc3, acc4, acc5, acc6];
     const createdAccessories = await Promise.all(accessories.map(accessory =>  Acc.createAccessoryListing(accessory)))
-    console.log("Created Accessories:", createdAccessories);
+    console.log("Initial Accessories Created")
 
     //***** INITIAL ORDERS ***** */
     console.log("Creating Initial Fake Orders")
