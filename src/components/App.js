@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Routes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { getAPIHealth } from "../api";
+import AuthorizeUser from "./Auth";
 import "../style/App.css";
 
 const App = () => {
     const [APIHealth, setAPIHealth] = useState("");
+    const [token, setToken] = useState(window.localStorage.getItem("token") || null);
+    const [username, setUsername] = useState(null);
 
     useEffect(() => {
         // follow this pattern inside your useEffect calls:
@@ -30,7 +33,7 @@ const App = () => {
             <Routes>
                 {/* <Route exact path="/" element={<Home user={user}/>} /> */}
                 {/* <Route exact path="/routines" element={<Routines tokenString={tokenString} user={user} />} /> */}
-                {/* <Route exact path="/account/:action" element={<AuthorizeUser setTokenString={setTokenString} tokenString={tokenString} user={user}/>} /> */}
+                <Route exact path="/account/:action" element={<AuthorizeUser setToken={setToken} username={username}/>} />
                 {/* <Route path="/activities" element={<Activities tokenString={tokenString} user={user}/>} /> */}
             </Routes>
 
