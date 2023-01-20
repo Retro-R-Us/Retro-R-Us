@@ -20,7 +20,7 @@ async function getOrderById(id) {
         const { rows: [cart] } = await client.query(`
         SELECT *
         FROM cart
-        WHERE id=$1;
+        WHERE "cartId"=$1;
         `, [id]);
 
         return cart;
@@ -36,7 +36,7 @@ async function updateCart({ id, ...fields }) {
         if (!order) {
             return;
         }
-        const setString = Object.keys(fields).map((key, index) => `"${key}"=${index + 1}`)
+        const setString = Object.keys(fields).map((key, index) => `"${key}"=$${index + 1}`)
         .join(", ");
 
         if (setString.length === 0) {
@@ -45,7 +45,7 @@ async function updateCart({ id, ...fields }) {
         const { rows: [updateCart] } = await client.query(`
         UPDATE cart
         SET ${setString}
-        WHERE id=${id}
+        WHERE "cartId"=${id}
         RETURNING *;
         `, Object.values(fields));
 
@@ -61,7 +61,7 @@ async function destroyCart(id) {
         const { rows: [deleteCart] } = await client.query(`
         DELETE
         FROM cart
-        WHERE id=$1
+        WHERE "cartId"=$1
         RETURNING *;
         `, [id]);
 
