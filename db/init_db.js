@@ -335,7 +335,7 @@ async function populateInitialData() {
     const consoles = [con1, con2, con3, con4, con5, con6, con7, con8];
 
     const createdConsoles = await Promise.all(consoles.map(somecon => Consoles.createConsoleListing(somecon)))
-    console.log("Created Consoles:", createdConsoles);
+    console.log("Initial Consoles Created")
 
     //***** INITIAL COLLECTIBLES ***** */
     console.log("Creating Initial Collectibles")
