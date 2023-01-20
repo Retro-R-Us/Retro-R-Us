@@ -16,7 +16,7 @@ export const userAction = async (username, password, action) => {
         const data = await response.json();
         return data;
     } catch (error) {
-        console.error("There was an error registering the user", error);
+        console.error(error);
     }
 };
 
@@ -35,7 +35,7 @@ export const getCurrentUser = async (username, token) => {
         const data = await response.json();
         return data;
     } catch {
-        console.error("Could not retrieve user", error);
+        console.error(error);
     }
 };
 
@@ -56,6 +56,24 @@ export const updateUserPass = async (token, username, oldPass, newPass) => {
         const data = await response.json();
         return data;
     } catch {
-        console.error("Could not retrieve user", error);
+        console.error(error);
+    }
+}
+
+export const isAdmin = async (username) => {
+    try {
+        const response = await fetch(`${BASEURL}/users/update`, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: username
+            }),
+        });
+
+        const data = await response.json();
+        return data;
+    } catch {
+        console.error(error);
     }
 }
