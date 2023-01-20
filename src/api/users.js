@@ -39,4 +39,23 @@ export const getCurrentUser = async (username, token) => {
     }
 };
 
+export const updateUserPass = async (token, username, oldPass, newPass) => {
+    try {
+        const response = await fetch(`${BASEURL}/users/update`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                username: username,
+                oldPassword: oldPass,
+                newPassword: newPass
+            }),
+        });
 
+        const data = await response.json();
+        return data;
+    } catch {
+        console.error("Could not retrieve user", error);
+    }
+}
