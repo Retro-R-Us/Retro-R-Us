@@ -262,7 +262,7 @@ async function populateInitialData() {
     const games = [game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12];
   
     const createdGames = await Promise.all(games.map(game =>  Games.createGameListing(game)))
-    console.log(`Created Games:`, createdGames);
+    console.log("Initial Games Created")
 
     //***** INITIAL CONSOLES ***** */
     console.log("Creating Initial Consoles")
