@@ -6,7 +6,7 @@ export {} from "./games"
 export {} from "./consoles"
 export {} from "./orders"
 export {} from "./cart"
-export {} from "./users"
+export { getCurrentUser, updateUserPass, userAction, isAdmin } from "./users"
 export {} from "./admin"
 
 export default BASEURL;
