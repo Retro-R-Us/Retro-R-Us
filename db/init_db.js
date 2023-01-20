@@ -126,7 +126,7 @@ async function buildTables() {
 
 async function populateInitialData() {
   try {
-    console.log("Creating Initial users.");
+    console.log("Creating Initial users");
 
     //***** INITIAL USERS ***** */
     class buildUser {
@@ -148,7 +148,7 @@ async function populateInitialData() {
 
     const users = [user1, user2, user3, admin1, admin2, admin3, admin4]
     const createdUsers = await Promise.all(users.map(user => User.createUser(user)))
-      console.log("Created Users:", createdUsers)
+    console.log("Initial Users Created")
 
     //***** INITIAL GAMES ***** */
 
