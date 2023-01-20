@@ -475,7 +475,7 @@ async function populateInitialData() {
 
     const orders = [order1, order2, order3];
     const createdOrders = await Promise.all(orders.map(order =>  Orders.createOrder(order)))
-    console.log("Fake Orders:", createdOrders);
+    console.log("Initial Fake Orders Created")
 
     //***** INITIAL CART ***** */
     console.log("Creating Initial Fake Carts")
