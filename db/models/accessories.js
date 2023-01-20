@@ -11,7 +11,7 @@ module.exports = {
 
 // returns all accessories
 async function getAllAccessories() {
-    const { rows: [accessories] } = await client.query(`
+    const { rows: accessories } = await client.query(`
         SELECT * FROM accessories;
     `);
 
@@ -32,6 +32,8 @@ async function getAccessoryById(accessoryId) {
                 message: 'Could not find an accessory by that accessoryId'
             };
         }
+
+        return accessory;
     } catch (error) {
         throw error;
     }
