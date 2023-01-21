@@ -41,3 +41,13 @@ export const fetchGamesByConsole = async (console) => {
         console.error("An error occured while attempting to fetch games by console:", error);
     }
 }
+
+export const fetchGamesByYear = async (year) => {
+    try {
+        const response = await fetch(`${BASEURL}/games/year/${year}`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("An error occured while attempting to fetch games by year:", error);
+    }
+}
