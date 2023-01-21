@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
 import { userAction } from '../api';
 
@@ -39,19 +39,45 @@ const AuthorizeUser = (props) => {
         try {
             if (action === "login") {
                 const response = await userAction(data);
-                setUserData(response.userdata)
-                setStyle({display: "none"});
-                setSuccess(true);
-                setToken(response.userdata.token)
-                setMessage(response.Message)
-                setInterval(() => {
-                    history("/")
-                }, 5000)
+                if (response.Success === false) {
+                    setStyle({display: "none"});
+                    setMessage(response.Message);
+                    setSuccess(false);
+                    setInterval(() => {
+                        setSuccess(null);
+                        setMessage("");
+                        setStyle(null);
+                    }, 7500)
+                } else {
+                    setUserData(response.userdata)
+                    setStyle({display: "none"});
+                    setSuccess(true);
+                    setToken(response.userdata.token)
+                    setMessage(response.Message)
+                    setInterval(() => {
+                        setSuccess(null)
+                        history("/")
+                    }, 5000)
+                }
             } else if (action === "register") {
                 const response = await userAction(data);
-                setStyle({display: "none"});
-                setSuccess(true);
-                setMessage(response.Message);
+                if (response.Success === false) {
+                    setStyle({display: "none"});
+                    setMessage(response.Message);
+                    setSuccess(false);
+                    setInterval(() => {
+                        setSuccess(null);
+                        setMessage("");
+                        setStyle(null);
+                    }, 7500)
+                } else  {
+                    setStyle({display: "none"});
+                    setSuccess(true);
+                    setMessage(response.Message);
+                    setInterval(() => {
+                        setSuccess(null)
+                        history("/")
+                    }, 5000)}
             } else { 
                 setMessage()
                 setSuccess(false)
@@ -85,31 +111,25 @@ const AuthorizeUser = (props) => {
                 </div> : null}
                 <button className="ui button basic positive" type="submit" style={style} >Submit</button>
             </form>
-            {success ? 
+            {success === true ? 
                 <div className="ui success message">
                     <div>Success!</div>
                     <p>{message}</p>
-                    {action === 'login' ? <p>You are now being redirected back to the homepage</p> : null}
+                    <p>You are now being redirected back to the homepage</p>
                 </div> 
             : 
-                <div className="ui success message">
-                    <div>Success!</div>
+                null
+            }
+            {success === false ? 
+                <div className="ui error message">
+                    <div>There was an error!</div>
                     <p>{message}</p>
-                    {action === 'login' ? <p>You are now being redirected back to the homepage</p> : null}
                 </div>
+            :
+                null
             }
         </div>
     ) : null;
 }
 
 export default AuthorizeUser;
-
-{/* <div class="ui success message">
-<div class="header">Form Completed</div>
-<p>You're all signed up for the newsletter.</p>
-</div> */}
-
-{/* <div class="ui error message">
-    <div class="header">Action Forbidden</div>
-    <p>You can only sign up for an account once with a given e-mail address.</p>
-  </div> */}
