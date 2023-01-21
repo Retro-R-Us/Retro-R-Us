@@ -43,7 +43,7 @@ const AuthorizeUser = (props) => {
                     setStyle({display: "none"});
                     setMessage(response.Message);
                     setSuccess(false);
-                    setInterval(() => {
+                    setTimeout(() => {
                         setSuccess(null);
                         setMessage("");
                         setStyle(null);
@@ -54,7 +54,7 @@ const AuthorizeUser = (props) => {
                     setSuccess(true);
                     setToken(response.userdata.token)
                     setMessage(response.Message)
-                    setInterval(() => {
+                    setTimeout(() => {
                         setSuccess(null)
                         history("/")
                     }, 5000)
@@ -65,7 +65,7 @@ const AuthorizeUser = (props) => {
                     setStyle({display: "none"});
                     setMessage(response.Message);
                     setSuccess(false);
-                    setInterval(() => {
+                    setTimeout(() => {
                         setSuccess(null);
                         setMessage("");
                         setStyle(null);
@@ -74,7 +74,7 @@ const AuthorizeUser = (props) => {
                     setStyle({display: "none"});
                     setSuccess(true);
                     setMessage(response.Message);
-                    setInterval(() => {
+                    setTimeout(() => {
                         setSuccess(null)
                         history("/")
                     }, 5000)}
@@ -123,7 +123,8 @@ const AuthorizeUser = (props) => {
             {success === false ? 
                 <div className="ui error message">
                     <div>There was an error!</div>
-                    <p>{message} <button>here</button></p>
+                    <p>{message}</p>
+                    {/* maybe look at adding a text-based link to the above <p> tag to re-route the user to the login page . Message above should be as follows: "That user already exists! You can login instead" */}
                 </div>
             :
                 null
