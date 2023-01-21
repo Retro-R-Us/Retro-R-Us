@@ -1,34 +1,47 @@
 import BASEURL from "./index";
 
-export const getAllConsoles = async() => {
-    try {
-        const response = await fetch(`${BASEURL}/consoles`)
-        const result = await response.json()
-        console.log("results from consoles", result)
-        return result
-    } catch(error) {
-        console.error(error)
-    }
-};
-
-export const createConsoleListing = async({title, description, year, price}) => {
+export const fetchAllConsoles = async () => {
     try {
         const response = await fetch(`${BASEURL}/consoles`, {
-            method: "POST",
             headers: {
-                'Content-type': 'Application/json',
-            },
-            body: JSON.stringify({
-                title: title,
-                description: description,
-                year: parseFloat(year),
-                price: parseFloat(price)
-
-            })
-        })
-        const result = await response.json()
-        return result 
-    } catch(error) {
-        console.error(error)
+                'Content-Type': 'Application/json'
+                }
+            });
+        const results = await response.json();
+        return results;
+    } catch (error) {
+        console.error("An error occured while attempting to fetch consoles", error);
     }
 }
+
+
+export const fetchConsoleById = async (consoleId) => {
+    try {
+        const response = await fetch(`${BASEURL}/consoles/${consoleId}`, {
+            headers: {
+                'Content-Type': 'Application/json'
+                }
+            });
+        const results = await response.json();
+        return results;
+    } catch (error) {
+        console.error("An error occured while attempting to fetch the console by ID", error);
+    }
+}
+
+
+
+export const fetchConsolesByYear = async (year) => {
+    try {
+        const response = await fetch(`${BASEURL}/consoles/year/${year}`);
+        const results = await response.json();
+        return results;
+    } catch (error) {
+        console.error("An error occured while attempting to fetch consoles by year", error);
+    }
+}
+
+
+
+
+
