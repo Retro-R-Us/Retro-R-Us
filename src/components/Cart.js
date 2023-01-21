@@ -1,4 +1,4 @@
-import {BASEURL} from './index';
+import BASEURL from './index';
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -59,20 +59,20 @@ return (
         {!loggedIn && cart.length !== 0 ? (
         <h3>
           Please{" "}
-          <Link to={"/Login"}>
+          <Link to={"/login"}>
             <button>login</button>
           </Link>{" "}
         
           or{" "}
         
-          <Link to={"/Register"}>
+          <Link to={"/register"}>
             <button>create an account</button>
           </Link>{" "}
         
           to complete checkout.
         </h3>
       ) : cart.length !== 0 ? (
-        <Link to={"/Checkout"}>
+        <Link to={"/checkout"}>
           <button onClick={() => handleCheckout()}>Checkout</button>
         </Link>
       ) : null}
