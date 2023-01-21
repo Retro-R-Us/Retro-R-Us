@@ -123,7 +123,7 @@ const AuthorizeUser = (props) => {
             {success === false ? 
                 <div className="ui error message">
                     <div>There was an error!</div>
-                    <p>{message}</p>
+                    <p>{message} <button>here</button></p>
                 </div>
             :
                 null
