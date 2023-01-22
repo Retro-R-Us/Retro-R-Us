@@ -41,17 +41,3 @@ export const fetchAccessoriesByConsole = async (console) => {
         console.error("An error occured while attempting to fetch accessories by console:", error);
     }
 }
-
-export const fetchAccessoriesByYear = async (year) => {
-    try {
-        const response = await fetch(`${BASEURL}/accessories/year/${year}`, {
-        headers: {
-            "Content-Type": "application/json",
-            },
-        });
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error("An error occured while attempting to fetch accessories by year:", error);
-    }
-}
