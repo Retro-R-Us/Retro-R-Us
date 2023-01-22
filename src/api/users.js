@@ -1,16 +1,18 @@
-import BASEURL from ".";
+import BASEURL from "./index";
 
-export const userAction = async (username, password, action) => {
+export const userAction = async ({username, password, email, admin, action}) => {
     try {
-        const response = await fetch(`${BASEURL}/users/${action}`, {
+        const response = await fetch(`${BASEURL}/user/${action}`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 username: username,
                 password: password,
-            }),
+                email: email,
+                admin: admin
+            })
         });
 
         const data = await response.json();
@@ -22,7 +24,7 @@ export const userAction = async (username, password, action) => {
 
 export const getCurrentUser = async (username, token) => {
     try {
-        const response = await fetch(`${BASEURL}/users/me`, {
+        const response = await fetch(`${BASEURL}/user/me`, {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
@@ -41,7 +43,7 @@ export const getCurrentUser = async (username, token) => {
 
 export const updateUserPass = async (token, username, oldPass, newPass) => {
     try {
-        const response = await fetch(`${BASEURL}/users/update`, {
+        const response = await fetch(`${BASEURL}/user/update`, {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`,
@@ -62,7 +64,7 @@ export const updateUserPass = async (token, username, oldPass, newPass) => {
 
 export const isAdmin = async (username) => {
     try {
-        const response = await fetch(`${BASEURL}/users/update`, {
+        const response = await fetch(`${BASEURL}/user/update`, {
             headers: {
                 "Content-Type": "application/json"
             },

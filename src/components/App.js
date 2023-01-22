@@ -10,7 +10,9 @@ const App = () => {
     const [APIHealth, setAPIHealth] = useState("");
     const [token, setToken] = useState(window.localStorage.getItem("token") || null);
     const [username, setUsername] = useState(null);
+    const [userData, setUserData] = useState({});
     const [games, setGames] = useState([]);
+
 
     useEffect(() => {
         // follow this pattern inside your useEffect calls:
@@ -44,7 +46,7 @@ const App = () => {
             <Routes>
                 {/* <Route exact path="/" element={<Home user={user}/>} /> */}
                 {/* <Route exact path="/routines" element={<Routines tokenString={tokenString} user={user} />} /> */}
-               {/* <Route exact path="/account/:action" element={<AuthorizeUser setToken={setToken} username={username}/>} /> */}
+                {/* <Route exact path="/account/:action" element={<AuthorizeUser setToken={setToken} username={username}/>} /> */}
                 <Route path="/games" element={<Games games={games}/>} />
             </Routes>
 
