@@ -54,7 +54,7 @@ export const fetchUpdateConsoleListing = async ({
 
 export const fetchDeleteConsoleListing = async () => {
   try {
-    const reponse = await fetch(`${BASEURL}/consoles/${consoleId}`, {
+    const response = await fetch(`${BASEURL}/consoles/${consoleId}`, {
       method: "DELETE",
       headers: {
         "Content-type": "Application/json",
