@@ -51,3 +51,19 @@ export const fetchUpdateConsoleListing = async ({
     console.error(error);
   }
 };
+
+export const fetchDeleteConsoleListing = async () => {
+  try {
+    const reponse = await fetch(`${BASEURL}/consoles/${consoleId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "Application/json",
+      },
+    });
+
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    console.error(error);
+  }
+};
