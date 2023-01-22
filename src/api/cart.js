@@ -23,13 +23,18 @@ export const addItemToCart = async (orderId, quantity, userId) => {
 
 export const updateCart = async (cartId) => {
     try {
-        const response = await fetch(`${BASEURL}/cart/:cartId`, {
+        const response = await fetch(`${BASEURL}/cart/${cartId}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                cartId: cartId
+                userId: userId,
+                quantity: quantity,
+                gameId: gameId,
+                consoleId: consoleId,
+                accessoryId: accessoryId,
+                collectibleId: collectibleId,
             }),
         });
 
@@ -42,12 +47,13 @@ export const updateCart = async (cartId) => {
 
 export const getOrderById = async (cartId) => {
     try {
-        const response = await fetch(`${BASEURL}/cart/userId`, {
+        const response = await fetch(`${BASEURL}/cart/${userId}`, {
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                cartId: cartId
+                cartId: cartId,
+                orderId: orderId,
             }),
         });
 
@@ -60,15 +66,11 @@ export const getOrderById = async (cartId) => {
 
 export const destroyCart = async (cartId) => {
     try {
-        const response = await fetch(`${BASEURL}/cart/:cartId`, {
+        const response = await fetch(`${BASEURL}/cart/${cartId}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                cartId: cartId
-            }),
-        });
+    }});
 
         const data = await response.json();
         return data;
