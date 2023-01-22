@@ -13,3 +13,17 @@ export const fetchAllAccessories = async () => {
         console.error("An error occured while attempting to fetch accessories:", error);
     }
 }
+
+export const fetchAccessoryById = async (accessoryId) => {
+    try {
+        const response = await fetch(`${BASEURL}/accessories/${accessoryId}`, {
+        headers: {
+            "Content-Type": "application/json",
+            },
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("An error occured while attempting to fetch accessory by ID:", error);
+    }
+}
