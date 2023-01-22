@@ -27,3 +27,17 @@ export const fetchAccessoryById = async (accessoryId) => {
         console.error("An error occured while attempting to fetch accessory by ID:", error);
     }
 }
+
+export const fetchAccessoriesByConsole = async (console) => {
+    try {
+        const response = await fetch(`${BASEURL}/accessories/console/${console}`, {
+        headers: {
+            "Content-Type": "application/json",
+            },
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("An error occured while attempting to fetch accessories by console:", error);
+    }
+}
