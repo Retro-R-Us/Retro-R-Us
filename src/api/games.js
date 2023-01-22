@@ -44,7 +44,11 @@ export const fetchGamesByConsole = async (console) => {
 
 export const fetchGamesByYear = async (year) => {
     try {
-        const response = await fetch(`${BASEURL}/games/year/${year}`);
+        const response = await fetch(`${BASEURL}/games/year/${year}`, {
+            headers: {
+                'Content-Type': 'application/json'
+                }
+            });
         const data = await response.json();
         return data;
     } catch (error) {
