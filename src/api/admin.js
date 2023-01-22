@@ -10,7 +10,7 @@ export const fetchCreateConsoleListing = async ({
     const response = await fetch(`${BASEURL}/consoles`, {
       method: "POST",
       headers: {
-        "Content-type": "Application/json",
+        "Content-type": "application/json",
       },
       body: JSON.stringify({
         title: title,
@@ -36,7 +36,7 @@ export const fetchUpdateConsoleListing = async ({
     const response = await fetch(`${BASEURL}/consoles/${consoleId}`, {
       method: "PATCH",
       headers: {
-        "Content-type": "Application/json",
+        "Content-type": "application/json",
       },
       body: JSON.stringify({
         title: title,
@@ -57,7 +57,7 @@ export const fetchDeleteConsoleListing = async () => {
     const response = await fetch(`${BASEURL}/consoles/${consoleId}`, {
       method: "DELETE",
       headers: {
-        "Content-type": "Application/json",
+        "Content-type": "application/json",
       },
     });
 
