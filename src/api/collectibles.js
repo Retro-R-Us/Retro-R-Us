@@ -14,7 +14,7 @@ export const fetchAllCollectibles = async () => {
     }
   };
 
-  export const fetchCollectibleById = async (collectibleId) => {
+export const fetchCollectibleById = async (collectibleId) => {
     try {
       const response = await fetch(`${BASEURL}/collectibles/${collectibleId}`, {
         headers: {
@@ -30,3 +30,21 @@ export const fetchAllCollectibles = async () => {
       );
     }
   };
+
+  export const fetchCollectiblesByConsole = async (console) => {
+    try {
+      const response = await fetch(`${BASEURL}/collectibles/console/${console}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const results = await response.json();
+      return results;
+    } catch (error) {
+      console.error(
+        "An error occured while attempting to fetch collectibles by console",
+        error
+      );
+    }
+  };
+
