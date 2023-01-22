@@ -123,3 +123,20 @@ export const fetchDeleteConsoleListing = async () => {
     console.error(error);
   }
 };
+
+
+export const fetchDeleteCollectibleListing = async () => {
+  try {
+    const response = await fetch(`${BASEURL}/collectibles/${collectibleId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    console.error(error);
+  }
+};
