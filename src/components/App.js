@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { getAPIHealth } from "../api";
-// import AuthorizeUser from "./Auth";
+import AuthorizeUser from "./Auth";
 import "../style/App.css";
 import Games from "./games";
 import { fetchAllGames } from "../api/games";
