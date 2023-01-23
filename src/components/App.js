@@ -5,6 +5,7 @@ import AuthorizeUser from "./Auth";
 import "../style/App.css";
 import Games from "./games";
 import { fetchAllGames } from "../api/games";
+import { fetchAllConsoles } from "../api/consoles";
 
 const App = () => {
     const [APIHealth, setAPIHealth] = useState("");
@@ -12,6 +13,7 @@ const App = () => {
     const [username, setUsername] = useState(null);
     const [userData, setUserData] = useState({});
     const [games, setGames] = useState([]);
+    const [consoles, setConsoles] = useState([]);
 
 
     useEffect(() => {
@@ -34,6 +36,14 @@ const App = () => {
             setGames(games);
         }
         getGames();
+    }, []);
+
+    useEffect(() => {
+        const getConsoles = async () => {
+            const consoles = await fetchAllConsoles();
+            setConsoles(consoles);
+        }
+        getConsoles();
     }, []);
 
     return (
