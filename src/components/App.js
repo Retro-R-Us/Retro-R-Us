@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
-import { getAPIHealth } from "../api";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { getAPIHealth, getCurrentUser } from "../api";
 import AuthorizeUser from "./Auth";
+import Header from "./header"
 import "../style/App.css";
 
 const App = () => {
     const [APIHealth, setAPIHealth] = useState("");
     const [token, setToken] = useState(window.localStorage.getItem("token") || null);
-    const [username, setUsername] = useState(null);
+    const [username, setUsername] = useState("");
     const [userData, setUserData] = useState({});
+    const [modalTrigger, setModalTrigger] = useState(false);
+    const [action, setAction] = useState(null);
+
+    const history = useNavigate()
 
     useEffect(() => {
         // follow this pattern inside your useEffect calls:
@@ -24,17 +29,49 @@ const App = () => {
         getAPIStatus();
     }, []);
 
+    useEffect(() => {
+
+        const getUser = async () => {
+            const user = await getCurrentUser(username, token)
+            setUsername(user.username)
+        }
+        getUser();
+        console.log("USERNAME:", username)
+        console.log("USERDATA:", userData)
+        setUsername(userData.username);
+    }, [token])
+
+    useEffect(() => {
+        if (token) {
+            window.localStorage.setItem("token", token)
+        } else {
+            window.localStorage.removeItem("token")
+        }
+    }, [token])
+
+    const logOut = () => {
+        setToken("");
+        setUsername(null);
+        history("/");
+    };
+
     return (
         <div className="main">
             <div className="head">
                 <header>Retro-R-Us</header>
                 <p>API Status: {APIHealth}</p>
-                {/* <Header tokenString={tokenString} user={user} logOut={logOut}/> */}
+                <Header token={token} username={username} 
+                    logOut={logOut} setModalTrigger={setModalTrigger}
+                    setAction={setAction} />
+                <AuthorizeUser setToken={setToken} 
+                    setUserData={setUserData} action={action} 
+                    modalTrigger={modalTrigger} 
+                    setModalTrigger={setModalTrigger} 
+                    setAction={setAction} />
             </div>
             <Routes>
                 {/* <Route exact path="/" element={<Home user={user}/>} /> */}
                 {/* <Route exact path="/routines" element={<Routines tokenString={tokenString} user={user} />} /> */}
-                <Route exact path="/account/:action" element={<AuthorizeUser setToken={setToken} setUserData={setUserData}/>} />
                 {/* <Route path="/activities" element={<Activities tokenString={tokenString} user={user}/>} /> */}
             </Routes>
 
