@@ -1,46 +1,79 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import { getAPIHealth } from "../api";
+import AuthorizeUser from "./Auth";
+import "../style/App.css";
+import Games from "./games";
+import Accessories from "./accessories";
+import { fetchAllGames } from "../api/games";
+import { fetchAllAccessories } from "../api/accessories";
 import { Orders } from '.';
-// getAPIHealth is defined in our axios-services directory index.js
-// you can think of that directory as a collection of api adapters
-// where each adapter fetches specific info from our express server's /api route
-import { getAPIHealth } from '../api';
-import '../style/App.css';
 
 const App = () => {
-  const [APIHealth, setAPIHealth] = useState('');
+    const [APIHealth, setAPIHealth] = useState("");
+    const [token, setToken] = useState(window.localStorage.getItem("token") || null);
+    const [username, setUsername] = useState(null);
+    const [userData, setUserData] = useState({});
+    const [games, setGames] = useState([]);
+    const [accessories, setAccessories] = useState([]);
 
-  useEffect(() => {
-    // follow this pattern inside your useEffect calls:
-    // first, create an async function that will wrap your axios service adapter
-    // invoke the adapter, await the response, and set the data
-    const getAPIStatus = async () => {
-      const { healthy } = await getAPIHealth();
-      setAPIHealth(healthy ? 'api is up! :D' : 'api is down :/');
-    };
 
-    // second, after you've defined your getter above
-    // invoke it immediately after its declaration, inside the useEffect callback
-    getAPIStatus();
-  }, []);
+    useEffect(() => {
+        // follow this pattern inside your useEffect calls:
+        // first, create an async function that will wrap your axios service adapter
+        // invoke the adapter, await the response, and set the data
+        const getAPIStatus = async () => {
+            const { healthy } = await getAPIHealth();
+            setAPIHealth(healthy ? "api is up! :D" : "api is down :/");
+        };
 
-  useEffect(() => {
-    const getOrders = async () => {
-        const orders = await getAllOrders();
-        setOrders(orders);
-    }
-    getOrders();
-}, [userData]);
-
-  return (
-    <div className="main">
-      <h1>Hello, World!</h1>
-      <p>API Status: {APIHealth}</p>
+        // second, after you've defined your getter above
+        // invoke it immediately after its declaration, inside the useEffect callback
+        getAPIStatus();
+    }, []);
   
-    <Routes>
-      <Route path="/orders" element={<Orders orders={Orders}/>} />
-    </Routes>
-    </div>
-  );
+    useEffect(() => {
+        const getOrders = async () => {
+            const orders = await getAllOrders();
+            setOrders(orders);
+      }
+      getOrders();
+    }, [userData]);
+
+    useEffect(() => {
+        const getGames = async () => {
+            const games = await fetchAllGames();
+            setGames(games);
+        }
+        getGames();
+    }, []);
+
+    useEffect(() => {
+        const getAccessories = async () => {
+            const accessories = await fetchAllAccessories();
+            setAccessories(accessories);
+        }
+        getAccessories();
+    }, []);
+
+    return (
+        <div className="main">
+            <div className="head">
+                <header>Retro-R-Us</header>
+                <p>API Status: {APIHealth}</p>
+                {/* <Header tokenString={tokenString} user={user} logOut={logOut}/> */}
+            </div>
+            <Routes>
+                {/* <Route exact path="/" element={<Home user={user}/>} /> */}
+                {/* <Route exact path="/routines" element={<Routines tokenString={tokenString} user={user} />} /> */}
+                {/* <Route exact path="/account/:action" element={<AuthorizeUser setToken={setToken} username={username}/>} /> */}
+                <Route path="/games" element={<Games games={games}/>} />
+                <Route path="/accessories" element={<Accessories accessories={accessories}/>} />
+            </Routes>
+
+            {/* <Footer /> */}
+        </div>
+    );
 };
 
 export default App;
