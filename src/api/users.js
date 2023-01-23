@@ -22,21 +22,18 @@ export const userAction = async ({username, password, email, admin, action}) => 
     }
 };
 
-export const getCurrentUser = async (username, token) => {
+export const getCurrentUser = async (token) => {
     try {
         const response = await fetch(`${BASEURL}/user/me`, {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-                username: username,
-            }),
+            }
         });
 
         const data = await response.json();
         return data;
-    } catch {
+    } catch (error) {
         console.error(error);
     }
 };
