@@ -4,6 +4,7 @@ import { getAPIHealth } from "../api";
 import AuthorizeUser from "./Auth";
 import "../style/App.css";
 import Games from "./games";
+import  Consoles  from "./consoles";
 import { fetchAllGames } from "../api/games";
 import { fetchAllConsoles } from "../api/consoles";
 
@@ -58,6 +59,7 @@ const App = () => {
                 {/* <Route exact path="/routines" element={<Routines tokenString={tokenString} user={user} />} /> */}
                 {/* <Route exact path="/account/:action" element={<AuthorizeUser setToken={setToken} username={username}/>} /> */}
                 <Route path="/games" element={<Games games={games}/>} />
+                <Route path="/consoles" element={<Consoles consoles={consoles}/>} />
             </Routes>
 
             {/* <Footer /> */}
