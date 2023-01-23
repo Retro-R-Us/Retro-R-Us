@@ -33,7 +33,7 @@ export const createOrder = async (orderId) => {
     }
 };
 
-export const updateOrder = async (id, status, cart) => {
+export const updateOrder = async (orderId, status, cart) => {
     try {
         const response = await fetch(`${BASEURL}/order/${orderId}`, {
             method: "PATCH",
