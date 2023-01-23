@@ -1,6 +1,7 @@
 import React from "react";
 
 const Search = () => {
+    const [search, setSearch] = React.useState("");
 
     return (
         <div>
