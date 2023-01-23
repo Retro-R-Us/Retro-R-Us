@@ -4,7 +4,9 @@ import { getAPIHealth } from "../api";
 import AuthorizeUser from "./Auth";
 import "../style/App.css";
 import Games from "./games";
+import Accessories from "./accessories";
 import { fetchAllGames } from "../api/games";
+import { fetchAllAccessories } from "../api/accessories";
 
 const App = () => {
     const [APIHealth, setAPIHealth] = useState("");
@@ -12,6 +14,7 @@ const App = () => {
     const [username, setUsername] = useState(null);
     const [userData, setUserData] = useState({});
     const [games, setGames] = useState([]);
+    const [accessories, setAccessories] = useState([]);
 
 
     useEffect(() => {
@@ -36,6 +39,14 @@ const App = () => {
         getGames();
     }, []);
 
+    useEffect(() => {
+        const getAccessories = async () => {
+            const accessories = await fetchAllAccessories();
+            setAccessories(accessories);
+        }
+        getAccessories();
+    }, []);
+
     return (
         <div className="main">
             <div className="head">
@@ -48,6 +59,7 @@ const App = () => {
                 {/* <Route exact path="/routines" element={<Routines tokenString={tokenString} user={user} />} /> */}
                 {/* <Route exact path="/account/:action" element={<AuthorizeUser setToken={setToken} username={username}/>} /> */}
                 <Route path="/games" element={<Games games={games}/>} />
+                <Route path="/accessories" element={<Accessories accessories={accessories}/>} />
             </Routes>
 
             {/* <Footer /> */}
