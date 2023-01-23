@@ -23,7 +23,6 @@ export const createOrder = async (orderId) => {
     },
         body: JSON.stringify({
         orderId: orderId,
-        cart: cart,
     }),
     }); 
         const result = await response.json();
