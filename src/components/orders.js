@@ -3,13 +3,13 @@ import React, { useEffect } from "react";
 
 const MyOrders = ({ setMyOrderList, myOrderList }) => {
     useEffect(() => {
-        const getOrderById = () => {
-            const id = localStorage.getItem('').then((result) =>{
+        const getMyOrders = () => {
+            const id = window.localStorage.getItem('id').then((result) => {
                 setMyOrderList(result)
             })
             .catch(console.error)
         }
-        getOrderById()
+        getMyOrders()
     }, [setMyOrderList]);
 
     return (

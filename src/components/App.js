@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Orders } from '.';
 // getAPIHealth is defined in our axios-services directory index.js
 // you can think of that directory as a collection of api adapters
 // where each adapter fetches specific info from our express server's /api route
@@ -22,10 +23,22 @@ const App = () => {
     getAPIStatus();
   }, []);
 
+  useEffect(() => {
+    const getOrders = async () => {
+        const orders = await getAllOrders();
+        setOrders(orders);
+    }
+    getOrders();
+}, [userData]);
+
   return (
-    <div className="app-container">
+    <div className="main">
       <h1>Hello, World!</h1>
       <p>API Status: {APIHealth}</p>
+  
+    <Routes>
+      <Route path="/orders" element={<Orders orders={Orders}/>} />
+    </Routes>
     </div>
   );
 };
