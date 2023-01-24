@@ -31,6 +31,7 @@ const Search = ({ data , setFilteredData }) => {
             <input 
                 type="text" 
                 placeholder="Search..." 
+                required
                 value={search}
                 onChange={(event) => {
                     setSearch(event.target.value);
