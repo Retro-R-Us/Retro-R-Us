@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 const Search = ({ data , setFilteredData }) => {
     const [search, setSearch] = React.useState("");
@@ -6,33 +6,24 @@ const Search = ({ data , setFilteredData }) => {
     // This is the last search state, which is used to render the last search in the h2 'Showing results for...'
     const [lastSearch, setLastSearch] = React.useState("");
 
-    // This is the timeout state, which is used to delay the search
-    const [timeout, setTimeout] = React.useState(null);
-
-    // When the user types in the input, handleSearchInput is called by onChange
-    const handleSearchInput = (event) => {
-        // Sets the search state to the value of the input
-        setSearch(event.target.value);
-
-        // If there is a timeout, clear it
-        if (timeout) {
-            clearTimeout(timeout);
-        }
-
-        // Set a new timeout, which calls handleSearch after 500ms
-        // This is debouncing, which means the search is only called after the user has finished typing for 500ms
-        setTimeout(setTimeout(() => {
-            handleSearch();
-            setLastSearch(search);
-        }, 500));
-    }
+    // This is used to store the current timeout, which is used to delay the search
+    const timeoutRef = useRef(null);
 
     const handleSearch = () => {
-        // This filters the data, converts both the data and search to lowercase, and then checks if the data includes the search
-        const filteredData = data.filter((item) => {
-            return item.title.toLowerCase().includes(search.toLowerCase());
-        });
-        setFilteredData(filteredData);
+        // If there is a timeout, clear it
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
+
+        // Set a new timeout
+        timeoutRef.current = setTimeout(() => {  
+            // This filters the data, converts both the data and search to lowercase, and then checks if the data includes the search
+            const filteredData = data.filter((item) => {
+                return item.title.toLowerCase().includes(search.toLowerCase());
+            });
+            setFilteredData(filteredData);
+            setLastSearch(search);
+        }, 500);
     }
 
     return (
@@ -41,7 +32,9 @@ const Search = ({ data , setFilteredData }) => {
                 type="text" 
                 placeholder="Search..." 
                 value={search}
-                onChange={handleSearchInput}
+                onChange={(event) => {
+                    setSearch(event.target.value);
+                }}
             />
             <button onClick={handleSearch}>Search</button>
             {lastSearch && <h2>Showing results for '{lastSearch}'</h2>}
