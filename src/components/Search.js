@@ -23,6 +23,7 @@ const Search = ({ data , setFilteredData }) => {
                 }} 
             />
             <button onClick={handleSearch}>Search</button>
+            {search && <h2>Showing results for '{search}'</h2>}
         </div>
     );
 }
