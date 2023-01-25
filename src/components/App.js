@@ -11,6 +11,7 @@ import { fetchAllConsoles } from "../api/consoles";
 import { fetchAllCollectibles } from "../api/collectibles";
 import Accessories from "./accessories";
 import { fetchAllAccessories } from "../api/accessories";
+import { Orders } from '.';
 
 
 const App = () => {
@@ -38,6 +39,14 @@ const App = () => {
         // invoke it immediately after its declaration, inside the useEffect callback
         getAPIStatus();
     }, []);
+  
+    useEffect(() => {
+        const getOrders = async () => {
+            const orders = await getAllOrders();
+            setOrders(orders);
+      }
+      getOrders();
+    }, [userData]);
 
     useEffect(() => {
         const getGames = async () => {
