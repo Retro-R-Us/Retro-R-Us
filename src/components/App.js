@@ -9,7 +9,7 @@ const App = () => {
     const [APIHealth, setAPIHealth] = useState("");
     const [token, setToken] = useState(window.localStorage.getItem("token") || null);
     const [username, setUsername] = useState("");
-    const [userData, setUserData] = useState({});
+    const [userData, setUserData] = useState(null);
     const [modalTrigger, setModalTrigger] = useState(false);
     const [action, setAction] = useState(null);
 
@@ -30,16 +30,10 @@ const App = () => {
     }, []);
 
     useEffect(() => {
-
-        const getUser = async () => {
-            const user = await getCurrentUser(username, token)
-            setUsername(user.username)
+        if (userData) {
+            setUsername(userData.userdata.username)
         }
-        getUser();
-        console.log("USERNAME:", username)
-        console.log("USERDATA:", userData)
-        setUsername(userData.username);
-    }, [token])
+    }, [userData]);
 
     useEffect(() => {
         if (token) {
@@ -70,7 +64,7 @@ const App = () => {
                     setAction={setAction} />
             </div>
             <Routes>
-                {/* <Route exact path="/" element={<Home user={user}/>} /> */}
+                <Route exact path="/" /*element={<Home user={user}/> */ />
                 {/* <Route exact path="/routines" element={<Routines tokenString={tokenString} user={user} />} /> */}
                 {/* <Route path="/activities" element={<Activities tokenString={tokenString} user={user}/>} /> */}
             </Routes>
