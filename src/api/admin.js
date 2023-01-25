@@ -251,3 +251,19 @@ export const fetchDeleteCollectibleListing = async () => {
     console.error(error);
   }
 };
+
+export const fetchDeleteGameListing = async () => {
+  try {
+    const response = await fetch(`${BASEURL}/games/${gameId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    console.error(error);
+  }
+}
