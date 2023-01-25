@@ -267,3 +267,19 @@ export const fetchDeleteGameListing = async () => {
     console.error(error);
   }
 }
+
+export const fetchDeleteAccessoryListing = async () => {
+  try {
+    const response = await fetch(`${BASEURL}/accessories/${accessoryId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    console.error(error);
+  }
+}
