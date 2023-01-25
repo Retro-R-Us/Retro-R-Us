@@ -163,6 +163,34 @@ export const fetchUpdateCollectibleListing = async ({
   }
 };
 
+export const fetchUpdateGameListing = async ({
+  title,
+  description,
+  console,
+  year,
+  price,
+}) => {
+  try {
+    const response = await fetch(`${BASEURL}/games/${gameId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        title: title,
+        description: description,
+        console: console,
+        year: Number(year),
+        price: Number(price),
+      }),
+    });
+
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 export const fetchDeleteConsoleListing = async () => {
   try {
