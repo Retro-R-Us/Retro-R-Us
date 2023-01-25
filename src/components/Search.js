@@ -6,6 +6,9 @@ const Search = ({ data , setFilteredData }) => {
     // This is the last search state, which is used to render the last search in the h2 'Showing results for...'
     const [lastSearch, setLastSearch] = React.useState("");
 
+    // This is used to check if there are any results, which is used to render the h2 'No results found'
+    const [hasResults, setHasResults] = React.useState(false);
+
     // This is used to store the current timeout, which is used to delay the search
     const timeoutRef = useRef(null);
 
@@ -23,6 +26,7 @@ const Search = ({ data , setFilteredData }) => {
             });
             setFilteredData(filteredData);
             setLastSearch(search);
+            setHasResults(filteredData.length > 0);
         }, 500);
     }
 
@@ -38,7 +42,7 @@ const Search = ({ data , setFilteredData }) => {
                 }}
             />
             <button onClick={handleSearch}>Search</button>
-            {lastSearch && <h2>Showing results for '{lastSearch}'</h2>}
+            {lastSearch && <h2>{hasResults ? `Showing results for '${lastSearch}'` : `No search results for '${lastSearch}'`}</h2>}
         </div>
     );
 }
