@@ -18,8 +18,8 @@ const Games = ({ games }) => {
             <div className='gamesContainer'>
                 <Search data={games} setFilteredData={setFilteredData} />
                 {filteredData.length > 0 ? (
-                    filteredData.map((game) => (
-                        <div className='gameCard' key={game.id}>
+                    filteredData.map((game, index) => (
+                        <div className='gameCard' key={index}>
                             <h1>{game.title}</h1>
                             <h2>{game.description}</h2>
                             <h3>{game.console}</h3>
@@ -28,8 +28,8 @@ const Games = ({ games }) => {
                         </div>
                     ))
                 ) : (
-                    games.map((game) => (
-                        <div className='gameCard' key={game.id}>
+                    games.map((game, index) => (
+                        <div className='gameCard' key={index}>
                             <h1>{game.title}</h1>
                             <h2>{game.description}</h2>
                             <h3>{game.console}</h3>
