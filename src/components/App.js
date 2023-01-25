@@ -4,8 +4,10 @@ import { getAPIHealth } from "../api";
 import AuthorizeUser from "./Auth";
 import "../style/App.css";
 import Games from "./games";
-import Accessories from "./accessories";
+import Consoles from "./consoles";
 import { fetchAllGames } from "../api/games";
+import { fetchAllConsoles } from "../api/consoles
+import Accessories from "./accessories";
 import { fetchAllAccessories } from "../api/accessories";
 
 const App = () => {
@@ -14,6 +16,7 @@ const App = () => {
     const [username, setUsername] = useState(null);
     const [userData, setUserData] = useState({});
     const [games, setGames] = useState([]);
+    const [consoles, setConsoles] = useState([]);
     const [accessories, setAccessories] = useState([]);
 
 
@@ -40,6 +43,12 @@ const App = () => {
     }, []);
 
     useEffect(() => {
+        const getConsoles = async () => {
+            const consoles = await fetchAllConsoles();
+            setConsoles(consoles);
+        }
+        getConsoles();
+        
         const getAccessories = async () => {
             const accessories = await fetchAllAccessories();
             setAccessories(accessories);
@@ -59,6 +68,7 @@ const App = () => {
                 {/* <Route exact path="/routines" element={<Routines tokenString={tokenString} user={user} />} /> */}
                 {/* <Route exact path="/account/:action" element={<AuthorizeUser setToken={setToken} username={username}/>} /> */}
                 <Route path="/games" element={<Games games={games}/>} />
+                <Route path="/consoles" element={<Consoles consoles={consoles}/>} />
                 <Route path="/accessories" element={<Accessories accessories={accessories}/>} />
             </Routes>
 
