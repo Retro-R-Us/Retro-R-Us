@@ -126,7 +126,7 @@ async function buildTables() {
 
 async function populateInitialData() {
   try {
-    console.log("Creating Initial users.");
+    console.log("Creating Initial users");
 
     //***** INITIAL USERS ***** */
     class buildUser {
@@ -148,7 +148,7 @@ async function populateInitialData() {
 
     const users = [user1, user2, user3, admin1, admin2, admin3, admin4]
     const createdUsers = await Promise.all(users.map(user => User.createUser(user)))
-      console.log("Created Users:", createdUsers)
+    console.log("Initial Users Created")
 
     //***** INITIAL GAMES ***** */
 
@@ -262,7 +262,7 @@ async function populateInitialData() {
     const games = [game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12];
   
     const createdGames = await Promise.all(games.map(game =>  Games.createGameListing(game)))
-    console.log(`Created Games:`, createdGames);
+    console.log("Initial Games Created")
 
     //***** INITIAL CONSOLES ***** */
     console.log("Creating Initial Consoles")
@@ -335,7 +335,7 @@ async function populateInitialData() {
     const consoles = [con1, con2, con3, con4, con5, con6, con7, con8];
 
     const createdConsoles = await Promise.all(consoles.map(somecon => Consoles.createConsoleListing(somecon)))
-    console.log("Created Consoles:", createdConsoles);
+    console.log("Initial Consoles Created")
 
     //***** INITIAL COLLECTIBLES ***** */
     console.log("Creating Initial Collectibles")
@@ -392,7 +392,7 @@ async function populateInitialData() {
 
     const collectibles = [coll1, coll2, coll3, coll4, coll5, coll6];
     const createdCollectibles = await Promise.all(collectibles.map(collectible =>  Collectibles.createCollectibleListing(collectible)));
-    console.log("Created Collectibles:", createdCollectibles);
+    console.log("Initial Collectibles Created")
 
     //***** INITIAL ACCESSORIES ***** */
     console.log("Creating Initial Accessories")
@@ -448,7 +448,7 @@ async function populateInitialData() {
 
     const accessories = [acc1, acc2, acc3, acc4, acc5, acc6];
     const createdAccessories = await Promise.all(accessories.map(accessory =>  Acc.createAccessoryListing(accessory)))
-    console.log("Created Accessories:", createdAccessories);
+    console.log("Initial Accessories Created")
 
     //***** INITIAL ORDERS ***** */
     console.log("Creating Initial Fake Orders")
@@ -475,7 +475,7 @@ async function populateInitialData() {
 
     const orders = [order1, order2, order3];
     const createdOrders = await Promise.all(orders.map(order =>  Orders.createOrder(order)))
-    console.log("Fake Orders:", createdOrders);
+    console.log("Initial Fake Orders Created")
 
     //***** INITIAL CART ***** */
     console.log("Creating Initial Fake Carts")
@@ -522,7 +522,7 @@ async function populateInitialData() {
 
     const carts = [cart1, cart2, cart3];
     const createdCarts = await Promise.all(carts.map(cart =>  Cart.addItemToCart(cart)))
-    console.log("Fake Carts Created:", createdCarts)
+    console.log("Initial Fake Carts Created")
 
   } catch (error) {
     throw error;
