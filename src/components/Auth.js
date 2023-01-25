@@ -40,14 +40,13 @@ const AuthorizeUser = (props) => {
                         setSuccess(null);
                         setMessage("");
                         setStyle(null);
-                    }, 7500)
+                    }, 10000)
                 } else {
-                    console.log("USERDATA:", response)
-                    setUserData(response.userdata)
                     setStyle({display: "none"});
                     setSuccess(true);
                     setToken(response.userdata.token)
                     setMessage(response.Message)
+                    setUserData(response)
                     setTimeout(() => {
                         setSuccess(null)
                         setModalTrigger(false)
@@ -64,7 +63,7 @@ const AuthorizeUser = (props) => {
                         setSuccess(null);
                         setMessage("");
                         setStyle(null);
-                    }, 7500)
+                    }, 10000)
                 } else  {
                     setStyle({display: "none"});
                     setSuccess(true);
@@ -86,7 +85,15 @@ const AuthorizeUser = (props) => {
     return modalTrigger ? (
         <div className="authModal">
             <div className="innerModal">
-            <div className="center-title">{formTitle}</div>
+                <span>
+                    <div className="center-title">{formTitle}</div>
+                    <button className="close-btn" onClick={() => {
+                        setModalTrigger(false);
+                        setSuccess(null)
+                    }}>
+                        <i className="times icon"></i>
+                    </button>
+                </span>
             <form className="ui form" onSubmit={handleSubmit}>
                 <div className="field">
                     <label>Username</label>
@@ -110,10 +117,23 @@ const AuthorizeUser = (props) => {
                 <p>{message}</p>
             </div> : null
             }
-            {success === false ? <div className="ui error message">
-                <div>There was an error!</div>
-                <p>{message}</p>
-            </div> : null
+            {success === false ? 
+                <div className="ui error message">
+                    <div>There was an error!</div>
+                    <p>{message}</p>
+                    {action === "register" ? 
+                        <div className="ui animated button" tabIndex="0" onClick={() => {
+                            setAction("login");
+                        }}>
+                            <div className="visible content">Switch to Login</div>
+                            <div className="hidden content">
+                                <i className="right arrow icon"></i>
+                            </div>
+                        </div>
+                    :
+                        null
+                    }
+                </div> : null
             }
 
             </div>
@@ -122,11 +142,3 @@ const AuthorizeUser = (props) => {
 }
 
 export default AuthorizeUser;
-
-
-{/* <div className="ui animated button" tabIndex="0">
-                    <div className="visible content">Next</div>
-                    <div className="hidden content">
-                        <i className="right arrow icon"></i>
-                    </div>
-                </div> */}
