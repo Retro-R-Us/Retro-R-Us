@@ -9,6 +9,9 @@ import Collectibles from "./collectibles";
 import { fetchAllGames } from "../api/games";
 import { fetchAllConsoles } from "../api/consoles";
 import { fetchAllCollectibles } from "../api/collectibles";
+import Accessories from "./accessories";
+import { fetchAllAccessories } from "../api/accessories";
+
 
 const App = () => {
     const [APIHealth, setAPIHealth] = useState("");
@@ -18,6 +21,8 @@ const App = () => {
     const [games, setGames] = useState([]);
     const [consoles, setConsoles] = useState([]);
     const [collectibles, setCollectibles] = useState([]);
+    const [accessories, setAccessories] = useState([]);
+
 
 
     useEffect(() => {
@@ -48,6 +53,12 @@ const App = () => {
             setConsoles(consoles);
         }
         getConsoles();
+        
+        const getAccessories = async () => {
+            const accessories = await fetchAllAccessories();
+            setAccessories(accessories);
+        }
+        getAccessories();
     }, []);
 
     useEffect(() => {
@@ -72,6 +83,8 @@ const App = () => {
                 <Route path="/games" element={<Games games={games}/>} />
                 <Route path="/consoles" element={<Consoles consoles={consoles}/>} />
                 <Route path="/collectibles" element={<Collectibles collectibles={collectibles}/>} />
+                <Route path="/accessories" element={<Accessories accessories={accessories}/>} />
+
             </Routes>
 
             {/* <Footer /> */}
