@@ -83,6 +83,33 @@ export const fetchCreateGameListing = async ({
   }
 }
 
+export const fetchCreateAccessoryListing = async ({
+  title,
+  description,
+  console,
+  price,
+}) => {
+  try {
+    const response = await fetch(`${BASEURL}/accessories`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        title: title,
+        description: description,
+        console: console,
+        price: Number(price),
+      }),
+    });
+
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export const fetchUpdateConsoleListing = async ({
   title,
   description,
