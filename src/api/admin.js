@@ -192,6 +192,33 @@ export const fetchUpdateGameListing = async ({
   }
 }
 
+export const fetchUpdateAccessoryListing = async ({
+  title,
+  description,
+  console,
+  price,
+}) => {
+  try {
+    const response = await fetch(`${BASEURL}/accessories/${accessoryId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        title: title,
+        description: description,
+        console: console,
+        price: Number(price),
+      }),
+    });
+
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export const fetchDeleteConsoleListing = async () => {
   try {
     const response = await fetch(`${BASEURL}/consoles/${consoleId}`, {
