@@ -10,14 +10,11 @@ export const Account = (props) => {
     const [accountTrigger, setAccountTrigger] = useState(false);
     const [ordersTrigger, setOrdersTrigger] = useState(false);
     const [supportTrigger, setSupportTrigger] = useState(false);
-    const {} = props;
-    console.log(accountTrigger);
+    const { userData } = props;
 
     if (accountTrigger) {
         return createPortal(
-            <AccountSettings
-                setAccountTrigger={setAccountTrigger}
-            />,
+            <AccountSettings setAccountTrigger={setAccountTrigger} userData={userData}/>,
             document.querySelector(".main")
         );
     }
