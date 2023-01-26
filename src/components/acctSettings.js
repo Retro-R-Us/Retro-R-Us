@@ -1,21 +1,12 @@
 import nodeTimeAgo from "node-time-ago";
+import { createPortal } from "react-dom";
 import React, { useState, Fragment } from "react";
-import { PassChange } from "./acctedit"
 import "../style/accountHome.css";
 
 export const AccountSettings = (props) => {
-    const { setAccountTrigger, userData } = props;
-
-    const [formTrigger, setFormTrigger] = useState(false);
+    const { setAccountTrigger, userData, setFormTrigger } = props;
 
     const accountage = nodeTimeAgo(userData.createdOn);
-
-    if (formTrigger) {
-        return createPortal(
-            <PassChange setFormTrigger={setFormTrigger} userData={userData} />,
-            document.querySelector(".main")
-        );
-    }
 
     return (
         <div id="modal">
@@ -54,8 +45,8 @@ export const AccountSettings = (props) => {
                     </tbody>
                 </table>
                 <div className="ui animated fade button" tabIndex="0" onClick={() => {
-                        setAccountTrigger(false)
                         setFormTrigger(true)
+                        setAccountTrigger(false);
                     }}>
                     <div className="visible content">Change Password</div>
                     <div className="hidden content">
