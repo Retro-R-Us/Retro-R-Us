@@ -105,8 +105,20 @@ async function getUserByUsername(name) {
       `, [name]
     )
 
-    delete user.password;
-    return user;
+    if (user === undefined) {
+      return {
+        Success: false,
+        Message: "User does not exist"
+      }
+    } else {
+      delete user.password;
+      return {
+        Success: true,
+        userData: user
+      };
+    }
+
+    
 
   } catch (error) {
     console.log("Could not get user by name.");
