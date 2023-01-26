@@ -134,7 +134,6 @@ const App = () => {
                         element={<Accessories accessories={accessories} />}
                     />
                 </Routes>
-
                 {/* <Footer /> */}
             </div>
         </div>
