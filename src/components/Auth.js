@@ -4,13 +4,13 @@ import { userAction } from '../api';
 import "../style/authModal.css"
 
 const AuthorizeUser = (props) => {
-    const [username, setUsername] = useState("");
+    const [userField, setUserField] = useState("");
     const [password, setPassword] = useState("");
     const [handle, setHandle] = useState("");
     const [style, setStyle] = useState();   
     const [success, setSuccess] = useState(null);
     const [message, setMessage] = useState("");
-    const { setUserData, setToken, modalTrigger, setModalTrigger, action, setAction } = props;
+    const { setToken, modalTrigger, setModalTrigger, action, setAction, setUsername } = props;
 
     let formTitle = "";
     if (action === "login") {
@@ -22,7 +22,7 @@ const AuthorizeUser = (props) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = {
-            username: username,
+            username: userField,
             password: password,
             email: handle,
             admin: false,
@@ -45,8 +45,8 @@ const AuthorizeUser = (props) => {
                     setStyle({display: "none"});
                     setSuccess(true);
                     setToken(response.userdata.token)
+                    setUsername(window.localStorage.setItem("username", response.userdata.username))
                     setMessage(response.Message)
-                    setUserData(response)
                     setTimeout(() => {
                         setSuccess(null)
                         setModalTrigger(false)
@@ -97,17 +97,17 @@ const AuthorizeUser = (props) => {
             <form className="ui form" onSubmit={handleSubmit}>
                 <div className="field">
                     <label>Username</label>
-                    <input type="text" name="Username" placeholder="Username" required minLength="8" onChange={e => setUsername(e.target.value)} />
+                    <input type="text" name="Username" value={userField} placeholder="Username" required minLength="8" onChange={e => setUserField(e.target.value)} />
                 </div>
                 <div className="field">
                     <label>Password</label>
-                    <input type="password" name="Password" placeholder="Password" required minLength="8" onChange={e => setPassword(e.target.value)} />
+                    <input type="password" name="Password" value={password} placeholder="Password" required minLength="8" onChange={e => setPassword(e.target.value)} />
                 </div>
                 {action === "register" ? 
                 <div className="field">
                     <label>Email</label>
                     <div className="ui input">
-                        <input type="Email" name="Email" placeholder="Email" required onChange={e => setHandle(e.target.value)} />
+                        <input type="Email" name="Email" value={handle} placeholder="Email" required onChange={e => setHandle(e.target.value)} />
                     </div>
                 </div> : null}
                 <button className="ui button positive" type="submit" style={style} >Submit</button>
