@@ -1,5 +1,30 @@
-.accountContainer {
-    display: flex;
-    justify-content: center;
-    
-  }
+#accountContainer {
+  display: flex;
+  justify-content: center;
+}
+
+#modal {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+  left: 0;
+  display: flex;
+  justify-content: center;
+}
+
+#inner {
+  position: relative;
+  padding: 32px;  
+  width: 100%;
+  max-width: 500px;
+  color:white;
+  background-color: rgba(197, 197, 197, 0.432);
+  border: 2px solid black;
+  border-radius: 15px;
+}
+
+#close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
