@@ -5,20 +5,20 @@ const Header = (props) => {
     const { token, username, logOut, setModalTrigger, setAction } = props;
 
     return (
-        <div className="ui menu" style={{ marginBottom: "20px" }}>
-            <Link className="ui button" to="/">
+        <div className="nav" style={{ marginBottom: "20px" }}>
+            <Link className="ui yellow button" to="/">
                 Home
             </Link>
             {token ? (
-                <button className="ui button" onClick={logOut}>Log Out</button>
+                <button className="ui yellow button" onClick={logOut}>Log Out</button>
             ) : (
-                <button className="ui button" onClick={() => {
+                <button className="ui yellow button" onClick={() => {
                     setAction("login"),
                     setModalTrigger(true)
                 }}>Login</button>
             )}
             {token ? null : (
-                <button className="ui button" onClick={() => {
+                <button className="ui yellow button" onClick={() => {
                     setAction("register"),
                     setModalTrigger(true)
                 }}>Sign Up</button>
