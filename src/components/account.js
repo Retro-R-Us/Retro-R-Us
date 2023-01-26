@@ -1,56 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import "../style/accountHome.css";
+import accountimg from "./images/account.png";
+import supportimg from "./images/support.png";
+import ordersimg from "./images/orders.png";
 
 export const Account = (props) => {
     const {} = props;
 
     return (
         <div className="accountContainer">
-            <div class="ui special cards">
-                <div class="card">
-                    <div class="blurring dimmable image">
-                        <div class="ui dimmer">
-                            <div class="content">
-                                <div class="center">
-                                    <div class="ui inverted button">Add Friend</div>
-                                </div>
-                            </div>
-                        </div>
-                        <img src="/images/avatar/large/elliot.jpg" />
+            <div className="ui link cards">
+                <div className="card">
+                    <div className="image">
+                        <img src={accountimg} />
                     </div>
-                    <div class="content">
-                        <a class="header">Team Fu</a>
-                        <div class="meta">
-                            <span class="date">Created in Sep 2014</span>
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <a>
-                            <i class="users icon"></i>2 Members
-                        </a>
+                    <div className="content">
+                        <div className="header">Account</div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="blurring dimmable image">
-                        <div class="ui inverted dimmer">
-                            <div class="content">
-                                <div class="center">
-                                    <div class="ui primary button">Add Friend</div>
-                                </div>
-                            </div>
-                        </div>
-                        <img src="/images/avatar/large/jenny.jpg" />
+                <div className="card">
+                    <div className="image">
+                        <img src={ordersimg} />
                     </div>
-                    <div class="content">
-                        <a class="header">Team Hess</a>
-                        <div class="meta">
-                            <span class="date">Created in Aug 2014</span>
-                        </div>
+                    <div className="content">
+                        <div className="header">Orders</div>
                     </div>
-                    <div class="extra content">
-                        <a>
-                            <i class="users icon"></i>2 Members
-                        </a>
+                </div>
+                <div className="card">
+                    <div className="image">
+                        <img src={supportimg} />
+                    </div>
+                    <div className="content">
+                        <div className="header">Support</div>
                     </div>
                 </div>
             </div>
