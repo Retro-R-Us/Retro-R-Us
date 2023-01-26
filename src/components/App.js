@@ -114,34 +114,28 @@ const App = () => {
                         />
                     </div>
                 </div>
-                <AuthorizeUser
-                    setToken={setToken}
-                    action={action}
-                    modalTrigger={modalTrigger}
-                    setModalTrigger={setModalTrigger}
-                    setAction={setAction}
-                    setUsername={setUsername}
-                />
-                <Routes>
-                    <Route exact path="/" /*element={<Home user={user}/> */ />
-                    <Route path="/games" element={<Games games={games} />} />
-                    <Route path="/consoles" element={<Consoles consoles={consoles} />} />
-                    <Route
-                        path="/collectibles"
-                        element={<Collectibles collectibles={collectibles} />}
-                    />
-                    <Route
-                        path="/account"
-                        element={<Account />}
-                    />
-                    <Route
-                        path="/accessories"
-                        element={<Accessories accessories={accessories} />}
-                    />
-                </Routes>
-
-                {/* <Footer /> */}
             </div>
+            <AuthorizeUser
+                setToken={setToken}
+                action={action}
+                modalTrigger={modalTrigger}
+                setModalTrigger={setModalTrigger}
+                setAction={setAction}
+                setUsername={setUsername}
+            />
+            <Routes>
+                <Route exact path="/" /*element={<Home user={user}/> */ />
+                <Route path="/games" element={<Games games={games} />} />
+                <Route path="/consoles" element={<Consoles consoles={consoles} />} />
+                <Route
+                    path="/collectibles"
+                    element={<Collectibles collectibles={collectibles} />}
+                />
+                <Route path="/account" element={<Account />} />
+                <Route path="/accessories" element={<Accessories accessories={accessories} />} />
+            </Routes>
+
+            {/* <Footer /> */}
         </div>
     );
 };
