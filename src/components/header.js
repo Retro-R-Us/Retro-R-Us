@@ -30,7 +30,7 @@ const Header = (props) => {
                 </Link>
             ) : <div className="ui label">
                     <i aria-hidden="true" className="red users circular icon"></i>
-                    {`Not Logged In`}
+                    Not Logged In
                 </div>
             }
         </div>
