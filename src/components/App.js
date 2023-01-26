@@ -3,6 +3,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import { getAPIHealth, getCurrentUser } from "../api";
 import AuthorizeUser from "./Auth";
 import Header from "./header"
+import UserHeader from "./UserHeader";
 import "../style/App.css";
 import Games from "./games";
 import Consoles  from "./consoles";
@@ -101,15 +102,17 @@ const App = () => {
     return (
         <div className="main">
             <div className="head">
-                <header>Retro-R-Us</header>
-                <p>API Status: {APIHealth}</p>
-                <Header token={token} setUsername={setUsername} username={username} 
-                    logOut={logOut} setModalTrigger={setModalTrigger}
-                    setAction={setAction} userData={userData}  />
+                <div className="ui tiny menu" style={{backgroundColor: "black"}}>
+                    <Header />
+                    <div className="right menu">
+                        <UserHeader token={token} setUsername={setUsername} username={username} 
+                        logOut={logOut} setModalTrigger={setModalTrigger}
+                        setAction={setAction} userData={userData}  />
+                    </div>
+            </div>
                 <AuthorizeUser setToken={setToken} action={action} 
                     modalTrigger={modalTrigger} setModalTrigger={setModalTrigger} 
                     setAction={setAction} setUsername={setUsername} />
-            </div>
             <Routes>
                 <Route exact path="/" /*element={<Home user={user}/> */ />
                 <Route path="/games" element={<Games games={games}/>} />
@@ -119,6 +122,7 @@ const App = () => {
             </Routes>
 
             {/* <Footer /> */}
+        </div>
         </div>
     );
 };
