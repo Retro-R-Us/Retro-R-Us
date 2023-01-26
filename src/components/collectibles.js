@@ -13,6 +13,7 @@ const Collectibles = ({ collectibles }) => {
                         <div className='collectibleCard' key={index}>
                             <h1>{collectible.title}</h1>
                             <h2>{collectible.description}</h2>
+                            <h3>{collectible.console}</h3>
                             <h4>{collectible.year}</h4>
                             <h2>{collectible.price}</h2>
                         </div>
@@ -22,6 +23,7 @@ const Collectibles = ({ collectibles }) => {
                         <div className='collectibleCard' key={index}>
                             <h1>{collectible.title}</h1>
                             <h2>{collectible.description}</h2>
+                            <h3>{collectible.console}</h3>
                             <h4>{collectible.year}</h4>
                             <h2>{collectible.price}</h2>
                         </div>
