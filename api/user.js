@@ -11,6 +11,8 @@ userRouter.get('/me', async (req, res, next) => {
         const tokenString = authorization.slice(7, -1);
         const tokenCheck = jwt.decode(tokenString);
 
+        const userdata = await User.getUserByUsername(tokenCheck.username)
+
         if (authorization === undefined) {
             res.status(401)
             res.send({
@@ -22,7 +24,7 @@ userRouter.get('/me', async (req, res, next) => {
             const orders = await Orders.getOrdersByUser(tokenCheck.id);
             const userData = {
                 Success: true,
-                user: tokenCheck,
+                user: userdata,
                 orders: orders
             }
             res.send(userData)
