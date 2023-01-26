@@ -6,12 +6,15 @@ import supportimg from "./images/support.png";
 import ordersimg from "./images/orders.png";
 
 export const Account = (props) => {
+    const [accountTrigger, setAccountTrigger] = useState(false);
+    const [ordersTrigger, setOrdersTrigger] = useState(false);
+    const [supportTrigger, setSupportTrigger] = useState(false);
     const {} = props;
 
     return (
         <div className="accountContainer">
             <div className="ui link cards">
-                <div className="card">
+                <div className="card" onClick={() => setAccountTrigger(true)}>
                     <div className="image">
                         <img src={accountimg} />
                     </div>
@@ -19,7 +22,7 @@ export const Account = (props) => {
                         <div className="header">Account</div>
                     </div>
                 </div>
-                <div className="card">
+                <div className="card" onClick={() => setOrdersTrigger(true)}>
                     <div className="image">
                         <img src={ordersimg} />
                     </div>
@@ -27,7 +30,7 @@ export const Account = (props) => {
                         <div className="header">Orders</div>
                     </div>
                 </div>
-                <div className="card">
+                <div className="card" onClick={() => setSupportTrigger(true)}>
                     <div className="image">
                         <img src={supportimg} />
                     </div>
