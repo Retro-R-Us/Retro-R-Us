@@ -4,6 +4,12 @@ import "../style/accountHome.css";
 export const PassChange = (props) => {
     const { userData, setFormTrigger } = props;
 
+    const [oldPwd, setOldPwd] = useState("");
+    const [newPwd, setNewPwd] = useState("");
+    const [CnewPwd, setCnewPwd] = useState("");
+
+    const handleSubmit = () => {};
+
     return (
         <div id="modal">
             <div id="inner">
@@ -22,38 +28,43 @@ export const PassChange = (props) => {
                         <div className="ui header">Password Change Request</div>
                     </div>
                 </div>
-                <form class="ui form">
-                    <div class="field">
-                        <label>First Name</label>
-                        <input type="text" name="first-name" placeholder="First Name" />
+                <form className="ui form" onSubmit={handleSubmit}>
+                    <div className="field">
+                        <label>Previous Password</label>
+                        <input
+                            type="text"
+                            name="oldpwd"
+                            value={oldPwd}
+                            placeholder="Your Previous Password"
+                            onChange={(e) => setOldPwd(e.target.value)}
+                        />
                     </div>
-                    <div class="field">
-                        <label>Last Name</label>
-                        <input type="text" name="last-name" placeholder="Last Name" />
+                    <div className="field">
+                        <label>New Password</label>
+                        <input
+                            type="password"
+                            name="newpwd"
+                            value={newPwd}
+                            placeholder="Your New Password"
+                            onChange={(e) => setNewPwd(e.target.value)}
+                        />
                     </div>
-                    <div class="field">
-                        <div class="ui checkbox">
-                            <input type="checkbox" tabindex="0" class="hidden" />
-                            <label>I agree to the Terms and Conditions</label>
+                    <div className="field">
+                        <label>Confirm New Password</label>
+                        <input
+                            type="password"
+                            name="confnewpwd"
+                            value={CnewPwd}
+                            onChange={(e) => setCnewPwd(e.target.value)}
+                        />
+                    </div>
+                    <button className="ui animated fade button" type="submit">
+                        <div className="visible content">Submit</div>
+                        <div className="hidden content">
+                            <i className="checkmark icon"></i>
                         </div>
-                    </div>
-                    <button class="ui button" type="submit">
-                        Submit
                     </button>
                 </form>
-
-                <button
-                    className="ui animated fade button"
-                    tabIndex="0"
-                    onClick={() => {
-                        setAccountTrigger(false);
-                        setFormTrigger(true);
-                    }}>
-                    <div className="visible content">Change Password</div>
-                    <div className="hidden content">
-                        <i className="angle double down icon"></i>
-                    </div>
-                </button>
             </div>
         </div>
     );
