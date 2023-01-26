@@ -62,7 +62,6 @@ userRouter.post('/login', async (req, res, next) => {
                     Message: "A required field was missing. Please fill all out all required fields."
                 })
         }
-        console.log("HERE1")
 
         const user = await User.getUserByUsername(username);
         if (user.Success === true) {
