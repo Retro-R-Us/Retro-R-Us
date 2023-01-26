@@ -1,6 +1,7 @@
 #accountContainer {
   display: flex;
   justify-content: center;
+  margin-top: 3vh;
 }
 
 #modal {
@@ -16,7 +17,7 @@
   position: relative;
   padding: 32px;  
   width: 100%;
-  max-width: 500px;
+  max-width: 750px;
   color:white;
   background-color: rgba(197, 197, 197, 0.432);
   border: 2px solid black;
