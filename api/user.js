@@ -62,6 +62,7 @@ userRouter.post('/login', async (req, res, next) => {
                     Message: "A required field was missing. Please fill all out all required fields."
                 })
         }
+        console.log("HERE1")
 
         const user = await User.getUserByUsername(username);
         if (user.Success === true) {
@@ -72,6 +73,12 @@ userRouter.post('/login', async (req, res, next) => {
                     Success: false,
                     Message: "Incorrect Username or Password."
                 })
+            } else {
+                const login = await User.userLogin(req.body);
+                const token = jwt.sign({id: user.id, username: username}, JWT_SECRET)
+                login.userdata.token = token;
+                res.status(200);
+                res.send(login);
             }
         } else if (user.Success === false) {
             res.status(400);
@@ -79,13 +86,7 @@ userRouter.post('/login', async (req, res, next) => {
                 Success: false,
                 Message:  `${user.Message}. Please sign up for an account.`
             })
-        } else {
-            const login = await User.userLogin(req.body);
-            const token = jwt.sign({id: user.id, username: username}, JWT_SECRET)
-            login.userdata.token = token;
-            res.status(200);
-            res.send(login);
-        }
+        } 
         
     } catch (error) {
         next(error)
