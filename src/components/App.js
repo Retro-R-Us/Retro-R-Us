@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { getAPIHealth, getCurrentUser } from "../api";
 import AuthorizeUser from "./Auth";
+import { Account } from "./account";
 import Header from "./header";
 import UserHeader from "./UserHeader";
 import "../style/App.css";
@@ -128,6 +129,10 @@ const App = () => {
                     <Route
                         path="/collectibles"
                         element={<Collectibles collectibles={collectibles} />}
+                    />
+                    <Route
+                        path="/account"
+                        element={<Account />}
                     />
                     <Route
                         path="/accessories"
