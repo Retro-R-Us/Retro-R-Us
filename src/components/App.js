@@ -79,9 +79,11 @@ const App = () => {
             window.localStorage.setItem("token", token);
             const getUserData = async () => {
                 const data = await getCurrentUser(token);
+                const userInfo = data.user.userData
+                console.log(userInfo)
                 if (data.Success) {
-                    window.localStorage.setItem("username", data.user.username);
-                    setUserData(data);
+                    window.localStorage.setItem("username", userInfo.username);
+                    setUserData(userInfo);
                 }
             };
             getUserData();
@@ -131,7 +133,7 @@ const App = () => {
                     path="/collectibles"
                     element={<Collectibles collectibles={collectibles} />}
                 />
-                <Route path="/account" element={<Account />} />
+                <Route path="/account" element={<Account userData={userData} />} />
                 <Route path="/accessories" element={<Accessories accessories={accessories} />} />
             </Routes>
 
