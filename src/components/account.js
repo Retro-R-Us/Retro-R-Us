@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import "../style/accountHome.css";
 import { AccountSettings } from "./acctSettings";
+import { PassChange } from "./acctedit"
 import accountimg from "./images/account.png";
 import supportimg from "./images/support.png";
 import ordersimg from "./images/orders.png";
@@ -10,11 +11,23 @@ export const Account = (props) => {
     const [accountTrigger, setAccountTrigger] = useState(false);
     const [ordersTrigger, setOrdersTrigger] = useState(false);
     const [supportTrigger, setSupportTrigger] = useState(false);
+    const [formTrigger, setFormTrigger] = useState(false);
     const { userData } = props;
 
     if (accountTrigger) {
         return createPortal(
-            <AccountSettings setAccountTrigger={setAccountTrigger} userData={userData}/>,
+            <AccountSettings
+                setAccountTrigger={setAccountTrigger}
+                userData={userData}
+                setFormTrigger={setFormTrigger}
+            />,
+            document.querySelector(".main")
+        );
+    }
+
+    if (formTrigger) {
+        return createPortal(
+            <PassChange setFormTrigger={setFormTrigger} />,
             document.querySelector(".main")
         );
     }
