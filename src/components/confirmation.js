@@ -25,7 +25,7 @@ const setText = (elementId, text) => {
     const element = document.querySelector(`#${elementId}`);
     element.innerHTML = text;
 
-const givenSet = "abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ123456789";
+const givenSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
 
 let code = "";
 for (let i=0; i<5; i++) {
