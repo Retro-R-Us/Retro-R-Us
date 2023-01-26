@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { getAPIHealth } from "../api";
+import { getAPIHealth, getCurrentUser } from "../api";
 import AuthorizeUser from "./Auth";
 import Header from "./header"
 import "../style/App.css";
@@ -18,8 +18,8 @@ import { Orders } from '.';
 const App = () => {
     const [APIHealth, setAPIHealth] = useState("");
     const [token, setToken] = useState(window.localStorage.getItem("token") || null);
-    const [username, setUsername] = useState("");
-    const [userData, setUserData] = useState(null);
+    const [username, setUsername] = useState(window.localStorage.getItem("username") || null);
+    const [userData, setUserData] = useState();
     const [modalTrigger, setModalTrigger] = useState(false);
     const [action, setAction] = useState(null);
     const [games, setGames] = useState([]);
@@ -43,14 +43,6 @@ const App = () => {
         // invoke it immediately after its declaration, inside the useEffect callback
         getAPIStatus();
     }, []);
-  
-    useEffect(() => {
-        const getOrders = async () => {
-            const orders = await getAllOrders();
-            setOrders(orders);
-      }
-      getOrders();
-    }, [userData]);
 
     useEffect(() => {
         const getGames = async () => {
@@ -83,22 +75,26 @@ const App = () => {
     }, []);
 
     useEffect(() => {
-        if (userData) {
-            setUsername(userData.userdata.username)
-        }
-    }, [userData]);
-
-    useEffect(() => {
         if (token) {
             window.localStorage.setItem("token", token)
+            const getUserData = async () => {
+                const data = await getCurrentUser(token);
+                if (data.Success)   {
+                    window.localStorage.setItem("username", data.user.username)
+                    setUserData(data)
+                }
+                
+            };
+            getUserData();
         } else {
             window.localStorage.removeItem("token")
+            window.localStorage.removeItem("username");
         }
     }, [token])
 
     const logOut = () => {
         setToken("");
-        setUsername(null);
+        setUsername("");
         history("/");
     };
 
@@ -107,14 +103,12 @@ const App = () => {
             <div className="head">
                 <header>Retro-R-Us</header>
                 <p>API Status: {APIHealth}</p>
-                <Header token={token} username={username} 
+                <Header token={token} setUsername={setUsername} username={username} 
                     logOut={logOut} setModalTrigger={setModalTrigger}
-                    setAction={setAction} />
-                <AuthorizeUser setToken={setToken} 
-                    setUserData={setUserData} action={action} 
-                    modalTrigger={modalTrigger} 
-                    setModalTrigger={setModalTrigger} 
-                    setAction={setAction} />
+                    setAction={setAction} userData={userData}  />
+                <AuthorizeUser setToken={setToken} action={action} 
+                    modalTrigger={modalTrigger} setModalTrigger={setModalTrigger} 
+                    setAction={setAction} setUsername={setUsername} />
             </div>
             <Routes>
                 <Route exact path="/" /*element={<Home user={user}/> */ />
