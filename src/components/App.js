@@ -14,7 +14,6 @@ import Accessories from "./accessories";
 import { fetchAllAccessories } from "../api/accessories";
 import { Orders } from '.';
 
-
 const App = () => {
     const [APIHealth, setAPIHealth] = useState("");
     const [token, setToken] = useState(window.localStorage.getItem("token") || null);
@@ -26,7 +25,6 @@ const App = () => {
     const [consoles, setConsoles] = useState([]);
     const [collectibles, setCollectibles] = useState([]);
     const [accessories, setAccessories] = useState([]);
-
 
     const history = useNavigate()
     
@@ -43,14 +41,6 @@ const App = () => {
         // invoke it immediately after its declaration, inside the useEffect callback
         getAPIStatus();
     }, []);
-  
-    useEffect(() => {
-        const getOrders = async () => {
-            const orders = await getAllOrders();
-            setOrders(orders);
-      }
-      getOrders();
-    }, [userData]);
 
     useEffect(() => {
         const getGames = async () => {
@@ -85,6 +75,7 @@ const App = () => {
     useEffect(() => {
         if (userData) {
             setUsername(userData.userdata.username)
+            console.log(userData)
         }
     }, [userData]);
 
@@ -106,7 +97,6 @@ const App = () => {
         <div className="main">
             <div className="head">
                 <header>Retro-R-Us</header>
-                <p>API Status: {APIHealth}</p>
                 <Header token={token} username={username} 
                     logOut={logOut} setModalTrigger={setModalTrigger}
                     setAction={setAction} />
