@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { createPortal } from "react-dom";
 import "../style/accountHome.css";
+import { AccountSettings } from "./acctSettings";
 import accountimg from "./images/account.png";
 import supportimg from "./images/support.png";
 import ordersimg from "./images/orders.png";
@@ -10,10 +11,22 @@ export const Account = (props) => {
     const [ordersTrigger, setOrdersTrigger] = useState(false);
     const [supportTrigger, setSupportTrigger] = useState(false);
     const {} = props;
+    console.log(accountTrigger);
+
+    if (accountTrigger) {
+        return createPortal(
+            <AccountSettings
+                setAccountTrigger={setAccountTrigger}
+            />,
+            document.querySelector(".main")
+        );
+    }
 
     return (
-        <div className="accountContainer">
-            <div className="ui link cards">
+        <div id="accountContainer">
+            {/* { ordersTrigger === true ? <AccountSettings /> : null} */}
+            {/* { supportTrigger === true ? <AccountSettings /> : null} */}
+            <div className="ui link cards ">
                 <div className="card" onClick={() => setAccountTrigger(true)}>
                     <div className="image">
                         <img src={accountimg} />
