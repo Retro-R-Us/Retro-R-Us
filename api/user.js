@@ -55,20 +55,30 @@ userRouter.post('/login', async (req, res, next) => {
     try {
         const { username, password } = req.body;
 
-        const user = await User.getUserByUsername(username);
-    
         if (!(username && password)) {
-            const err = new Error()
-            err.status = 400;
-            err.message = "Username/Password field missing. Please fill out both fields."
-            res.status(400)
-            next(err)
-        } else if (!(user.id && user.email && user.username)) {
-            const err = new Error()
-            err.status = 400;
-            err.message = "User does not exist. Please sign up for an account."
-            res.status(400)
-            next(err)
+            res.status(400);
+                res.send({
+                    Success: false,
+                    Message: "A required field was missing. Please fill all out all required fields."
+                })
+        }
+
+        const user = await User.getUserByUsername(username);
+        if (user.Success === true) {
+            const passCheck = await User.getPass(username, password);
+            if (passCheck.Success === false) {
+                res.status(400);
+                res.send({
+                    Success: false,
+                    Message: "Incorrect Username or Password."
+                })
+            }
+        } else if (user.Success === false) {
+            res.status(400);
+            res.send({
+                Success: false,
+                Message:  `${user.Message}. Please sign up for an account.`
+            })
         } else {
             const login = await User.userLogin(req.body);
             const token = jwt.sign({id: user.id, username: username}, JWT_SECRET)
