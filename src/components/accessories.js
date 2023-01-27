@@ -14,7 +14,6 @@ const Accessories = ({ accessories }) => {
                             <h1>{accessory.title}</h1>
                             <h2>{accessory.description}</h2>
                             <h3>{accessory.console}</h3>
-                            <h4>{accessory.year}</h4>
                             <h2>{accessory.price}</h2>
                         </div>
                     ))
@@ -24,7 +23,6 @@ const Accessories = ({ accessories }) => {
                             <h1>{accessory.title}</h1>
                             <h2>{accessory.description}</h2>
                             <h3>{accessory.console}</h3>
-                            <h4>{accessory.year}</h4>
                             <h2>{accessory.price}</h2>
                         </div>
                     ))
