@@ -1,51 +1,53 @@
 body {
   background-image: url("https://pbs.twimg.com/media/DqvmspaWkAAQ28a.jpg:large");
   background-repeat: no-repeat;
+  background-attachment: fixed;
   margin: 0 auto;
   background-position: center;
   background-size: cover;
   background-color: beige;
-}
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: left;
+  width: 100%;
+  height: 100%;
 
 h1 {
-  color: pink;
+  color: black;
   padding: 1rem;
 }
 
-.header {
-  display: flex;
-  flex-direction: column;
-  align-items: right;
-  justify-content: center;
-}
-
-.siteTitle {
-  padding: 10px;
-  font-size:4vmax;
-  font-family: monospace;
-  color: white;
-}
-
-.altheader {
-  display: flex;
-  flex-direction: column;
-  align-items: right;
-  justify-content: center;
-}
-
-.container {
-  margin: auto;
-  color: white;
-  padding: 50px;
-}
-
-.card {
-  background-color: aliceblue;
+.card,
+.accessoryCard,
+.consoleCard,
+.gameCard {
+  background-color: rgb(135, 184, 226);
   color: black;
-  border-radius: 10px;
-  padding: 5px 45px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-grow: 1;
+  margin: 15px;
+  padding: 25px;
+  max-width: 350px;
+  min-height: 300px;
+  border: 1px solid black;
+  border-radius: 33px;
 }
 
 ul {
   list-style: none;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  height: 50%;
+}
+
+img {
+  max-width: 300px;
+  max-height: 300px;
 }
