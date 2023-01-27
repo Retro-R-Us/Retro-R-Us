@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { getAPIHealth, getCurrentUser } from "../api";
 import AuthorizeUser from "./Auth";
+import { Account } from "./account";
 import Header from "./header";
 import UserHeader from "./UserHeader";
 import "../style/App.css";
@@ -78,9 +79,11 @@ const App = () => {
             window.localStorage.setItem("token", token);
             const getUserData = async () => {
                 const data = await getCurrentUser(token);
+                const userInfo = data.user.userData
+                console.log(userInfo)
                 if (data.Success) {
-                    window.localStorage.setItem("username", data.user.username);
-                    setUserData(data);
+                    window.localStorage.setItem("username", userInfo.username);
+                    setUserData(userInfo);
                 }
             };
             getUserData();
@@ -113,29 +116,30 @@ const App = () => {
                         />
                     </div>
                 </div>
-                <AuthorizeUser
-                    setToken={setToken}
-                    action={action}
-                    modalTrigger={modalTrigger}
-                    setModalTrigger={setModalTrigger}
-                    setAction={setAction}
-                    setUsername={setUsername}
-                />
-                <Routes>
-                    <Route exact path="/" /*element={<Home user={user}/> */ />
-                    <Route path="/games" element={<Games games={games} />} />
-                    <Route path="/consoles" element={<Consoles consoles={consoles} />} />
-                    <Route
-                        path="/collectibles"
-                        element={<Collectibles collectibles={collectibles} />}
-                    />
-                    <Route
-                        path="/accessories"
-                        element={<Accessories accessories={accessories} />}
-                    />
-                </Routes>
-                {/* <Footer /> */}
             </div>
+            <AuthorizeUser
+                setToken={setToken}
+                action={action}
+                modalTrigger={modalTrigger}
+                setModalTrigger={setModalTrigger}
+                setAction={setAction}
+                setUsername={setUsername}
+            />
+            <Routes>
+                <Route exact path="/" /*element={<Home user={user}/> */ />
+                <Route path="/user/cart" /* element={<Cart />} */ />
+                <Route path="/games" element={<Games games={games} />} />
+                <Route path="/consoles" element={<Consoles consoles={consoles} />} />
+                <Route
+                    path="/collectibles"
+                    element={<Collectibles collectibles={collectibles} />}
+                />
+                <Route path="/account" element={<Account userData={userData} />} />
+                <Route path="/accessories" element={<Accessories accessories={accessories} />} />
+            </Routes>
+
+            {/* <Footer /> */}
+
         </div>
     );
 };
