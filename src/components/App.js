@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { getAPIHealth } from "../api";
+import { getAPIHealth, getCurrentUser } from "../api";
 import AuthorizeUser from "./Auth";
-import Header from "./header"
+import Header from "./header";
+import UserHeader from "./UserHeader";
 import "../style/App.css";
 import Games from "./games";
-import Consoles  from "./consoles";
+import Consoles from "./consoles";
 import Collectibles from "./collectibles";
 import { fetchAllGames } from "../api/games";
 import { fetchAllConsoles } from "../api/consoles";
 import { fetchAllCollectibles } from "../api/collectibles";
 import Accessories from "./accessories";
 import { fetchAllAccessories } from "../api/accessories";
-import { Orders } from '.';
+import { Orders } from ".";
 
 const App = () => {
     const [APIHealth, setAPIHealth] = useState("");
     const [token, setToken] = useState(window.localStorage.getItem("token") || null);
-    const [username, setUsername] = useState("");
-    const [userData, setUserData] = useState(null);
+    const [username, setUsername] = useState(window.localStorage.getItem("username") || null);
+    const [userData, setUserData] = useState();
     const [modalTrigger, setModalTrigger] = useState(false);
     const [action, setAction] = useState(null);
     const [games, setGames] = useState([]);
@@ -26,8 +27,8 @@ const App = () => {
     const [collectibles, setCollectibles] = useState([]);
     const [accessories, setAccessories] = useState([]);
 
-    const history = useNavigate()
-    
+    const history = useNavigate();
+
     useEffect(() => {
         // follow this pattern inside your useEffect calls:
         // first, create an async function that will wrap your axios service adapter
@@ -46,7 +47,7 @@ const App = () => {
         const getGames = async () => {
             const games = await fetchAllGames();
             setGames(games);
-        }
+        };
         getGames();
     }, []);
 
@@ -54,13 +55,13 @@ const App = () => {
         const getConsoles = async () => {
             const consoles = await fetchAllConsoles();
             setConsoles(consoles);
-        }
+        };
         getConsoles();
-        
+
         const getAccessories = async () => {
             const accessories = await fetchAllAccessories();
             setAccessories(accessories);
-        }
+        };
         getAccessories();
     }, []);
 
@@ -68,53 +69,73 @@ const App = () => {
         const getCollectibles = async () => {
             const collectibles = await fetchAllCollectibles();
             setCollectibles(collectibles);
-        }
+        };
         getCollectibles();
     }, []);
 
     useEffect(() => {
-        if (userData) {
-            setUsername(userData.userdata.username)
-            console.log(userData)
-        }
-    }, [userData]);
-
-    useEffect(() => {
         if (token) {
-            window.localStorage.setItem("token", token)
+            window.localStorage.setItem("token", token);
+            const getUserData = async () => {
+                const data = await getCurrentUser(token);
+                if (data.Success) {
+                    window.localStorage.setItem("username", data.user.username);
+                    setUserData(data);
+                }
+            };
+            getUserData();
         } else {
-            window.localStorage.removeItem("token")
+            window.localStorage.removeItem("token");
+            window.localStorage.removeItem("username");
         }
-    }, [token])
+    }, [token]);
 
     const logOut = () => {
         setToken("");
-        setUsername(null);
+        setUsername("");
         history("/");
     };
 
     return (
         <div className="main">
             <div className="head">
-                <header>Retro-R-Us</header>
-                <Header token={token} username={username} 
-                    logOut={logOut} setModalTrigger={setModalTrigger}
-                    setAction={setAction} />
-                <AuthorizeUser setToken={setToken} 
-                    setUserData={setUserData} action={action} 
-                    modalTrigger={modalTrigger} 
-                    setModalTrigger={setModalTrigger} 
-                    setAction={setAction} />
+                <div className="ui tiny menu" style={{ backgroundColor: "black" }}>
+                    <Header />
+                    <div className="right menu">
+                        <UserHeader
+                            token={token}
+                            setUsername={setUsername}
+                            username={username}
+                            logOut={logOut}
+                            setModalTrigger={setModalTrigger}
+                            setAction={setAction}
+                            userData={userData}
+                        />
+                    </div>
+                </div>
+                <AuthorizeUser
+                    setToken={setToken}
+                    action={action}
+                    modalTrigger={modalTrigger}
+                    setModalTrigger={setModalTrigger}
+                    setAction={setAction}
+                    setUsername={setUsername}
+                />
+                <Routes>
+                    <Route exact path="/" /*element={<Home user={user}/> */ />
+                    <Route path="/games" element={<Games games={games} />} />
+                    <Route path="/consoles" element={<Consoles consoles={consoles} />} />
+                    <Route
+                        path="/collectibles"
+                        element={<Collectibles collectibles={collectibles} />}
+                    />
+                    <Route
+                        path="/accessories"
+                        element={<Accessories accessories={accessories} />}
+                    />
+                </Routes>
+                {/* <Footer /> */}
             </div>
-            <Routes>
-                <Route exact path="/" /*element={<Home user={user}/> */ />
-                <Route path="/games" element={<Games games={games}/>} />
-                <Route path="/consoles" element={<Consoles consoles={consoles}/>} />
-                <Route path="/collectibles" element={<Collectibles collectibles={collectibles}/>} />
-                <Route path="/accessories" element={<Accessories accessories={accessories}/>} />
-            </Routes>
-
-            {/* <Footer /> */}
         </div>
     );
 };

@@ -6,8 +6,10 @@ const { User, Orders } = require('../db/models/index');
 
 userRouter.get('/me', async (req, res, next) => {
     try {
-        const { username } = req.body;
         const { authorization } = req.headers;
+
+        const tokenString = authorization.slice(7, -1);
+        const tokenCheck = jwt.decode(tokenString);
 
         if (authorization === undefined) {
             res.status(401)
@@ -16,25 +18,11 @@ userRouter.get('/me', async (req, res, next) => {
                 name: "Auth Error",
                 message: "You must be logged in to perform this action"
               })
-        }
-
-        const tokenString = authorization.slice(7, -1);
-        const tokenCheck = jwt.decode(tokenString);
-
-        if (tokenCheck.username !== username) {
-            res.status(401)
-            res.send({
-                Success: false,
-                name: "Token Error",
-                error: "Token Invalid",
-                message: "Your token does not match your username."
-        })
         } else {
-            const user = await User.getUserByUsername(username);
-            const orders = await Orders.getOrdersByUser(user.id);
+            const orders = await Orders.getOrdersByUser(tokenCheck.id);
             const userData = {
                 Success: true,
-                user: user,
+                user: tokenCheck,
                 orders: orders
             }
             res.send(userData)
@@ -83,7 +71,7 @@ userRouter.post('/login', async (req, res, next) => {
             next(err)
         } else {
             const login = await User.userLogin(req.body);
-            const token = jwt.sign({username: username}, JWT_SECRET)
+            const token = jwt.sign({id: user.id, username: username}, JWT_SECRET)
             login.userdata.token = token;
             res.status(200);
             res.send(login);
