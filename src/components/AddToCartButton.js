@@ -1,8 +1,19 @@
 import React from "react";
+import { addItemToCart } from "../api/cart";
 
-const AddToCartButton = () => {
+const AddToCartButton = ({ data, userData }) => {
+    const handleAddToCart = async () => {
+        const orderId = data.id;
+        const quantity = 1;
+        const userId = userData.id;
+        await addItemToCart(orderId, quantity, userId);
+        console.log("added to cart! :D");
+    }
+
     return (
-        <button className="addToCartButton">Add to Cart</button>
+        <button 
+            className="addToCartButton" 
+            onClick={handleAddToCart}>Add to Cart</button>
     );
 }
 
