@@ -1,39 +1,16 @@
-import React, { useState } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const Header = (props) => {
-    const { token, username, logOut, setModalTrigger, setAction } = props;
-
+const Header = () => {
     return (
-        <div className="nav" style={{ marginBottom: "20px" }}>
-            <Link className="ui yellow button" to="/">
-                Home
-            </Link>
-            {token ? (
-                <button className="ui yellow button" onClick={logOut}>Log Out</button>
-            ) : (
-                <button className="ui yellow button" onClick={() => {
-                    setAction("login"),
-                    setModalTrigger(true)
-                }}>Login</button>
-            )}
-            {token ? null : (
-                <button className="ui yellow button" onClick={() => {
-                    setAction("register"),
-                    setModalTrigger(true)
-                }}>Sign Up</button>
-            )}
-            {token ? (
-                <Link className="ui label" to="/account">
-                    <i aria-hidden="true" className="green users circular icon"></i>
-                    {username}
+        <Fragment>
+            <div className="item">
+                <Link className="ui button" to="/">
+                    Home
                 </Link>
-            ) : <div className="ui label">
-                    <i aria-hidden="true" className="red users circular icon"></i>
-                    Not Logged In
-                </div>
-            }
-        </div>
+            </div>
+            <header className="siteTitle">Retro-R-Us</header>
+        </Fragment>
     );
 };
 

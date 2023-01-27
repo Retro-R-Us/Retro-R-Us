@@ -6,8 +6,10 @@ const { User, Orders } = require('../db/models/index');
 
 userRouter.get('/me', async (req, res, next) => {
     try {
-        const { username } = req.body;
         const { authorization } = req.headers;
+
+        const tokenString = authorization.slice(7, -1);
+        const tokenCheck = jwt.decode(tokenString);
 
         if (authorization === undefined) {
             res.status(401)
@@ -16,25 +18,11 @@ userRouter.get('/me', async (req, res, next) => {
                 name: "Auth Error",
                 message: "You must be logged in to perform this action"
               })
-        }
-
-        const tokenString = authorization.slice(7, -1);
-        const tokenCheck = jwt.decode(tokenString);
-
-        if (tokenCheck.username !== username) {
-            res.status(401)
-            res.send({
-                Success: false,
-                name: "Token Error",
-                error: "Token Invalid",
-                message: "Your token does not match your username."
-        })
         } else {
-            const user = await User.getUserByUsername(username);
-            const orders = await Orders.getOrdersByUser(user.id);
+            const orders = await Orders.getOrdersByUser(tokenCheck.id);
             const userData = {
                 Success: true,
-                user: user,
+                user: tokenCheck,
                 orders: orders
             }
             res.send(userData)
@@ -67,23 +55,33 @@ userRouter.post('/login', async (req, res, next) => {
     try {
         const { username, password } = req.body;
 
-        const user = await User.getUserByUsername(username);
-    
         if (!(username && password)) {
-            const err = new Error()
-            err.status = 400;
-            err.message = "Username/Password field missing. Please fill out both fields."
-            res.status(400)
-            next(err)
-        } else if (!(user.id && user.email && user.username)) {
-            const err = new Error()
-            err.status = 400;
-            err.message = "User does not exist. Please sign up for an account."
-            res.status(400)
-            next(err)
+            res.status(400);
+                res.send({
+                    Success: false,
+                    Message: "A required field was missing. Please fill all out all required fields."
+                })
+        }
+
+        const user = await User.getUserByUsername(username);
+        if (user.Success === true) {
+            const passCheck = await User.getPass(username, password);
+            if (passCheck.Success === false) {
+                res.status(400);
+                res.send({
+                    Success: false,
+                    Message: "Incorrect Username or Password."
+                })
+            }
+        } else if (user.Success === false) {
+            res.status(400);
+            res.send({
+                Success: false,
+                Message:  `${user.Message}. Please sign up for an account.`
+            })
         } else {
             const login = await User.userLogin(req.body);
-            const token = jwt.sign({username: username}, JWT_SECRET)
+            const token = jwt.sign({id: user.id, username: username}, JWT_SECRET)
             login.userdata.token = token;
             res.status(200);
             res.send(login);
