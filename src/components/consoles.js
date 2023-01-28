@@ -19,6 +19,7 @@ const Consoles = ({ userData, consoles }) => {
                             <h2>{console.description}</h2>
                             <h4>{console.year}</h4>
                             <h2>{console.price}</h2>
+                            <AddToCartButton data={consoles} userData={userData}/>
                         </div>
                     ))
                 ) : (
@@ -28,7 +29,7 @@ const Consoles = ({ userData, consoles }) => {
                             <h2>{console.description}</h2>
                             <h4>{console.year}</h4>
                             <h2>{console.price}</h2>
-                            <button data={consoles} userData={userData}
+                            <AddToCartButton data={consoles} userData={userData}/>
                         </div>
                     ))
                 )}
