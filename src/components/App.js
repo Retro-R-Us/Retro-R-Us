@@ -22,6 +22,7 @@ const App = () => {
     const [token, setToken] = useState(window.localStorage.getItem("token") || null);
     const [username, setUsername] = useState(window.localStorage.getItem("username") || null);
     const [userData, setUserData] = useState();
+    const [userOrders, setUserOrders] = useState();
     const [modalTrigger, setModalTrigger] = useState(false);
     const [action, setAction] = useState(null);
     const [games, setGames] = useState([]);
@@ -80,11 +81,13 @@ const App = () => {
             window.localStorage.setItem("token", token);
             const getUserData = async () => {
                 const data = await getCurrentUser(token);
-                const userInfo = data.user.userData
+                const userInfo = data.user
                 console.log(userInfo)
+                const orders = data.orders
                 if (data.Success) {
                     window.localStorage.setItem("username", userInfo.username);
                     setUserData(userInfo);
+                    setUserOrders(orders);
                 }
             };
             getUserData();
