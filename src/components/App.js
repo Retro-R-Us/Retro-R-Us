@@ -14,6 +14,7 @@ import { fetchAllConsoles } from "../api/consoles";
 import { fetchAllCollectibles } from "../api/collectibles";
 import Accessories from "./accessories";
 import { fetchAllAccessories } from "../api/accessories";
+import Home from "./home";
 import { Orders } from ".";
 
 const App = () => {
@@ -126,7 +127,7 @@ const App = () => {
                 setUsername={setUsername}
             />
             <Routes>
-                <Route exact path="/" /*element={<Home user={user}/> */ />
+                <Route exact path="/" element={<Home />} />
                 <Route path="/user/cart" /* element={<Cart />} */ />
                 <Route path="/games" element={<Games games={games} />} />
                 <Route path="/consoles" element={<Consoles consoles={consoles} />} />
@@ -134,7 +135,7 @@ const App = () => {
                     path="/collectibles"
                     element={<Collectibles collectibles={collectibles} />}
                 />
-                <Route path="/account" element={<Account userData={userData} />} />
+                <Route path="/account" element={<Account userData={userData} token={token} />} />
                 <Route path="/accessories" element={<Accessories accessories={accessories} />} />
             </Routes>
 
