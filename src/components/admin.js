@@ -63,13 +63,13 @@ const Admin = ({ userData }) => {
                 break;
             case 'UPDATE':
                 if(category === 'consoles') {
-                    // TODO - UPDATE console
+                    adminFn.fetchUpdateConsoleListing(formData);
                 } else if (category === 'games') {
-                    // TODO - UPDATE game
+                    adminFn.fetchUpdateGameListing(formData);
                 } else if (category === 'accessories') {
-                    // TODO - UPDATE accessory
+                    adminFn.fetchUpdateAccessoryListing(formData);
                 } else if (category === 'collectibles') {
-                    // TODO - UPDATE collectible
+                    adminFn.fetchUpdateCollectibleListing(formData);
                 }
                 break;
             case 'DELETE':
