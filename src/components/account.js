@@ -32,12 +32,12 @@ export const Account = (props) => {
         );
     }
 
-    // if (ordersTrigger) {
-    //     return createPortal(
-    //         <PassChange setFormTrigger={setFormTrigger} />,
-    //         document.querySelector(".main")
-    //     );
-    // }
+    if (ordersTrigger) {
+        return createPortal(
+            <AccountOrders setOrdersTrigger={setOrdersTrigger} userData={userData} />,
+            document.querySelector(".main")
+        );
+    }
 
     // if (supportTrigger) {
     //     return createPortal(
