@@ -128,14 +128,14 @@ const App = () => {
             <Routes>
                 <Route exact path="/" /*element={<Home user={user}/> */ />
                 <Route path="/user/cart" /* element={<Cart />} */ />
-                <Route path="/games" element={<Games games={games} />} />
+                <Route path="/games" element={<Games games={games} userData={userData}/>} />
                 <Route path="/consoles" element={<Consoles consoles={consoles} />} />
                 <Route
                     path="/collectibles"
                     element={<Collectibles collectibles={collectibles} />}
                 />
                 <Route path="/account" element={<Account userData={userData} />} />
-                <Route path="/accessories" element={<Accessories accessories={accessories} />} />
+                <Route path="/accessories" element={<Accessories accessories={accessories} userData={userData}/>} />
             </Routes>
 
             {/* <Footer /> */}
