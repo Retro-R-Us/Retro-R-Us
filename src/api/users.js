@@ -41,6 +41,7 @@ export const getCurrentUser = async (token) => {
 export const updateUserPass = async (token, username, oldPass, newPass) => {
     try {
         const response = await fetch(`${BASEURL}/user/update`, {
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`,
