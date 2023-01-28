@@ -1,5 +1,6 @@
 import React from 'react';
 // TODO Import API fns for admin actions
+import adminFn from '../api/admin';
 
 /* NOTE - Admin Tools Flow
     - Admin.js is passed down userData of logged in user from App.js
