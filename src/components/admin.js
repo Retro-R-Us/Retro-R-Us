@@ -122,6 +122,7 @@ const Admin = ({ userData }) => {
             default:
                 break; 
     }
+}
 
     // If userData is not defined (no user logged in), return null for this component
     if (!userData) return null;
