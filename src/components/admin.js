@@ -98,8 +98,8 @@ const Admin = ({ userData }) => {
     // If userData is not defined (no user logged in), return null for this component
     if (!userData) return null;
 
-    // If userData is defined, check if "isAdmin" = true, if so, return the Admin component
-    if (userData.isAdmin) {
+    // If userData is defined, check if "admin" = true, if so, return the Admin component
+    if (userData.admin) {
         return (
             <div className='adminContainer'>
                 <div className='adminCard'>
