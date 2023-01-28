@@ -1,4 +1,23 @@
 import React from 'react';
+// TODO Import API fns for admin actions
+
+/* NOTE - Admin Tools Flow
+    - Admin.js is passed down userData of logged in user from App.js
+    - If userData is defined, check if "isAdmin" = true
+    - If "isAdmin" = true, return the Admin component
+    - Otherwise, return null for this component
+    - Admin component has a form with 2 dropdowns
+    - First dropdown is for selecting a category, and updating the state
+        - The admin can select from "Consoles", "Games", "Accessories", or "Collectibles"
+    - Second dropdown is for selecting an action, and updating the state
+        - The admin can select from "Add New" AKA POST, "Edit Existing" AKA UPDATE, or "Delete Existing" AKA DELETE
+    - Based on the category and action selected, the form will change
+    - If the admin selects "Add New" for "Consoles", the form will have fields for "Title", "Description", "Console", "Year", and "Price"
+    - If the admin selects "Edit Existing" for "Consoles", the form will have a dropdown for "Title", and fields for "Description", "Console", "Year", and "Price"
+    - If the admin selects "Delete Existing" for "Consoles", the form will have a dropdown for "Title"
+    - The form will have a submit button that will perform the action on the category selected
+
+*/
 
 // Admin.js is passed down userData from App.js
 // This is to be used to check if "isAdmin" = true
@@ -54,6 +73,7 @@ const Admin = ({ userData }) => {
                                 <option value='DELETE'>Delete Existing</option>
                             </select>
                         </label>
+                        {/* TODO - FORM HERE */}
                         <input type='submit' value='Submit' />
                     </form>
                 </div>
