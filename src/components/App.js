@@ -14,7 +14,9 @@ import { fetchAllConsoles } from "../api/consoles";
 import { fetchAllCollectibles } from "../api/collectibles";
 import Accessories from "./accessories";
 import { fetchAllAccessories } from "../api/accessories";
-import { Orders } from ".";
+import { Orders } from "./orders";
+import Home from "./home";
+import Cart from "./Cart";
 
 const App = () => {
     const [APIHealth, setAPIHealth] = useState("");
@@ -126,16 +128,16 @@ const App = () => {
                 setUsername={setUsername}
             />
             <Routes>
-                <Route exact path="/" /*element={<Home user={user}/> */ />
-                <Route path="/user/cart" /* element={<Cart />} */ />
-                <Route path="/games" element={<Games games={games} />} />
-                <Route path="/consoles" element={<Consoles consoles={consoles} />} />
+                <Route exact path="/" element={<Home />} />
+                <Route path="/user/cart" element={<Cart />} />
+                <Route path="/consoles" element={<Consoles consoles={consoles} userData={userData}/>} />
+                <Route path="/games" element={<Games games={games} userData={userData}/>} />
                 <Route
                     path="/collectibles"
-                    element={<Collectibles collectibles={collectibles} />}
+                    element={<Collectibles collectibles={collectibles} userData={userData}/>}
                 />
-                <Route path="/account" element={<Account userData={userData} />} />
-                <Route path="/accessories" element={<Accessories accessories={accessories} />} />
+                <Route path="/account" element={<Account userData={userData} token={token} />} />
+                <Route path="/accessories" element={<Accessories accessories={accessories} userData={userData}/>} />
             </Routes>
 
             {/* <Footer /> */}
