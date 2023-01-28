@@ -138,7 +138,7 @@ const App = () => {
                     path="/collectibles"
                     element={<Collectibles collectibles={collectibles} userData={userData}/>}
                 />
-                <Route path="/account" element={<Account userData={userData} token={token} />} />
+                <Route path="/account" element={<Account userData={userData} token={token} userOrders={userOrders} />} />
                 <Route path="/accessories" element={<Accessories accessories={accessories} userData={userData}/>} />
             </Routes>
 
