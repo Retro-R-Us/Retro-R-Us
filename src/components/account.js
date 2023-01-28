@@ -13,7 +13,7 @@ export const Account = (props) => {
     const [ordersTrigger, setOrdersTrigger] = useState(false);
     const [supportTrigger, setSupportTrigger] = useState(false);
     const [formTrigger, setFormTrigger] = useState(false);
-    const { userData, token } = props;
+    const { userData, token, userOrders } = props;
 
     if (accountTrigger) {
         return createPortal(
@@ -35,7 +35,7 @@ export const Account = (props) => {
 
     if (ordersTrigger) {
         return createPortal(
-            <MyOrders setOrdersTrigger={setOrdersTrigger} userData={userData} />,
+            <MyOrders setOrdersTrigger={setOrdersTrigger} userData={userData} userOrders={userOrders} />,
             document.querySelector(".main")
         );
     }
