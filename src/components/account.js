@@ -6,6 +6,7 @@ import { PassChange } from "./acctedit"
 import accountimg from "./images/account.png";
 import supportimg from "./images/support.png";
 import ordersimg from "./images/orders.png";
+import MyOrders from "./orders"
 
 export const Account = (props) => {
     const [accountTrigger, setAccountTrigger] = useState(false);
@@ -34,7 +35,7 @@ export const Account = (props) => {
 
     if (ordersTrigger) {
         return createPortal(
-            <AccountOrders setOrdersTrigger={setOrdersTrigger} userData={userData} />,
+            <MyOrders setOrdersTrigger={setOrdersTrigger} userData={userData} />,
             document.querySelector(".main")
         );
     }
