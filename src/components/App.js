@@ -128,8 +128,8 @@ const App = () => {
             <Routes>
                 <Route exact path="/" /*element={<Home user={user}/> */ />
                 <Route path="/user/cart" /* element={<Cart />} */ />
+                <Route path="/consoles" element={<Consoles consoles={consoles} userData={userData}/>} />
                 <Route path="/games" element={<Games games={games} userData={userData}/>} />
-                <Route path="/consoles" element={<Consoles consoles={consoles} />} />
                 <Route
                     path="/collectibles"
                     element={<Collectibles collectibles={collectibles} />}
