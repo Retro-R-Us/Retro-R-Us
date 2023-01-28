@@ -56,43 +56,71 @@ const Admin = ({ userData }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        switch (action) {
-            case 'POST':
-                if(category === 'consoles') {
-                    adminFn.fetchCreateConsoleListing(formData);
-                } else if (category === 'games') {
-                    adminFn.fetchCreateGameListing(formData);
-                } else if (category === 'accessories') {
-                    adminFn.fetchCreateAccessoryListing(formData);
-                } else if (category === 'collectibles') {
-                    adminFn.fetchCreateCollectibleListing(formData);
+
+        // Perform the action based on the category/action selected
+        switch (category) {
+            case 'consoles':
+                switch (action) {
+                    case 'POST':
+                        adminFn.fetchCreateConsoleListing(formData);
+                        break;
+                    case 'UPDATE':
+                        adminFn.fetchUpdateConsoleListing(formData);
+                        break;
+                    case 'DELETE':
+                        adminFn.fetchDeleteConsoleListing(formData);
+                        break;
+                    default:
+                        break;
                 }
                 break;
-            case 'UPDATE':
-                if(category === 'consoles') {
-                    adminFn.fetchUpdateConsoleListing(formData);
-                } else if (category === 'games') {
-                    adminFn.fetchUpdateGameListing(formData);
-                } else if (category === 'accessories') {
-                    adminFn.fetchUpdateAccessoryListing(formData);
-                } else if (category === 'collectibles') {
-                    adminFn.fetchUpdateCollectibleListing(formData);
+            case 'games':
+                switch (action) {
+                    case 'POST':
+                        adminFn.fetchCreateGameListing(formData);
+                        break;
+                    case 'UPDATE':
+                        adminFn.fetchUpdateGameListing(formData);
+                        break;
+                    case 'DELETE':
+                        adminFn.fetchDeleteGameListing(formData);
+                        break;
+                    default:
+                        break;
                 }
                 break;
-            case 'DELETE':
-                if(category === 'consoles') {
-                    adminFn.fetchDeleteConsoleListing(formData);
-                } else if (category === 'games') {
-                    adminFn.fetchDeleteGameListing(formData);
-                } else if (category === 'accessories') {
-                    adminFn.fetchDeleteAccessoryListing(formData);
-                } else if (category === 'collectibles') {
-                    adminFn.fetchDeleteCollectibleListing(formData);
+            case 'accessories':
+                switch (action) {
+                    case 'POST':
+                        adminFn.fetchCreateAccessoryListing(formData);
+                        break;
+                    case 'UPDATE':
+                        adminFn.fetchUpdateAccessoryListing(formData);
+                        break;
+                    case 'DELETE':
+                        adminFn.fetchDeleteAccessoryListing(formData);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 'collectibles':
+                switch (action) {
+                    case 'POST':
+                        adminFn.fetchCreateCollectibleListing(formData);
+                        break;
+                    case 'UPDATE':
+                        adminFn.fetchUpdateCollectibleListing(formData);
+                        break;
+                    case 'DELETE':
+                        adminFn.fetchDeleteCollectibleListing(formData);
+                        break;
+                    default:
+                        break;
                 }
                 break;
             default:
-                break;
-        }
+                break; 
     }
 
     // If userData is not defined (no user logged in), return null for this component
