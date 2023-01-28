@@ -47,6 +47,47 @@ const Admin = ({ userData }) => {
         setCategory(event.target.value);
     }
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        switch (action) {
+            case 'POST':
+                if(category === 'consoles') {
+                    // TODO - POST console
+                } else if (category === 'games') {
+                    // TODO - POST game
+                } else if (category === 'accessories') {
+                    // TODO - POST accessory
+                } else if (category === 'collectibles') {
+                    // TODO - POST collectible
+                }
+                break;
+            case 'UPDATE':
+                if(category === 'consoles') {
+                    // TODO - UPDATE console
+                } else if (category === 'games') {
+                    // TODO - UPDATE game
+                } else if (category === 'accessories') {
+                    // TODO - UPDATE accessory
+                } else if (category === 'collectibles') {
+                    // TODO - UPDATE collectible
+                }
+                break;
+            case 'DELETE':
+                if(category === 'consoles') {
+                    // TODO - DELETE console
+                } else if (category === 'games') {
+                    // TODO - DELETE game
+                } else if (category === 'accessories') {
+                    // TODO - DELETE accessory
+                } else if (category === 'collectibles') {
+                    // TODO - DELETE collectible
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
     // If userData is not defined (no user logged in), return null for this component
     if (!userData) return null;
 
