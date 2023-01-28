@@ -1,14 +1,42 @@
 import React, { useState } from "react";
 import "../style/accountHome.css";
+import { updateUserPass } from "../api";
 
 export const PassChange = (props) => {
-    const { userData, setFormTrigger } = props;
+    const { userData, setFormTrigger, token } = props;
 
     const [oldPwd, setOldPwd] = useState("");
     const [newPwd, setNewPwd] = useState("");
     const [CnewPwd, setCnewPwd] = useState("");
+    const [success, setSuccess] = useState(null);
+    const [message, setMessage] = useState("");
 
-    const handleSubmit = () => {};
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        try {
+            console.log("PASSWORDS:", oldPwd, newPwd, CnewPwd)
+            const response = await updateUserPass(token, userData.username, oldPwd, newPwd)
+            if (response.Success) {
+                setMessage(response.Message);
+                setSuccess(true);
+            } else if (response.Success === false) {
+                setMessage(response.message);
+                setSuccess(false);
+            }
+        } catch (error) {
+            throw error;
+        }
+    };
+
+    const exitFunc = () => {
+        setMessage("")
+        setSuccess(null)
+        setOldPwd("")
+        setNewPwd("")
+        setCnewPwd("")
+        setFormTrigger(false)
+    }
 
     return (
         <div id="modal">
@@ -17,7 +45,7 @@ export const PassChange = (props) => {
                     id="close-btn"
                     className="ui animated fade button"
                     tabIndex="0"
-                    onClick={() => setFormTrigger(false)}>
+                    onClick={() => exitFunc()}>
                     <div className="visible content">
                         <i className="close icon"></i>
                     </div>
@@ -32,9 +60,10 @@ export const PassChange = (props) => {
                     <div className="field">
                         <label>Previous Password</label>
                         <input
-                            type="text"
+                            type="password"
                             name="oldpwd"
                             value={oldPwd}
+                            required
                             placeholder="Your Previous Password"
                             onChange={(e) => setOldPwd(e.target.value)}
                         />
@@ -45,6 +74,8 @@ export const PassChange = (props) => {
                             type="password"
                             name="newpwd"
                             value={newPwd}
+                            required
+                            minLength="8"
                             placeholder="Your New Password"
                             onChange={(e) => setNewPwd(e.target.value)}
                         />
@@ -55,7 +86,16 @@ export const PassChange = (props) => {
                             type="password"
                             name="confnewpwd"
                             value={CnewPwd}
-                            onChange={(e) => setCnewPwd(e.target.value)}
+                            required
+                            minLength="8"
+                            onChange={(e) => {
+                                setCnewPwd(e.target.value)
+                                if (CnewPwd !== newPwd) {
+                                    setMessage("Passwords must match");
+                                } else {
+                                    setMessage("")
+                                }
+                            }}
                         />
                     </div>
                     <button className="ui animated fade button" type="submit">
@@ -65,6 +105,22 @@ export const PassChange = (props) => {
                         </div>
                     </button>
                 </form>
+                {success === true ? (
+                    <div className="ui positive message">
+                        <i className="close icon"></i>
+                        <div className="header">
+                            {message}
+                        </div>
+                    </div>
+                ) : null}
+                {success === false ? (
+                    <div className="ui negative message">
+                        <i className="close icon"></i>
+                        <div className="header">
+                            {message}
+                        </div>
+                    </div>
+                ) : null}
             </div>
         </div>
     );
