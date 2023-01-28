@@ -12,7 +12,7 @@ export const Account = (props) => {
     const [ordersTrigger, setOrdersTrigger] = useState(false);
     const [supportTrigger, setSupportTrigger] = useState(false);
     const [formTrigger, setFormTrigger] = useState(false);
-    const { userData } = props;
+    const { userData, token } = props;
 
     if (accountTrigger) {
         return createPortal(
@@ -27,10 +27,24 @@ export const Account = (props) => {
 
     if (formTrigger) {
         return createPortal(
-            <PassChange setFormTrigger={setFormTrigger} />,
+            <PassChange setFormTrigger={setFormTrigger} token={token} userData={userData} />,
             document.querySelector(".main")
         );
     }
+
+    // if (ordersTrigger) {
+    //     return createPortal(
+    //         <PassChange setFormTrigger={setFormTrigger} />,
+    //         document.querySelector(".main")
+    //     );
+    // }
+
+    // if (supportTrigger) {
+    //     return createPortal(
+    //         <PassChange setFormTrigger={setFormTrigger} />,
+    //         document.querySelector(".main")
+    //     );
+    // }
 
     return (
         <div id="accountContainer">
