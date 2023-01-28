@@ -1,5 +1,4 @@
 import React from 'react';
-// TODO Import API fns for admin actions
 import adminFn from '../api/admin';
 
 /* NOTE - Admin Tools Flow
@@ -53,13 +52,13 @@ const Admin = ({ userData }) => {
         switch (action) {
             case 'POST':
                 if(category === 'consoles') {
-                    // TODO - POST console
+                    adminFn.fetchCreateConsoleListing(formData);
                 } else if (category === 'games') {
-                    // TODO - POST game
+                    adminFn.fetchCreateGameListing(formData);
                 } else if (category === 'accessories') {
-                    // TODO - POST accessory
+                    adminFn.fetchCreateAccessoryListing(formData);
                 } else if (category === 'collectibles') {
-                    // TODO - POST collectible
+                    adminFn.fetchCreateCollectibleListing(formData);
                 }
                 break;
             case 'UPDATE':
