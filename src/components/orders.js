@@ -1,35 +1,31 @@
 import BASEURL from "./index";
 import React, { useEffect } from "react";
 
-const MyOrders = ({ setMyOrderList, myOrderList }) => {
-    useEffect(() => {
-        const getMyOrders = () => {
-            const id = window.localStorage.getItem('id').then((result) => {
-                setMyOrderList(result)
-            })
-            .catch(console.error)
-        }
-        getMyOrders()
-    }, [setMyOrderList]);
+const MyOrders = ({ setOrdersTrigger, userData }) => {
+
+
 
     return (
-        <div className="myOrders">
-            <label>My Orders</label>
-            {myOrderList ? myOrderList.map((order) => {
-                return (
-                    <div>
-                        <p>Order Number</p>{order.id}
-                        <p>Order Status: {order.status}</p>
-                        <p>Number of items ordered: {order.cart}</p>
+        <div id="modal">
+            <div id="inner">
+                <div
+                    id="close-btn"
+                    className="ui animated fade button"
+                    tabIndex="0"
+                    onClick={() => exitFunc()}>
+                    <div className="visible content">
+                        <i className="close icon"></i>
                     </div>
-                )
-            })
-        :
-        <p>You have not placed any orders yet!</p>}
-    </div>
-
+                    <div className="hidden content">Close</div>
+                </div>
+                <div className="image content">
+                    <div className="description">
+                        <div className="ui header">Your Orders</div>
+                    </div>
+                </div>
+            </div>
+        </div>
   )
-
 };
 
 export default MyOrders;
