@@ -134,7 +134,7 @@ const App = () => {
                 <Route path="/games" element={<Games games={games} userData={userData}/>} />
                 <Route
                     path="/collectibles"
-                    element={<Collectibles collectibles={collectibles} />}
+                    element={<Collectibles collectibles={collectibles} userData={userData}/>}
                 />
                 <Route path="/account" element={<Account userData={userData} />} />
                 <Route path="/accessories" element={<Accessories accessories={accessories} userData={userData}/>} />

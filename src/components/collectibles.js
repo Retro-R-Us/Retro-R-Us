@@ -1,7 +1,8 @@
 import React from 'react';
 import Search from './Search';
+import AddToCartButton from './AddToCartButton';
 
-const Collectibles = ({ collectibles }) => {
+const Collectibles = ({ userData, collectibles }) => {
     const [filteredData, setFilteredData] = React.useState([]);
 
     return (
@@ -16,6 +17,7 @@ const Collectibles = ({ collectibles }) => {
                             <h3>{collectible.console}</h3>
                             <h4>{collectible.year}</h4>
                             <h2>{collectible.price}</h2>
+                            <AddToCartButton data={collectibles} userData={userData}/>
                         </div>
                     ))
                 ) : (
@@ -26,6 +28,7 @@ const Collectibles = ({ collectibles }) => {
                             <h3>{collectible.console}</h3>
                             <h4>{collectible.year}</h4>
                             <h2>{collectible.price}</h2>
+                            <AddToCartButton data={collectibles} userData={userData}/>
                         </div>
                     ))
                 )}
