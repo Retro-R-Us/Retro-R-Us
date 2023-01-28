@@ -14,7 +14,6 @@ import { fetchAllConsoles } from "../api/consoles";
 import { fetchAllCollectibles } from "../api/collectibles";
 import Accessories from "./accessories";
 import { fetchAllAccessories } from "../api/accessories";
-import { Orders } from "./orders";
 import Home from "./home";
 import Cart from "./Cart";
 
