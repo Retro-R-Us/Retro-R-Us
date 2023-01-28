@@ -1,8 +1,11 @@
 import React from 'react';
 import Search from './Search';
+import AddToCartButton from './AddToCartButton';
 
-const Consoles = ({ consoles }) => {
+
+const Consoles = ({ userData, consoles }) => {
     const [filteredData, setFilteredData] = React.useState ([]);
+    
 
 
     return (
@@ -16,6 +19,7 @@ const Consoles = ({ consoles }) => {
                             <h2>{console.description}</h2>
                             <h4>{console.year}</h4>
                             <h2>{console.price}</h2>
+                            <AddToCartButton data={consoles} userData={userData}/>
                         </div>
                     ))
                 ) : (
@@ -25,6 +29,7 @@ const Consoles = ({ consoles }) => {
                             <h2>{console.description}</h2>
                             <h4>{console.year}</h4>
                             <h2>{console.price}</h2>
+                            <AddToCartButton data={consoles} userData={userData}/>
                         </div>
                     ))
                 )}
