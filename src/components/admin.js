@@ -46,6 +46,14 @@ const Admin = ({ userData }) => {
         setCategory(event.target.value);
     }
 
+    const handleFormChange = (event) => {
+        // Set the formData state to the value of the selected option
+        setFormData({
+            ...formData,
+            [event.target.name]: event.target.value
+        });
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
         switch (action) {
@@ -113,7 +121,28 @@ const Admin = ({ userData }) => {
                                 <option value='DELETE'>Delete Existing</option>
                             </select>
                         </label>
-                        {/* TODO - FORM HERE */}
+                        <form className='adminForm'>
+                            <label>
+                                Title:
+                                <input type='text' name='title' value={formData.title} onChange={handleFormChange}/>
+                            </label>
+                            <label>
+                                Description:
+                                <input type='text' name='description' value={formData.description} onChange={handleFormChange}/>
+                            </label>
+                            <label>
+                                Console:
+                                <input type='text' name='console' value={formData.console} onChange={handleFormChange}/>
+                            </label>
+                            <label>
+                                Year:
+                                <input type='text' name='year' value={formData.year} onChange={handleFormChange}/>
+                            </label>
+                            <label>
+                                Price:
+                                <input type='text' name='price' value={formData.price} onChange={handleFormChange}/>
+                            </label>
+                        </form>
                         <input type='submit' value='Submit' onClick={handleSubmit}/>
                     </form>
                 </div>
