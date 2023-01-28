@@ -15,6 +15,11 @@ const Admin = ({ userData }) => {
         price: ''
     });
 
+    const handleSelect = (event) => {
+        // Set the action state to the value of the selected option
+        setAction(event.target.value);
+    }
+
     // If userData is not defined (no user logged in), return null for this component
     if (!userData) return null;
 
@@ -26,7 +31,7 @@ const Admin = ({ userData }) => {
                     <form>
                         <label>
                             <h2>Select an option:</h2>
-                            <select>
+                            <select onChange={handleSelect}>
                                 <option value='POST'>Add New</option>
                                 <option value='UPDATE'>Edit Existing</option>
                                 <option value='DELETE'>Delete Existing</option>
