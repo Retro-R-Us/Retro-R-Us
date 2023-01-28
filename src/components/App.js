@@ -132,7 +132,7 @@ const App = () => {
                 <Route path="/consoles" element={<Consoles consoles={consoles} userData={userData}/>} />
                 <Route
                     path="/collectibles"
-                    element={<Collectibles collectibles={collectibles} />}
+                    element={<Collectibles collectibles={collectibles} userData={userData}/>}
                 />
                 <Route path="/account" element={<Account userData={userData} />} />
                 <Route path="/accessories" element={<Accessories accessories={accessories} />} />
