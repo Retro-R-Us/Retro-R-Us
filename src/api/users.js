@@ -54,7 +54,7 @@ export const updateUserPass = async (token, username, oldPass, newPass) => {
 
         const data = await response.json();
         return data;
-    } catch {
+    } catch (error) {
         console.error(error);
     }
 }
