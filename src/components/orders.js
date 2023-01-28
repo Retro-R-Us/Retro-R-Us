@@ -1,9 +1,12 @@
 import BASEURL from "./index";
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 
-const MyOrders = ({ setOrdersTrigger, userData }) => {
-    
+const MyOrders = ({ setOrdersTrigger, userData, userOrders }) => {
+    if (typeof userOrders === "object") {
+        userOrders = [userOrders];
+    }
 
+    console.log("USER ORDERS:", userOrders);
 
     return (
         <div id="modal">
@@ -20,30 +23,37 @@ const MyOrders = ({ setOrdersTrigger, userData }) => {
                 </div>
                 <div className="image content">
                     <div className="description">
-                        <div className="ui header">Your Orders</div>
+                        <div className="ui header">
+                            {userOrders ? "Your Orders" : "You have Not Made Any Orders Yet"}
+                        </div>
                     </div>
                 </div>
-                {<table className="ui celled table">
-                    <thead>
-                        <tr>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>Account Created:</th>
-                            <th>Phone #</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td data-label="username"></td>
-                            <td data-label="email"></td>
-                            <td data-label="accountAge"></td>
-                            <td data-label="phone">800-867-5309</td>
-                        </tr>
-                    </tbody>
-                </table>}
+                {userOrders ? (
+                    <table className="ui celled table">
+                        <thead>
+                            <tr>
+                                <th>Order Number</th>
+                                <th>Order Status</th>
+                                <th>Order Placed:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                {userOrders.map((order) => {
+                                    return (
+                                        <Fragment key={order.orderId}>
+                                            <td data-label="Order Number">{order.orderId}</td>
+                                            <td data-label="Order Status">{order.status}</td>
+                                            <td data-label="Order Placed">{order.createdOn}</td>
+                                        </Fragment>
+                                )})}
+                            </tr>
+                        </tbody>
+                    </table>
+                ) : null}
             </div>
         </div>
-  )
+    );
 };
 
 export default MyOrders;
