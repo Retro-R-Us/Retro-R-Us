@@ -16,7 +16,6 @@ import adminFn from '../api/admin';
     - If the admin selects "Edit Existing" for "Consoles", the form will have a dropdown for "Title", and fields for "Description", "Console", "Year", and "Price"
     - If the admin selects "Delete Existing" for "Consoles", the form will have a dropdown for "Title"
     - The form will have a submit button that will perform the action on the category selected
-
 */
 
 // Admin.js is passed down userData from App.js
@@ -74,13 +73,13 @@ const Admin = ({ userData }) => {
                 break;
             case 'DELETE':
                 if(category === 'consoles') {
-                    // TODO - DELETE console
+                    adminFn.fetchDeleteConsoleListing(formData);
                 } else if (category === 'games') {
-                    // TODO - DELETE game
+                    adminFn.fetchDeleteGameListing(formData);
                 } else if (category === 'accessories') {
-                    // TODO - DELETE accessory
+                    adminFn.fetchDeleteAccessoryListing(formData);
                 } else if (category === 'collectibles') {
-                    // TODO - DELETE collectible
+                    adminFn.fetchDeleteCollectibleListing(formData);
                 }
                 break;
             default:
@@ -115,7 +114,7 @@ const Admin = ({ userData }) => {
                             </select>
                         </label>
                         {/* TODO - FORM HERE */}
-                        <input type='submit' value='Submit' />
+                        <input type='submit' value='Submit' onClick={handleSubmit}/>
                     </form>
                 </div>
             </div>
