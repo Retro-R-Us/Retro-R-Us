@@ -31,7 +31,7 @@ const Search = ({ data , setFilteredData }) => {
     }
 
     return (
-        <div>
+        <div className="search">
             <input 
                 type="text" 
                 placeholder="Search..." 
