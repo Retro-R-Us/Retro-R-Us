@@ -8,12 +8,12 @@ const Header = () => {
     return (
         <Fragment>
             <div className="item">
-                <Link className="ui button" to="/">
+                <Link className="ui inverted primary button" to="/">
                     Home
                 </Link>
             </div>
             <div className="item">
-                <select className="ui button" onChange={(e) => {
+                <select className="ui inverted primary button" onChange={(e) => {
                     console.log(e.target.value)
                     if (e.target.value === "") {
                         return;

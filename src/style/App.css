@@ -1,21 +1,75 @@
-body {
+.homeContainer,
+.consolesContainer,
+.gamesContainer,
+.accesoriesContainer,
+.collectiblesContainer {
   background-image: url("https://pbs.twimg.com/media/DqvmspaWkAAQ28a.jpg:large");
   background-repeat: no-repeat;
   background-attachment: fixed;
   margin: 0 auto;
   background-position: center;
   background-size: cover;
-  background-color: beige;
+  background-color: rgb(212, 212, 192);
   display: flex;
-  flex-direction: column;
-  justify-content: left;
-  width: 100%;
-  height: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 100vw;
+  min-height: 100vh;
 }
+
+/* .slide {
+  width: 500px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: -1px 5px 15px black;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  animation: slide 16s infinite;
+}
+
+@keyframes slide{
+  0%{
+      transform: translateX(0);
+  }
+  25%{
+      transform: translateX(0);
+  }
+  30%{
+      transform: translateX(-100%);
+  }
+  50%{
+      transform: translateX(-100%);
+  }
+  55%{
+      transform: translateX(-200%);
+  }
+  75%{
+      transform: translateX(-200%);
+  }
+  80%{
+      transform: translateX(-300%);
+  }
+  100%{
+      transform: translateX(-300%);
+  }
+} */
 
 h1 {
   color: black;
   padding: 1rem;
+}
+
+.logo {
+  display: block;
+  margin-left: 100vmax;
+  margin-right: 100vmax;
 }
 
 .card,
@@ -23,18 +77,19 @@ h1 {
 .consoleCard,
 .gameCard,
 .collectibleCard {
-  background-color: rgb(135, 184, 226);
+  background-color: rgba(138, 192, 240, 0.666);
   color: black;
   display: flex;
   align-items: center;
   flex-direction: column;
   flex-grow: 1;
-  margin: 15px;
+  margin: 5px;
   padding: 25px;
-  max-width: 350px;
+  max-width: 400px;
   min-height: 300px;
-  border: 1px solid black;
-  border-radius: 33px;
+  max-height: 600px;
+  border: 3px solid black;
+  border-radius: 55px;
 }
 
 ul {
@@ -51,6 +106,12 @@ nav {
 img {
   max-width: 300px;
   max-height: 300px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-grow: 1;
+  margin: 15px;
+  padding: 15px;
 }
 
 .altheader {
