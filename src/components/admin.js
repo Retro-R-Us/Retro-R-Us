@@ -1,5 +1,5 @@
 import React from 'react';
-import adminFn from '../api/admin';
+import * as adminFn from '../api/admin';
 
 /* NOTE - Admin Tools Flow
     - Admin.js is passed down userData of logged in user from App.js
@@ -12,9 +12,7 @@ import adminFn from '../api/admin';
     - Second dropdown is for selecting an action, and updating the state
         - The admin can select from "Add New" AKA POST, "Edit Existing" AKA UPDATE, or "Delete Existing" AKA DELETE
     - Based on the category and action selected, the form will change
-    - If the admin selects "Add New" for "Consoles", the form will have fields for "Title", "Description", "Console", "Year", and "Price"
-    - If the admin selects "Edit Existing" for "Consoles", the form will have a dropdown for "Title", and fields for "Description", "Console", "Year", and "Price"
-    - If the admin selects "Delete Existing" for "Consoles", the form will have a dropdown for "Title"
+    - The form will be dynamically rendered based on the category selected
     - The form will have a submit button that will perform the action on the category selected
 */
 
@@ -28,13 +26,7 @@ const Admin = ({ userData }) => {
     const [category, setCategory] = React.useState(null);
 
     // State to keep track of form data
-    const [formData, setFormData] = React.useState({
-        title: '',
-        description: '',
-        console: '',
-        year: '',
-        price: ''
-    });
+    const [formData, setFormData] = React.useState({});
 
     const handleActionSelect = (event) => {
         // Set the action state to the value of the selected option
@@ -47,11 +39,42 @@ const Admin = ({ userData }) => {
     }
 
     const handleFormChange = (event) => {
-        // Set the formData state to the value of the selected option
-        setFormData({
-            ...formData,
-            [event.target.name]: event.target.value
-        });
+        // If the category is "consoles", update the form data state with the value of the input
+        if (category === "consoles") {
+            setFormData({
+                ...formData,
+                title: event.target.value,
+                description: event.target.value,
+                year: event.target.value,
+                price: event.target.value
+            });
+        // If the category is "collectible", update the form data state with the value of the input, and so on for each category
+        } else if (category === "collectible") {
+            setFormData({
+                ...formData,
+                title: event.target.value,
+                description: event.target.value,
+                console: event.target.value,
+                price: event.target.value
+            });
+        } else if (category === "game") {
+            setFormData({
+                ...formData,
+                title: event.target.value,
+                description: event.target.value,
+                console: event.target.value,
+                year: event.target.value,
+                price: event.target.value
+            });
+        } else if (category === "accessory") {
+            setFormData({
+                ...formData,
+                title: event.target.value,
+                description: event.target.value,
+                console: event.target.value,
+                price: event.target.value
+            });
+        }
     }
 
     const handleSubmit = (event) => {
@@ -121,10 +144,10 @@ const Admin = ({ userData }) => {
                 break;
             default:
                 break; 
+        }
     }
-}
 
-    // If userData is not defined (no user logged in), return null for this component
+    // If userData is not defined (no admin user logged in), return null for this component
     if (!userData) return null;
 
     // If userData is defined, check if "admin" = true, if so, return the Admin component
@@ -134,8 +157,9 @@ const Admin = ({ userData }) => {
                 <div className='adminCard'>
                     <form>
                         <label>
+                            {/* This is a required dropdown to set which product to target */}
                             <h2>Select a category:</h2>
-                            <select onChange={handleCategorySelect}>
+                            <select onChange={handleCategorySelect} required>
                                 <option value='consoles'>Consoles</option>
                                 <option value='games'>Games</option>
                                 <option value='accessories'>Accessories</option>
@@ -143,8 +167,9 @@ const Admin = ({ userData }) => {
                             </select>
                         </label>
                         <label>
+                            {/* This is a required dropdown to set what action will be performed */}
                             <h2>Select an option:</h2>
-                            <select onChange={handleActionSelect}>
+                            <select onChange={handleActionSelect} required>
                                 <option value='POST'>Add New</option>
                                 <option value='UPDATE'>Edit Existing</option>
                                 <option value='DELETE'>Delete Existing</option>
@@ -159,14 +184,19 @@ const Admin = ({ userData }) => {
                                 Description:
                                 <input type='text' name='description' value={formData.description} onChange={handleFormChange}/>
                             </label>
+                            {/* If the category is "consoles", do not render the console field */}
+                            {category === 'consoles' ? null : (
                             <label>
                                 Console:
                                 <input type='text' name='console' value={formData.console} onChange={handleFormChange}/>
-                            </label>
+                            </label>)}
+                            {/* If the category is "collectibles" or "accessories", do not render the year field */}
+                            {category === 'collectibles' || 'accessories' ? 
+                                null : (
                             <label>
                                 Year:
                                 <input type='text' name='year' value={formData.year} onChange={handleFormChange}/>
-                            </label>
+                            </label>)}
                             <label>
                                 Price:
                                 <input type='text' name='price' value={formData.price} onChange={handleFormChange}/>
