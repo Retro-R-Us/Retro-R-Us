@@ -10,7 +10,7 @@ userRouter.get('/me', async (req, res, next) => {
 
         const tokenString = authorization.slice(7, -1);
         const tokenCheck = jwt.decode(tokenString);
-
+        
         const userdata = await User.getUserByUsername(tokenCheck.username)
 
         if (authorization === undefined) {
@@ -24,7 +24,7 @@ userRouter.get('/me', async (req, res, next) => {
             const orders = await Orders.getOrdersByUser(tokenCheck.id);
             const userData = {
                 Success: true,
-                user: userdata,
+                user: userdata.userData,
                 orders: orders
             }
             res.send(userData)
@@ -76,7 +76,7 @@ userRouter.post('/login', async (req, res, next) => {
                 })
             } else {
                 const login = await User.userLogin(req.body);
-                const token = jwt.sign({id: user.id, username: username}, JWT_SECRET)
+                const token = jwt.sign({id: user.userData.id, username: username}, JWT_SECRET)
                 login.userdata.token = token;
                 res.status(200);
                 res.send(login);

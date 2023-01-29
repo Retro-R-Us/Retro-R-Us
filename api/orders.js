@@ -36,4 +36,15 @@ ordersRouter.patch('/:orderId', async (req, res, next) => {
     }
 })
 
+ordersRouter.get('/:userId', async (req, res, next) => {
+    try {
+        const { userId } = req.params;
+        const userOrders = await Orders.getOrdersByUser(userId);
+        res.send(userOrders);
+    } catch (error) {
+        console.error("Could not get orders for user");
+        next(error);
+    }
+})
+
 module.exports = ordersRouter

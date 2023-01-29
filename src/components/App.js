@@ -14,7 +14,6 @@ import { fetchAllConsoles } from "../api/consoles";
 import { fetchAllCollectibles } from "../api/collectibles";
 import Accessories from "./accessories";
 import { fetchAllAccessories } from "../api/accessories";
-import { Orders } from "./orders";
 import Home from "./home";
 import Cart from "./Cart";
 
@@ -25,6 +24,7 @@ const App = () => {
     const [token, setToken] = useState(window.localStorage.getItem("token") || null);
     const [username, setUsername] = useState(window.localStorage.getItem("username") || null);
     const [userData, setUserData] = useState();
+    const [userOrders, setUserOrders] = useState();
     const [modalTrigger, setModalTrigger] = useState(false);
     const [action, setAction] = useState(null);
     const [games, setGames] = useState([]);
@@ -84,11 +84,13 @@ const App = () => {
             window.localStorage.setItem("token", token);
             const getUserData = async () => {
                 const data = await getCurrentUser(token);
-                const userInfo = data.user.userData
+                const userInfo = data.user
                 console.log(userInfo)
+                const orders = data.orders
                 if (data.Success) {
                     window.localStorage.setItem("username", userInfo.username);
                     setUserData(userInfo);
+                    setUserOrders(orders);
                 }
             };
             getUserData();
@@ -139,7 +141,7 @@ const App = () => {
                     path="/collectibles"
                     element={<Collectibles collectibles={collectibles} userData={userData}/>}
                 />
-                <Route path="/account" element={<Account userData={userData} token={token} />} />
+                <Route path="/account" element={<Account userData={userData} token={token} userOrders={userOrders} />} />
                 <Route path="/accessories" element={<Accessories accessories={accessories} userData={userData}/>} />
             </Routes>
 
