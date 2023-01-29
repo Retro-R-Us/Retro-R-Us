@@ -141,10 +141,10 @@ async function populateInitialData() {
     const user1 = new buildUser("The Grim Reaper", "deathman", "Reaper@hell.com");
     const user2 = new buildUser("The Devil", "HellBoss", "TheBoss@hell.com");
     const user3 = new buildUser("Demon", "freakazoid", "freakazoid1@hell.com");
-    const admin1 = new buildUser("Matt", "123123", "admin1@gmail.com", true);
-    const admin2 = new buildUser("Jasmine", "456456", "admin2@gmail.com", true);
-    const admin3 = new buildUser("Marty", "789789", "admin3@gmail.com", true);
-    const admin4 = new buildUser("Kelan", "147147", "admin4@gmail.com", true);
+    const admin1 = new buildUser("Remics89", "123123123", "admin1@gmail.com", true);
+    const admin2 = new buildUser("JHoolwerf", "456456456", "admin2@gmail.com", true);
+    const admin3 = new buildUser("Matrixman", "789789789", "admin3@gmail.com", true);
+    const admin4 = new buildUser("Kaypaint", "147147147", "admin4@gmail.com", true);
 
     const users = [user1, user2, user3, admin1, admin2, admin3, admin4]
     const createdUsers = await Promise.all(users.map(user => User.createUser(user)))

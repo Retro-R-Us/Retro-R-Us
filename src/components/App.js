@@ -14,21 +14,24 @@ import { fetchAllConsoles } from "../api/consoles";
 import { fetchAllCollectibles } from "../api/collectibles";
 import Accessories from "./accessories";
 import { fetchAllAccessories } from "../api/accessories";
-import { Orders } from "./orders";
 import Home from "./home";
 import Cart from "./Cart";
+
+const localStorageCart = JSON.parse(localStorage.getItem("cart") || "[]")
 
 const App = () => {
     const [APIHealth, setAPIHealth] = useState("");
     const [token, setToken] = useState(window.localStorage.getItem("token") || null);
     const [username, setUsername] = useState(window.localStorage.getItem("username") || null);
     const [userData, setUserData] = useState();
+    const [userOrders, setUserOrders] = useState();
     const [modalTrigger, setModalTrigger] = useState(false);
     const [action, setAction] = useState(null);
     const [games, setGames] = useState([]);
     const [consoles, setConsoles] = useState([]);
     const [collectibles, setCollectibles] = useState([]);
     const [accessories, setAccessories] = useState([]);
+    const [cart, setCart] = useState(localStorageCart)
 
     const history = useNavigate();
 
@@ -81,11 +84,13 @@ const App = () => {
             window.localStorage.setItem("token", token);
             const getUserData = async () => {
                 const data = await getCurrentUser(token);
-                const userInfo = data.user.userData
+                const userInfo = data.user
                 console.log(userInfo)
+                const orders = data.orders
                 if (data.Success) {
                     window.localStorage.setItem("username", userInfo.username);
                     setUserData(userInfo);
+                    setUserOrders(orders);
                 }
             };
             getUserData();
@@ -129,14 +134,14 @@ const App = () => {
             />
             <Routes>
                 <Route exact path="/" element={<Home />} />
-                <Route path="/user/cart" element={<Cart />} />
+                <Route path="/user/cart" element={<Cart cart={cart} setCart={setCart}/>} />
                 <Route path="/consoles" element={<Consoles consoles={consoles} userData={userData}/>} />
                 <Route path="/games" element={<Games games={games} userData={userData}/>} />
                 <Route
                     path="/collectibles"
                     element={<Collectibles collectibles={collectibles} userData={userData}/>}
                 />
-                <Route path="/account" element={<Account userData={userData} token={token} />} />
+                <Route path="/account" element={<Account userData={userData} token={token} userOrders={userOrders} />} />
                 <Route path="/accessories" element={<Accessories accessories={accessories} userData={userData}/>} />
             </Routes>
 
