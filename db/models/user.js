@@ -25,7 +25,8 @@ async function createUser(userData) {
       `
         INSERT INTO users (username, password, email, admin)
         VALUES ($1, $2, $3, $4)
-        ON CONFLICT (username) DO NOTHING;
+        ON CONFLICT (username) DO NOTHING
+        RETURNING *;
       `, [username, hashedPassword, email, userData.admin]
     );
 
