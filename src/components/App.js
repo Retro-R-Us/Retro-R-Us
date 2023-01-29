@@ -18,6 +18,8 @@ import { Orders } from "./orders";
 import Home from "./home";
 import Cart from "./Cart";
 
+const localStorageCart = JSON.parse(localStorage.getItem("cart") || "[]")
+
 const App = () => {
     const [APIHealth, setAPIHealth] = useState("");
     const [token, setToken] = useState(window.localStorage.getItem("token") || null);
@@ -29,6 +31,7 @@ const App = () => {
     const [consoles, setConsoles] = useState([]);
     const [collectibles, setCollectibles] = useState([]);
     const [accessories, setAccessories] = useState([]);
+    const [cart, setCart] = useState(localStorageCart)
 
     const history = useNavigate();
 
@@ -129,7 +132,7 @@ const App = () => {
             />
             <Routes>
                 <Route exact path="/" element={<Home />} />
-                <Route path="/user/cart" element={<Cart />} />
+                <Route path="/user/cart" element={<Cart cart={cart} setCart={setCart}/>} />
                 <Route path="/consoles" element={<Consoles consoles={consoles} userData={userData}/>} />
                 <Route path="/games" element={<Games games={games} userData={userData}/>} />
                 <Route

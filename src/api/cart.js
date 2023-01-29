@@ -3,7 +3,7 @@ import BASEURL from "./index";
 export const addItemToCart = async (orderId, quantity, userId) => {
     try {
         const response = await fetch(`${BASEURL}/cart`, {
-            method: "PATCH",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -17,7 +17,7 @@ export const addItemToCart = async (orderId, quantity, userId) => {
         const data = await response.json();
         return data;
     } catch (error) {
-        console.error(error);
+        console.error("Could not add item");
     }
 };
 
@@ -41,7 +41,7 @@ export const updateCart = async (cartId) => {
         const data = await response.json();
         return data;
     } catch {
-        console.error(error);
+        console.error("Could not update cart");
     }
 };
 
