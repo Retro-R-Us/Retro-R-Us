@@ -21,7 +21,8 @@ h1 {
 .card,
 .accessoryCard,
 .consoleCard,
-.gameCard {
+.gameCard,
+.collectibleCard {
   background-color: rgb(135, 184, 226);
   color: black;
   display: flex;
