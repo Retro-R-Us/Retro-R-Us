@@ -26,7 +26,13 @@ const Admin = ({ userData }) => {
     const [category, setCategory] = React.useState(null);
 
     // State to keep track of form data
-    const [formData, setFormData] = React.useState({});
+    const [formData, setFormData] = React.useState({
+        title: "",
+        description: "",
+        console: "",
+        year: "",
+        price: ""
+    });
 
     const handleActionSelect = (event) => {
         // Set the action state to the value of the selected option
@@ -38,43 +44,22 @@ const Admin = ({ userData }) => {
         setCategory(event.target.value);
     }
 
+    React.useEffect(() => {
+        // No side-effect operations
+        // This ensures the component is re-rendered when the category state is updated
+    }, [category]);
+
+    React.useEffect(() => {
+        // No side-effect operations
+        // This ensures the component is re-rendered when the action state is updated
+    }, [action]);
+
     const handleFormChange = (event) => {
-        // If the category is "consoles", update the form data state with the value of the input
-        if (category === "consoles") {
-            setFormData({
-                ...formData,
-                title: event.target.value,
-                description: event.target.value,
-                year: event.target.value,
-                price: event.target.value
-            });
-        // If the category is "collectible", update the form data state with the value of the input, and so on for each category
-        } else if (category === "collectible") {
-            setFormData({
-                ...formData,
-                title: event.target.value,
-                description: event.target.value,
-                console: event.target.value,
-                price: event.target.value
-            });
-        } else if (category === "game") {
-            setFormData({
-                ...formData,
-                title: event.target.value,
-                description: event.target.value,
-                console: event.target.value,
-                year: event.target.value,
-                price: event.target.value
-            });
-        } else if (category === "accessory") {
-            setFormData({
-                ...formData,
-                title: event.target.value,
-                description: event.target.value,
-                console: event.target.value,
-                price: event.target.value
-            });
-        }
+        // Update the form data state with the value of the input
+        setFormData({
+            ...formData,
+            [event.target.name]: event.target.value
+        });
     }
 
     const handleSubmit = (event) => {
@@ -145,21 +130,31 @@ const Admin = ({ userData }) => {
             default:
                 break; 
         }
+
+        // Reset the form data state
+        setFormData({
+            title: "",
+            description: "",
+            console: "",
+            year: "",
+            price: ""
+        });
     }
 
     // If userData is not defined (no admin user logged in), return null for this component
-    if (!userData) return null;
+    // if (!userData) return null;
 
     // If userData is defined, check if "admin" = true, if so, return the Admin component
-    if (userData.admin) {
+    // if (userData.admin) {
         return (
             <div className='adminContainer'>
                 <div className='adminCard'>
-                    <form>
+                    <form className='adminOptions'>
                         <label>
                             {/* This is a required dropdown to set which product to target */}
                             <h2>Select a category:</h2>
                             <select onChange={handleCategorySelect} required>
+                                <option value=''>Select a category</option>
                                 <option value='consoles'>Consoles</option>
                                 <option value='games'>Games</option>
                                 <option value='accessories'>Accessories</option>
@@ -170,44 +165,44 @@ const Admin = ({ userData }) => {
                             {/* This is a required dropdown to set what action will be performed */}
                             <h2>Select an option:</h2>
                             <select onChange={handleActionSelect} required>
+                                <option value=''>Select an action</option>
                                 <option value='POST'>Add New</option>
                                 <option value='UPDATE'>Edit Existing</option>
                                 <option value='DELETE'>Delete Existing</option>
                             </select>
                         </label>
-                        <form className='adminForm'>
-                            <label>
-                                Title:
-                                <input type='text' name='title' value={formData.title} onChange={handleFormChange}/>
-                            </label>
-                            <label>
-                                Description:
-                                <input type='text' name='description' value={formData.description} onChange={handleFormChange}/>
-                            </label>
-                            {/* If the category is "consoles", do not render the console field */}
-                            {category === 'consoles' ? null : (
-                            <label>
-                                Console:
-                                <input type='text' name='console' value={formData.console} onChange={handleFormChange}/>
-                            </label>)}
-                            {/* If the category is "collectibles" or "accessories", do not render the year field */}
-                            {category === 'collectibles' || 'accessories' ? 
-                                null : (
-                            <label>
-                                Year:
-                                <input type='text' name='year' value={formData.year} onChange={handleFormChange}/>
-                            </label>)}
-                            <label>
-                                Price:
-                                <input type='text' name='price' value={formData.price} onChange={handleFormChange}/>
-                            </label>
-                        </form>
+                    </form>
+                    <form className='adminForm'>
+                        <label>
+                            Title:
+                            <input type='text' name='title' value={formData.title} onChange={handleFormChange}/>
+                        </label>
+                        <label>
+                            Description:
+                            <input type='text' name='description' value={formData.description} onChange={handleFormChange}/>
+                        </label>
+                        {/* If the category is "consoles", do not render the console field */}
+                        {category === 'consoles' ? null : (
+                        <label>
+                            Console:
+                            <input type='text' name='console' value={formData.console} onChange={handleFormChange}/>
+                        </label>)}
+                        {/* If the category is "collectibles" or "accessories", do not render the year field */}
+                        {category === 'collectibles' || category === 'accessories' ? null : (
+                        <label>
+                            Year:
+                            <input type='text' name='year' value={formData.year} onChange={handleFormChange}/>
+                        </label>)}
+                        <label>
+                            Price:
+                            <input type='text' name='price' value={formData.price} onChange={handleFormChange}/>
+                        </label>
                         <input type='submit' value='Submit' onClick={handleSubmit}/>
                     </form>
                 </div>
             </div>
         )
     }
-}
+// }
 
 export default Admin;
