@@ -25,6 +25,9 @@ const Admin = ({ userData, games, consoles, collectibles, accessories }) => {
     // State to keep track of which category the admin wants to perform the action on
     const [category, setCategory] = React.useState(null);
 
+    // State to keep track of the listing ID for UPDATE and DELETE actions
+    const [listingID, setListingID] = React.useState(null);
+
     // State to keep track of form data
     const [formData, setFormData] = React.useState({
         title: "",
@@ -44,6 +47,11 @@ const Admin = ({ userData, games, consoles, collectibles, accessories }) => {
         setCategory(event.target.value);
     }
 
+    const handleListingID = (event) => {
+        // Set the listingID state to the value of the selected option
+        setListingID(event.target.value);
+    }
+
     React.useEffect(() => {
         // No side-effect operations
         // This ensures the component is re-rendered when the category state is updated
@@ -53,6 +61,10 @@ const Admin = ({ userData, games, consoles, collectibles, accessories }) => {
         // No side-effect operations
         // This ensures the component is re-rendered when the action state is updated
     }, [action]);
+
+    React.useEffect(() => {
+        // No side-effect operations
+    }, [listingID]);
 
     // Lookup table for admin actions
     const adminActions = {
@@ -92,9 +104,15 @@ const Admin = ({ userData, games, consoles, collectibles, accessories }) => {
         // Perform the action based on the category/action selected
         const adminAction = adminActions[category][action];
 
-        if (adminAction) {
-            // if lookup is successful, call the adminAction function with the form data
-            adminAction(formData)
+        if (action === "UPDATE") {
+            // if lookup is successful, and action is UPDATE, pass in the listingID
+            adminAction(formData, listingID)
+        } else if (action === "POST") {
+            // if lookup is successful, and action is POST, do not pass in the listingID
+            adminAction(formData);
+        } else {
+            // if lookup is successful, and action is DELETE, pass in the listingID
+            adminAction(listingID);
         }
 
         // Reset the form data state
@@ -138,7 +156,41 @@ const Admin = ({ userData, games, consoles, collectibles, accessories }) => {
                             </select>
                         </label>
                     </form>
-                    <form className='adminForm'>
+                    {action === 'UPDATE' || action === 'DELETE' ? (
+                        <div>
+                            <h2>Select a listing to {action}:</h2>
+                            <select onChange={handleListingID}>
+                                <option value=''>Select a listing</option>
+                                {/* Depending on the category state, it could be any of four different arrays of objects, map the array of objects*/}
+                                {category === 'consoles' ? consoles.map((console) => {
+                                    return (
+                                        <option value={console.consoleId}>{console.title}</option>
+                                    )
+                                }) : null}
+                                {category === 'games' ? games.map((game) => {
+                                    return (
+                                        <option value={game.gameId}>{game.title}</option>
+                                    )
+                                }) : null}
+                                {category === 'accessories' ? accessories.map((accessory) => {
+                                    return (
+                                        <option value={accessory.accessoryId}>{accessory.title}</option>
+                                    )
+                                }) : null}
+                                {category === 'collectibles' ? collectibles.map((collectible) => {
+                                    return (
+                                        <option value={collectible.collectibleId}>{collectible.title}</option>
+                                    )
+                                }) : null}
+                            </select>
+                            {/* If the action is "DELETE", render the delete button */}
+                            {action === 'DELETE' ? (
+                                <button onClick={handleSubmit}>Delete</button>
+                            ) : null}
+                        </div>
+                    ) : null}
+                    {action === 'POST' || action === 'UPDATE' ? 
+                    (<form className='adminForm'>
                         <label>
                             Title:
                             <input type='text' name='title' value={formData.title} onChange={handleFormChange}/>
@@ -164,7 +216,7 @@ const Admin = ({ userData, games, consoles, collectibles, accessories }) => {
                             <input type='text' name='price' value={formData.price} onChange={handleFormChange}/>
                         </label>
                         <input type='submit' value='Submit' onClick={handleSubmit}/>
-                    </form>
+                    </form>) : null}
                 </div>
             </div>
         )
