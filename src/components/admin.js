@@ -18,7 +18,7 @@ import * as adminFn from '../api/admin';
 
 // Admin.js is passed down userData from App.js
 // This is to be used to check if "isAdmin" = true
-const Admin = ({ userData }) => {
+const Admin = ({ userData, games, consoles, collectibles, accessories }) => {
     // State to keep track of which action the admin wants to perform
     const [action, setAction] = React.useState(null);
 
@@ -54,6 +54,30 @@ const Admin = ({ userData }) => {
         // This ensures the component is re-rendered when the action state is updated
     }, [action]);
 
+    // Lookup table for admin actions
+    const adminActions = {
+        consoles: {
+            POST: adminFn.fetchCreateConsoleListing,
+            UPDATE: adminFn.fetchUpdateConsoleListing,
+            DELETE: adminFn.fetchDeleteConsoleListing,
+        },
+        games: {
+            POST: adminFn.fetchCreateGameListing,
+            UPDATE: adminFn.fetchUpdateGameListing,
+            DELETE: adminFn.fetchDeleteGameListing,
+        },
+        accessories: {
+            POST: adminFn.fetchCreateAccessoryListing,
+            UPDATE: adminFn.fetchUpdateAccessoryListing,
+            DELETE: adminFn.fetchDeleteAccessoryListing,
+        },
+        collectibles: {
+            POST: adminFn.fetchCreateCollectibleListing,
+            UPDATE: adminFn.fetchUpdateCollectibleListing,
+            DELETE: adminFn.fetchDeleteCollectibleListing,
+        },
+    };
+
     const handleFormChange = (event) => {
         // Update the form data state with the value of the input
         setFormData({
@@ -66,69 +90,11 @@ const Admin = ({ userData }) => {
         event.preventDefault();
 
         // Perform the action based on the category/action selected
-        switch (category) {
-            case 'consoles':
-                switch (action) {
-                    case 'POST':
-                        adminFn.fetchCreateConsoleListing(formData);
-                        break;
-                    case 'UPDATE':
-                        adminFn.fetchUpdateConsoleListing(formData);
-                        break;
-                    case 'DELETE':
-                        adminFn.fetchDeleteConsoleListing(formData);
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case 'games':
-                switch (action) {
-                    case 'POST':
-                        adminFn.fetchCreateGameListing(formData);
-                        break;
-                    case 'UPDATE':
-                        adminFn.fetchUpdateGameListing(formData);
-                        break;
-                    case 'DELETE':
-                        adminFn.fetchDeleteGameListing(formData);
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case 'accessories':
-                switch (action) {
-                    case 'POST':
-                        adminFn.fetchCreateAccessoryListing(formData);
-                        break;
-                    case 'UPDATE':
-                        adminFn.fetchUpdateAccessoryListing(formData);
-                        break;
-                    case 'DELETE':
-                        adminFn.fetchDeleteAccessoryListing(formData);
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case 'collectibles':
-                switch (action) {
-                    case 'POST':
-                        adminFn.fetchCreateCollectibleListing(formData);
-                        break;
-                    case 'UPDATE':
-                        adminFn.fetchUpdateCollectibleListing(formData);
-                        break;
-                    case 'DELETE':
-                        adminFn.fetchDeleteCollectibleListing(formData);
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            default:
-                break; 
+        const adminAction = adminActions[category][action];
+
+        if (adminAction) {
+            // if lookup is successful, call the adminAction function with the form data
+            adminAction(formData)
         }
 
         // Reset the form data state
