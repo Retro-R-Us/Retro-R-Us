@@ -17,8 +17,6 @@ import { fetchAllAccessories } from "../api/accessories";
 import Home from "./home";
 import Cart from "./Cart";
 
-const localStorageCart = JSON.parse(localStorage.getItem("cart") || "[]")
-
 const App = () => {
     const [APIHealth, setAPIHealth] = useState("");
     const [token, setToken] = useState(window.localStorage.getItem("token") || null);
@@ -31,7 +29,8 @@ const App = () => {
     const [consoles, setConsoles] = useState([]);
     const [collectibles, setCollectibles] = useState([]);
     const [accessories, setAccessories] = useState([]);
-    const [cart, setCart] = useState(localStorageCart)
+    const [cart, setCart] = useState(JSON.parse(window.localStorage.getItem("cart")) || undefined);
+    const [cartItem, setCartItem] = useState()
 
     const history = useNavigate();
 
@@ -102,6 +101,8 @@ const App = () => {
         } else {
             window.localStorage.removeItem("token");
             window.localStorage.removeItem("username");
+            setUserData(undefined);
+            setUserOrders(undefined)
         }
     }, [token]);
 
@@ -140,14 +141,14 @@ const App = () => {
             <Routes>
                 <Route exact path="/" element={<Home />} />
                 <Route path="/user/cart" element={<Cart cart={cart} setCart={setCart}/>} />
-                <Route path="/consoles" element={<Consoles consoles={consoles} userData={userData}/>} />
-                <Route path="/games" element={<Games games={games} userData={userData}/>} />
+                <Route path="/consoles" element={<Consoles consoles={consoles} userData={userData} setCartItem={setCartItem}/>} />
+                <Route path="/games" element={<Games games={games} userData={userData} setCartItem={setCartItem}/>} />
                 <Route
                     path="/collectibles"
-                    element={<Collectibles collectibles={collectibles} userData={userData}/>}
+                    element={<Collectibles collectibles={collectibles} userData={userData}setCartItem={setCartItem}/>}
                 />
-                <Route path="/account" element={<Account userData={userData} token={token} userOrders={userOrders} />} />
-                <Route path="/accessories" element={<Accessories accessories={accessories} userData={userData}/>} />
+                <Route path="/account" element={<Account userData={userData} token={token} userOrders={userOrders}/>} />
+                <Route path="/accessories" element={<Accessories accessories={accessories} userData={userData} setCartItem={setCartItem}/>} />
             </Routes>
 
             {/* <Footer /> */}
