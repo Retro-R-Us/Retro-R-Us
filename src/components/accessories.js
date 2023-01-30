@@ -2,7 +2,7 @@ import React from "react";
 import Search from "./Search";
 import AddToCartButton from "./AddToCartButton";
 
-const Accessories = ({ accessories, userData }) => {
+const Accessories = ({setCartItem, accessories, userData }) => {
     const [filteredData, setFilteredData] = React.useState([]);
 
     return (
@@ -16,7 +16,7 @@ const Accessories = ({ accessories, userData }) => {
                             <h2>{accessory.description}</h2>
                             <h3>{accessory.console}</h3>
                             <h2>{accessory.price}</h2>
-                            <AddToCartButton data={accessories} userData={userData} />
+                            <AddToCartButton data={accessory} userData={userData} setCartItem={setCartItem} />
                         </div>
                     ))
                 ) : (
@@ -26,7 +26,7 @@ const Accessories = ({ accessories, userData }) => {
                             <h2>{accessory.description}</h2>
                             <h3>{accessory.console}</h3>
                             <h2>{accessory.price}</h2>
-                            <AddToCartButton data={accessories} userData={userData} />
+                            <AddToCartButton data={accessory} userData={userData} setCartItem={setCartItem} />
                         </div>
                     ))
                 )}
