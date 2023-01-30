@@ -23,8 +23,8 @@ const App = () => {
     const [APIHealth, setAPIHealth] = useState("");
     const [token, setToken] = useState(window.localStorage.getItem("token") || null);
     const [username, setUsername] = useState(window.localStorage.getItem("username") || null);
-    const [userData, setUserData] = useState();
-    const [userOrders, setUserOrders] = useState();
+    const [userData, setUserData] = useState(undefined);
+    const [userOrders, setUserOrders] = useState(undefined);
     const [modalTrigger, setModalTrigger] = useState(false);
     const [action, setAction] = useState(null);
     const [games, setGames] = useState([]);
@@ -90,7 +90,12 @@ const App = () => {
                 if (data.Success) {
                     window.localStorage.setItem("username", userInfo.username);
                     setUserData(userInfo);
-                    setUserOrders(orders);
+                    if (orders === undefined) {
+                        setUserOrders(undefined)
+                    } else {
+                        setUserOrders(orders);
+                    }
+                    
                 }
             };
             getUserData();
