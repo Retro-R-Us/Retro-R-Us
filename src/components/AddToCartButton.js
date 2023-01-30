@@ -6,8 +6,6 @@ const AddToCartButton = ({ data, userData }) => {
         const orderId = 1;
         const quantity = 1;
         const userId = userData.id;
-        console.log(userData);
-        console.log(data);
         await addItemToCart(orderId, quantity, userId);
         console.log("added to cart! :D");
     }

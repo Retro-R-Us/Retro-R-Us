@@ -2,9 +2,6 @@ import BASEURL from "./index";
 
 export const addItemToCart = async (orderId, quantity, userId) => {
     try {
-        console.log(orderId);
-        console.log(quantity);
-        console.log(userId);
         const response = await fetch(`${BASEURL}/cart`, {
             method: "POST",
             headers: {

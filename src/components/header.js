@@ -30,7 +30,6 @@ const Header = () => {
                     })}
                 </select>
             </div>
-            <header className="siteTitle">Retro-R-Us</header>
         </Fragment>
     );
 };

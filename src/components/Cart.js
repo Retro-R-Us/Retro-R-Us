@@ -59,7 +59,7 @@ const Cart = ({ loggedIn, cart, setCart }) => {
             </h3>
           </div>
         )}
-        {cart.length === 0 ? <p>Add something to your cart!</p> : null}
+        {cart.length === 0 ? <h3>Add something to your cart!</h3> : null}
         {!loggedIn && cart.length !== 0 ? (
           <h3>
             Please{" "}
