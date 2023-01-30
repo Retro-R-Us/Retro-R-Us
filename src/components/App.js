@@ -49,6 +49,25 @@ const App = () => {
     }, []);
 
     useEffect(() => {
+        if (!cartItem) {
+            return;
+        }
+        const cartAr = JSON.parse(window.localStorage.getItem("cart"));
+        if (!cartAr) {
+            const newCart = [];
+            newCart.push(cartItem)
+            window.localStorage.setItem("cart", JSON.stringify(newCart))
+            setCart(JSON.parse(window.localStorage.getItem("cart")));
+        } else {
+            cartAr.push(cartItem);
+            window.localStorage.setItem("cart", JSON.stringify(cartAr))
+            setCart(JSON.parse(window.localStorage.getItem("cart")));
+        }
+        
+        window.localStorage.removeItem("cartItem")
+    }, [cartItem]);
+
+    useEffect(() => {
         const getGames = async () => {
             const games = await fetchAllGames();
             setGames(games);
