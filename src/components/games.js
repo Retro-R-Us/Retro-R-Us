@@ -16,8 +16,8 @@ const Games = ({setCartItem, games, userData }) => {
 
     return (    
         <div className='gamesPage'>
+            <Search data={games} setFilteredData={setFilteredData} />
             <div className='gamesContainer'>
-                <Search data={games} setFilteredData={setFilteredData} />
                 {filteredData.length > 0 ? (
                     filteredData.map((game, index) => (
                         <div className='gameCard' key={index}>
