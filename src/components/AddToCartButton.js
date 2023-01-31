@@ -1,15 +1,19 @@
 import React from "react";
 import { addItemToCart } from "../api/cart";
 
-const AddToCartButton = ({ data, userData }) => {
-    const handleAddToCart = async () => {
-        const orderId = data.id;
-        const quantity = 1;
-        const userId = userData.id;
-        await addItemToCart(orderId, quantity, userId);
-        console.log("added to cart! :D");
-    }
+const AddToCartButton = ({setCartItem, data, userData }) => {
 
+    const handleAddToCart = async () => {
+        if (userData === undefined ) {
+            setCartItem(data);
+        } else {
+            const userId = userData.id;
+            const orderId = 1;
+            const quantity = 1;
+            const cart = await addItemToCart(orderId, quantity, userId);
+        }
+        
+    }
     return (
         <button 
             className="addToCartButton" 

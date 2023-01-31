@@ -113,8 +113,9 @@ export const fetchCreateAccessoryListing = async ({
 export const fetchUpdateConsoleListing = async ({
   title,
   description,
+  year,
   price,
-}) => {
+}, consoleId) => {
   try {
     const response = await fetch(`${BASEURL}/consoles/${consoleId}`, {
       method: "PATCH",
@@ -124,6 +125,7 @@ export const fetchUpdateConsoleListing = async ({
       body: JSON.stringify({
         title: title,
         description: description,
+        year: Number(year),
         price: Number(price),
       }),
     });
@@ -141,7 +143,7 @@ export const fetchUpdateCollectibleListing = async ({
   description,
   console,
   price,
-}) => {
+}, collectibleId) => {
   try {
     const response = await fetch(`${BASEURL}/collectibles/${collectibleId}`, {
       method: "PATCH",
@@ -169,7 +171,7 @@ export const fetchUpdateGameListing = async ({
   console,
   year,
   price,
-}) => {
+}, gameId) => {
   try {
     const response = await fetch(`${BASEURL}/games/${gameId}`, {
       method: "PATCH",
@@ -197,7 +199,7 @@ export const fetchUpdateAccessoryListing = async ({
   description,
   console,
   price,
-}) => {
+}, accessoryId) => {
   try {
     const response = await fetch(`${BASEURL}/accessories/${accessoryId}`, {
       method: "PATCH",
@@ -219,7 +221,7 @@ export const fetchUpdateAccessoryListing = async ({
   }
 }
 
-export const fetchDeleteConsoleListing = async () => {
+export const fetchDeleteConsoleListing = async (consoleId) => {
   try {
     const response = await fetch(`${BASEURL}/consoles/${consoleId}`, {
       method: "DELETE",
@@ -236,7 +238,7 @@ export const fetchDeleteConsoleListing = async () => {
 };
 
 
-export const fetchDeleteCollectibleListing = async () => {
+export const fetchDeleteCollectibleListing = async (collectibleId) => {
   try {
     const response = await fetch(`${BASEURL}/collectibles/${collectibleId}`, {
       method: "DELETE",
@@ -252,7 +254,7 @@ export const fetchDeleteCollectibleListing = async () => {
   }
 };
 
-export const fetchDeleteGameListing = async () => {
+export const fetchDeleteGameListing = async (gameId) => {
   try {
     const response = await fetch(`${BASEURL}/games/${gameId}`, {
       method: "DELETE",
@@ -268,7 +270,7 @@ export const fetchDeleteGameListing = async () => {
   }
 }
 
-export const fetchDeleteAccessoryListing = async () => {
+export const fetchDeleteAccessoryListing = async (accessoryId) => {
   try {
     const response = await fetch(`${BASEURL}/accessories/${accessoryId}`, {
       method: "DELETE",

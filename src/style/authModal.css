@@ -1,18 +1,24 @@
 .authModal {
-    width:250px;
-    height:50vh;
+    padding: 20px;
     display: flex;
-    justify-content: center;
+    background-color: black;
+    max-height: 400px;
+    align-items: center;
+    justify-content: right;
 }
 
 .innerModal {
     position: relative;
     padding: 20px;
-    width: 100vh;
+    margin-right: 5%;
+    min-width: 200px;
+    max-width: 20%;
+    max-height: auto;
     color:rgb(0, 0, 0);
-    background-color: rgb(123, 123, 123);
+    background-color: rgb(159, 158, 158);
     border: 2px dashed black;
     border-radius: 10px;
+    z-index: 100;
 }
 
 .innerModal .close-btn {
