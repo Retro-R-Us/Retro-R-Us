@@ -16,11 +16,12 @@
     border-radius: 15px;
 }
 
-.accessoriesContainer {
+.consolesContainer, .accessoriesContainer {
   min-height: 100vh;
 }
 
-.accCard {
+.accCard,
+.conCard {
     align-items: center;
 }
 
