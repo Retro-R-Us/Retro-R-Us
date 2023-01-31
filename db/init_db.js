@@ -60,7 +60,8 @@ async function buildTables() {
         description varchar(255) NOT NULL,
         console varchar(50) NOT NULL,
         year integer NOT NULL,
-        price numeric(18,2) NOT NULL
+        price numeric(18,2) NOT NULL,
+        image varchar(255)
       );
     `);
 
@@ -71,7 +72,8 @@ async function buildTables() {
         title varchar(100) NOT NULL,
         description varchar(255) NOT NULL,
         year integer NOT NULL,
-        price numeric(18,2) NOT NULL
+        price numeric(18,2) NOT NULL,
+        image varchar(255)
       );
     `);
 
@@ -82,7 +84,8 @@ async function buildTables() {
         title varchar(100) NOT NULL,
         description varchar(255) NOT NULL,
         console varchar(50) NOT NULL,
-        price numeric(18,2) NOT NULL
+        price numeric(18,2) NOT NULL,
+        image varchar(255)
       );
     `);
 
@@ -93,7 +96,8 @@ async function buildTables() {
         title varchar(100) NOT NULL,
         description varchar(255) NOT NULL,
         console varchar(50),
-        price numeric(18,2) NOT NULL
+        price numeric(18,2) NOT NULL,
+        image varchar(255)
       );
     `);
 
@@ -144,12 +148,13 @@ async function populateInitialData() {
 
     
     class Game {
-      constructor(title, desc, console, year, price) {
+      constructor(title, desc, console, year, price, image) {
         this.title = title,
         this.description = desc,
         this.console = console,
         this.year = year,
-        this.price = price
+        this.price = price,
+        this.image = image
       }
     }
 
@@ -158,7 +163,8 @@ async function populateInitialData() {
       "Badass monkeys kicking the shit out of enemies and collecting those bananas",
       "N64",
       "1999",
-      19.99
+      19.99,
+      "https://upload.wikimedia.org/wikipedia/en/a/ae/DonkeyKong64CoverArt.jpg"
     )
 
     const game2 = new Game(
@@ -166,7 +172,8 @@ async function populateInitialData() {
       "a platform game in which the player takes control of Crash and Coco Bandicoot, who must travel back and forward in time and gather 25 crystals before Uka Uka and Doctor Neo Cortex can do so.",
       "Playstation",
       "1998",
-      19.99
+      19.99,
+      "https://upload.wikimedia.org/wikipedia/en/3/3e/Crash_Bandicoot_3_Warped_Original_Box_Art.jpg"
     )
 
     const game3 = new Game(
@@ -257,11 +264,12 @@ async function populateInitialData() {
     
 
     class createConsole {
-      constructor(title, desc, year, price) {
+      constructor(title, desc, year, price, image) {
         this.title = title,
         this.description = desc,
         this.year = year,
-        this.price = price
+        this.price = price,
+        this.image = image
       }
     }
 
@@ -330,11 +338,12 @@ async function populateInitialData() {
 
 
     class createCol {
-      constructor(title, desc, console, price) {
+      constructor(title, desc, console, price, image) {
         this.title = title,
         this.description = desc,
         this.console = console,
-        this.price = price
+        this.price = price,
+        this.image = image
       }
     }
 
@@ -383,11 +392,12 @@ async function populateInitialData() {
    
 
     class createAcc {
-      constructor(title, desc, console, price) {
+      constructor(title, desc, console, price, image) {
         this.title = title,
         this.description = desc,
         this.console = console,
-        this.price = price
+        this.price = price,
+        this.image = image
       }
     }
 
