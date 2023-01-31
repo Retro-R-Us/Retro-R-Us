@@ -2,7 +2,7 @@ const express = require('express');
 const accessoriesRouter = express.Router();
 const { Acc } = require('../db/models/index');
 
-// get all accessories
+
 accessoriesRouter.get('/', async (req, res, next) => {
     try {
         const allAccessories = await Acc.getAllAccessories();
@@ -12,7 +12,7 @@ accessoriesRouter.get('/', async (req, res, next) => {
     }
 });
 
-// get accessory by id
+
 accessoriesRouter.get('/:accessoryId', async (req, res, next) => {
     try {
         const accessory = await Acc.getAccessoryById(req.params.accessoryId);
@@ -22,7 +22,7 @@ accessoriesRouter.get('/:accessoryId', async (req, res, next) => {
     }
 });
 
-// get accessories by console
+
 accessoriesRouter.get('/console/:console', async (req, res, next) => {
     try {
         const accessories = await Acc.getAccessoriesByConsole(req.params.console);
@@ -32,7 +32,7 @@ accessoriesRouter.get('/console/:console', async (req, res, next) => {
     }
 });
 
-// create an accessory listing
+
 accessoriesRouter.post('/', async (req, res, next) => {
     try {
         const newAccessory = await Acc.createAccessoryListing(req.body);
@@ -42,7 +42,7 @@ accessoriesRouter.post('/', async (req, res, next) => {
     }
 });
 
-// update an accessory listing
+
 accessoriesRouter.patch('/:accessoryId', async (req, res, next) => {
     try {
         const accessoryToUpdate = await Acc.getAccessoryById(req.params.accessoryId);
@@ -60,7 +60,7 @@ accessoriesRouter.patch('/:accessoryId', async (req, res, next) => {
     }
 });
 
-// delete an accessory listing
+
 accessoriesRouter.delete('/:accessoryId', async (req, res, next) => {
     try {
         const accessoryToDelete = await Acc.getAccessoryById(req.params.accessoryId);
