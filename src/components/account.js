@@ -54,7 +54,7 @@ export const Account = (props) => {
             <div className="ui link cards ">
                 <div className="card" onClick={() => setAccountTrigger(true)}>
                     <div className="image">
-                        <img src={accountimg} />
+                        <img src={accountimg} style={{margin: 0, padding: 0}}/>
                     </div>
                     <div className="content">
                         <div className="header">Account</div>
@@ -62,7 +62,7 @@ export const Account = (props) => {
                 </div>
                 <div className="card" onClick={() => setOrdersTrigger(true)}>
                     <div className="image">
-                        <img src={ordersimg} />
+                        <img src={ordersimg} style={{margin: 0, padding: 0}}/>
                     </div>
                     <div className="content">
                         <div className="header">Orders</div>
@@ -70,7 +70,7 @@ export const Account = (props) => {
                 </div>
                 <div className="card" onClick={() => setSupportTrigger(true)}>
                     <div className="image">
-                        <img src={supportimg} />
+                        <img src={supportimg}  style={{margin: 0, padding: 0}}/>
                     </div>
                     <div className="content">
                         <div className="header">Support</div>
