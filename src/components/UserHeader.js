@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
+import "../style/header.css"
 
 const UserHeader = (props) => {
     const { token, username, setUsername, logOut, setModalTrigger, setAction } = props;
