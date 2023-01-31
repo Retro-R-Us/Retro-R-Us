@@ -2,7 +2,7 @@ import React from 'react';
 import Search from './Search';
 import AddToCartButton from './AddToCartButton';
 
-const Games = ({ games, userData }) => {
+const Games = ({setCartItem, games, userData }) => {
     const [filteredData, setFilteredData] = React.useState([]);
 
     /* How Search Works With Parent Components:
@@ -26,7 +26,7 @@ const Games = ({ games, userData }) => {
                             <h3>{game.console}</h3>
                             <h4>{game.year}</h4>
                             <h2>{game.price}</h2>
-                            <AddToCartButton data={game} userData={userData}/>
+                            <AddToCartButton data={game} userData={userData} setCartItem={setCartItem} />
                         </div>
                     ))
                 ) : (
@@ -37,7 +37,7 @@ const Games = ({ games, userData }) => {
                             <h3>{game.console}</h3>
                             <h4>{game.year}</h4>
                             <h2>{game.price}</h2>
-                            <AddToCartButton data={game} userData={userData}/>
+                            <AddToCartButton data={game} userData={userData} setCartItem={setCartItem} />
                         </div>
                     ))
                 )}
