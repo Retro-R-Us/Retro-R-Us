@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import "../style/cart.css"
 
 const Cart = ({ cart, setCart }) => {
     const [quantities, setQuantities] = useState([]);
@@ -11,7 +12,7 @@ const Cart = ({ cart, setCart }) => {
     
     const total = () => {
         let total = 0;
-        cart.every((item) => {
+        cart.forEach((item) => {
             item.price = Number(item.price);
             const price = item.price;
             total += price;
