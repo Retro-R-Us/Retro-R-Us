@@ -11,7 +11,29 @@ img {
 
 .logo {
     display: block;
-    margin-left: 100vmax;
-    margin-right: 100vmax;
-    margin-bottom: -200px;
+    margin-left: 50vmax;
+    margin-right: 50vmax;
+    margin-bottom: 20px;
+}
+
+.homecard {
+    background-color: rgba(138, 192, 240, 0.666);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5px;
+    padding: 10px;
+    max-width: 300px;
+    max-height: 400px;
+    min-height: 200px;
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+.homeContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
 }
