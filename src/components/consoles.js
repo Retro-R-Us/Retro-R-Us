@@ -16,7 +16,7 @@ const Consoles = ({ setCartItem, userData, consoles }) => {
                     filteredData.map((console, index) => (
                         <div className='consoleCard' key={index}>
                             <h2>{console.title}</h2>
-                            <img alt={console.image} src={`/components/Product_Images/${console.image}`}/>
+                            <img src={console.image}></img>
                             <h3>{console.description}</h3>
                             <h4>{console.year}</h4>
                             <h2>{console.price}</h2>
@@ -27,6 +27,7 @@ const Consoles = ({ setCartItem, userData, consoles }) => {
                     consoles.map((console, index) => (
                         <div className='consoleCard' key={index}>
                             <h2>{console.title}</h2>
+                            <img src={console.image}></img>
                             <h3>{console.description}</h3>
                             <h4>{console.year}</h4>
                             <h2>{console.price}</h2>

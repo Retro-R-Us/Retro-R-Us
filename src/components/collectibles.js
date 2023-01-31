@@ -14,6 +14,7 @@ const Collectibles = ({setCartItem, userData, collectibles }) => {
                     filteredData.map((collectible, index) => (
                         <div className='collectibleCard' key={index}>
                             <h2>{collectible.title}</h2>
+                            <img src={collectible.image}></img>
                             <h3>{collectible.description}</h3>
                             <h3>{collectible.console}</h3>
                             <h4>{collectible.year}</h4>
@@ -25,6 +26,7 @@ const Collectibles = ({setCartItem, userData, collectibles }) => {
                     collectibles.map((collectible, index) => (
                         <div className='collectibleCard' key={index}>
                             <h2>{collectible.title}</h2>
+                            <img src={collectible.image}></img>
                             <h3>{collectible.description}</h3>
                             <h3>{collectible.console}</h3>
                             <h4>{collectible.year}</h4>
