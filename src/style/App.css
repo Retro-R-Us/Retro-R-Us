@@ -8,7 +8,7 @@ body {
   color: white;
   display: flex;
   flex-wrap: wrap;
-  justify-content:space-around;
+  justify-content: center;
   max-width: 100vw;
   min-height: 100vh;
 }
@@ -109,9 +109,8 @@ body {
   100% { opacity: 0 }
 }
 
-h1 {
+h2 {
   color: white;
-  font-size: 4rem;
   padding: 1rem;
 }
 
