@@ -24,8 +24,8 @@ apiRouter.use('/consoles', consolesRouter);
 const ordersRouter = require('./orders');
 apiRouter.use("/order", ordersRouter);
 
-const gamesRouter = require('./games'); // import the games router
-apiRouter.use('/games', gamesRouter); // mount the games router on /api/games
+const gamesRouter = require('./games'); 
+apiRouter.use('/games', gamesRouter); 
 
 const cartRouter = require('./cart');
 apiRouter.use('/cart', cartRouter);

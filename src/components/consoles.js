@@ -14,9 +14,9 @@ const Consoles = ({ setCartItem, userData, consoles }) => {
                 {filteredData.length > 0 ? (
                     filteredData.map((console, index) => (
                         <div className='consoleCard' key={index}>
-                            <h1>{console.title}</h1>
+                            <h2>{console.title}</h2>
                             <img alt={console.image} src={`/components/Product_Images/${console.image}`}/>
-                            <h2>{console.description}</h2>
+                            <h3>{console.description}</h3>
                             <h4>{console.year}</h4>
                             <h2>{console.price}</h2>
                             <AddToCartButton data={console} userData={userData} setCartItem={setCartItem} />
@@ -25,8 +25,8 @@ const Consoles = ({ setCartItem, userData, consoles }) => {
                 ) : (
                     consoles.map((console, index) => (
                         <div className='consoleCard' key={index}>
-                            <h1>{console.title}</h1>
-                            <h2>{console.description}</h2>
+                            <h2>{console.title}</h2>
+                            <h3>{console.description}</h3>
                             <h4>{console.year}</h4>
                             <h2>{console.price}</h2>
                             <AddToCartButton data={console} userData={userData} setCartItem={setCartItem} />

@@ -9,7 +9,7 @@ module.exports = {
     updateAccessoryListing
 };
 
-// returns all accessories
+
 async function getAllAccessories() {
     const { rows: accessories } = await client.query(`
         SELECT * FROM accessories;
@@ -18,7 +18,7 @@ async function getAllAccessories() {
     return accessories;
 }
 
-// returns an accessory by id
+
 async function getAccessoryById(accessoryId) {
     try {
         const { rows: [accessory] } = await client.query(`
@@ -39,7 +39,7 @@ async function getAccessoryById(accessoryId) {
     }
 }
 
-// returns all accessories by console
+
 async function getAccessoriesByConsole(console) {
     try {
         const { rows: [accessories] } = await client.query(`
@@ -60,8 +60,8 @@ async function getAccessoriesByConsole(console) {
     }
 }
 
-// create an accessory listing, returns the new accessory
 async function createAccessoryListing({ title, description, console, price, image }) {
+
     try {
         const { rows: [accessory] } = await client.query(`
             INSERT INTO accessories(title, description, console, price, image)
@@ -75,7 +75,7 @@ async function createAccessoryListing({ title, description, console, price, imag
     }   
 }
 
-// update accessory listing, returns the updated accessory
+
 async function updateAccessoryListing(accessoryId, { title, description, console, price }) {
     try {
         const { rows: [accessory] } = await client.query(`
@@ -91,7 +91,7 @@ async function updateAccessoryListing(accessoryId, { title, description, console
     }
 }   
 
-// delete accessory listing, returns the deleted accessory
+
 async function deleteAccessoryListing(accessoryId) {
     try {
         const { rows: [accessory] } = await client.query(`

@@ -10,10 +10,8 @@ const {
 } = require('./');
 
 async function dropTables() {
-  console.log("Attempting to drop tables.")
   try {
     client.connect();
-    // drop tables in correct order
     await client.query(`
       DROP TABLE IF EXISTS cart;
       DROP TABLE IF EXISTS orders;
@@ -24,18 +22,14 @@ async function dropTables() {
       DROP TABLE IF EXISTS users;
     `);
 
-    console.log("Tables Successfully Dropped.")
+    
   } catch (error) {
-    console.log("Could not drop tables.")
     throw error;
   }
 }
 
 async function buildTables() {
-  console.log("Attempting to build tables.")
   try {
-    // build tables in correct order
-    // users table
     await client.query(`
       CREATE TABLE users (
         id SERIAL PRIMARY KEY,
@@ -48,7 +42,7 @@ async function buildTables() {
       );
     `);
 
-    // orders table
+    
     await client.query(`
       CREATE TABLE orders (
         "orderId" SERIAL PRIMARY KEY,
@@ -58,7 +52,7 @@ async function buildTables() {
       );
     `);
 
-    // games table
+    
     await client.query(`
       CREATE TABLE games (
         "gameId" SERIAL PRIMARY KEY,
@@ -71,7 +65,7 @@ async function buildTables() {
       );
     `);
 
-    // consoles table
+    
     await client.query(`
       CREATE TABLE consoles (
         "consoleId" SERIAL PRIMARY KEY,
@@ -83,7 +77,7 @@ async function buildTables() {
       );
     `);
 
-    // accessories table
+    
     await client.query(`
       CREATE TABLE accessories (
         "accessoryId" SERIAL PRIMARY KEY,
@@ -95,7 +89,7 @@ async function buildTables() {
       );
     `);
 
-    // collectibles table
+    
     await client.query(`
       CREATE TABLE collectibles (
         "collectibleId" SERIAL PRIMARY KEY,
@@ -107,7 +101,7 @@ async function buildTables() {
       );
     `);
 
-    // cart table
+    
     await client.query(`
       CREATE TABLE cart (
         "cartId" SERIAL PRIMARY KEY,
@@ -121,18 +115,14 @@ async function buildTables() {
       );
     `);
 
-    console.log("Tables Successfully built.")
+    
   } catch (error) {
-    console.log("Could not build tables.")
     throw error;
   }
 }
 
 async function populateInitialData() {
   try {
-    console.log("Creating Initial users");
-
-    //***** INITIAL USERS ***** */
     class buildUser {
       constructor(username, password, email, admin) {
         this.username = username,
@@ -152,11 +142,11 @@ async function populateInitialData() {
 
     const users = [user1, user2, user3, admin1, admin2, admin3, admin4]
     const createdUsers = await Promise.all(users.map(user => User.createUser(user)))
-    console.log("Initial Users Created")
+    
 
-    //***** INITIAL GAMES ***** */
+    
 
-    console.log("Creating Initial Games")
+    
     class Game {
       constructor(title, desc, console, year, price, image) {
         this.title = title,
@@ -269,10 +259,9 @@ async function populateInitialData() {
     const games = [game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12];
   
     const createdGames = await Promise.all(games.map(game =>  Games.createGameListing(game)))
-    console.log("Initial Games Created")
+    
 
-    //***** INITIAL CONSOLES ***** */
-    console.log("Creating Initial Consoles")
+    
 
     class createConsole {
       constructor(title, desc, year, price, image) {
@@ -345,8 +334,7 @@ async function populateInitialData() {
     const createdConsoles = await Promise.all(consoles.map(somecon => Consoles.createConsoleListing(somecon)))
     console.log("Initial Consoles Created")
 
-    //***** INITIAL COLLECTIBLES ***** */
-    console.log("Creating Initial Collectibles")
+    
 
 
     class createCol {
@@ -401,10 +389,7 @@ async function populateInitialData() {
 
     const collectibles = [coll1, coll2, coll3, coll4, coll5, coll6];
     const createdCollectibles = await Promise.all(collectibles.map(collectible =>  Collectibles.createCollectibleListing(collectible)));
-    console.log("Initial Collectibles Created")
-
-    //***** INITIAL ACCESSORIES ***** */
-    console.log("Creating Initial Accessories")
+   
 
     class createAcc {
       constructor(title, desc, console, price, image) {
@@ -458,10 +443,7 @@ async function populateInitialData() {
 
     const accessories = [acc1, acc2, acc3, acc4, acc5, acc6];
     const createdAccessories = await Promise.all(accessories.map(accessory =>  Acc.createAccessoryListing(accessory)))
-    console.log("Initial Accessories Created")
-
-    //***** INITIAL ORDERS ***** */
-    console.log("Creating Initial Fake Orders")
+    
 
     class createOr {
       constructor(userId, status) {
@@ -485,10 +467,7 @@ async function populateInitialData() {
 
     const orders = [order1, order2, order3];
     const createdOrders = await Promise.all(orders.map(order =>  Orders.createOrder(order)))
-    console.log("Initial Fake Orders Created")
-
-    //***** INITIAL CART ***** */
-    console.log("Creating Initial Fake Carts")
+    
 
     class createCart {
       constructor(orderId, quantity, userId, gameId, consoleId, accessoryId, collectibleId) {
@@ -532,7 +511,7 @@ async function populateInitialData() {
 
     const carts = [cart1, cart2, cart3];
     const createdCarts = await Promise.all(carts.map(cart =>  Cart.addItemToCart(cart)))
-    console.log("Initial Fake Carts Created")
+    
 
   } catch (error) {
     throw error;

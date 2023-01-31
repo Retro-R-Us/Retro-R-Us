@@ -1,6 +1,6 @@
 const client = require('../client');
 
-// returns all games
+
 async function getAllGames() {
     const { rows: games } = await client.query(`
         SELECT * FROM games;
@@ -9,7 +9,7 @@ async function getAllGames() {
     return games;
 }
 
-// returns game by id
+
 async function getGameById(gameId) {
     try {
         const { rows: [game] } = await client.query(`
@@ -30,7 +30,7 @@ async function getGameById(gameId) {
     }
 }
 
-// returns all games by console
+
 async function getGamesByConsole(console) {
     try {
         const { rows: [games] } = await client.query(`
@@ -51,7 +51,7 @@ async function getGamesByConsole(console) {
     }
 }
 
-// returns all games by year
+
 async function getGamesByYear(year) {
     try {
         const { rows: [games] } = await client.query(`
@@ -72,7 +72,6 @@ async function getGamesByYear(year) {
     }
 }
 
-// create new game listing
 async function createGameListing({ title, description, console, year, price, image }) {
     try {
         const { rows: [game] } = await client.query(`
@@ -87,7 +86,7 @@ async function createGameListing({ title, description, console, year, price, ima
     }
 }
 
-// update game listing
+
 async function updateGameListing(gameId, { title, description, console, year, price }) {
     
     try {
@@ -104,7 +103,7 @@ async function updateGameListing(gameId, { title, description, console, year, pr
     }
 }
 
-// delete game listing
+
 async function deleteGameListing(gameId) {
     try {
         const { rows: [game] } = await client.query(`

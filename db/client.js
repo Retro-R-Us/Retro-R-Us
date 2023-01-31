@@ -1,7 +1,7 @@
-// Connect to DB
+
 const { Client } = require('pg');
 
-// change the DB_NAME string to whatever your group decides on
+
 const DB_NAME = 'retro_r_us';
 
 const DB_URL =
@@ -9,7 +9,7 @@ const DB_URL =
 
 let client;
 
-// github actions client config
+
 if (process.env.CI) {
   client = new Client({
     host: 'localhost',
@@ -19,7 +19,6 @@ if (process.env.CI) {
     database: 'postgres',
   });
 } else {
-  // local / heroku client config
   client = new Client(DB_URL);
 }
 
