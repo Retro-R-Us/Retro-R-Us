@@ -14,7 +14,6 @@ const Header = () => {
             </div>
             <div className="item">
                 <select className="ui inverted primary button" onChange={(e) => {
-                    console.log(e.target.value)
                     if (e.target.value === "") {
                         return;
                     }
