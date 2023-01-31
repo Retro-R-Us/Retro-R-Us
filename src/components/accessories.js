@@ -12,20 +12,20 @@ const Accessories = ({setCartItem, accessories, userData }) => {
                 {filteredData.length > 0 ? (
                     filteredData.map((accessory, index) => (
                         <div className="accessoryCard" key={index}>
-                            <h1>{accessory.title}</h1>
-                            <h2>{accessory.description}</h2>
+                            <h2>{accessory.title}</h2>
+                            <h3>{accessory.description}</h3>
                             <h3>{accessory.console}</h3>
-                            <h2>{accessory.price}</h2>
+                            <h4>{accessory.price}</h4>
                             <AddToCartButton data={accessory} userData={userData} setCartItem={setCartItem} />
                         </div>
                     ))
                 ) : (
                     accessories.map((accessory, index) => (
                         <div className="accessoryCard" key={index}>
-                            <h1>{accessory.title}</h1>
-                            <h2>{accessory.description}</h2>
+                            <h2>{accessory.title}</h2>
+                            <h3>{accessory.description}</h3>
                             <h3>{accessory.console}</h3>
-                            <h2>{accessory.price}</h2>
+                            <h4>{accessory.price}</h4>
                             <AddToCartButton data={accessory} userData={userData} setCartItem={setCartItem} />
                         </div>
                     ))
