@@ -1,7 +1,6 @@
 .accessoryCard,
 .consoleCard,
-.gameCard,
-.collectibleCard {
+.gameCard{
     background-color: rgba(138, 192, 240, 0.666);
     display: flex;
     align-items: center;
@@ -16,10 +15,11 @@
     border-radius: 15px;
 }
 
-.consolesContainer, .accessoriesContainer {
+.collectiblesContainer, .consolesContainer, .accessoriesContainer {
   min-height: 100vh;
 }
 
+.collCard,
 .accCard,
 .conCard {
     align-items: center;
