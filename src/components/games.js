@@ -26,7 +26,7 @@ const Games = ({ games, userData }) => {
                             <h3>{game.console}</h3>
                             <h4>{game.year}</h4>
                             <h2>{game.price}</h2>
-                            <AddToCartButton data={games} userData={userData}/>
+                            <AddToCartButton data={game} userData={userData}/>
                         </div>
                     ))
                 ) : (
@@ -37,7 +37,7 @@ const Games = ({ games, userData }) => {
                             <h3>{game.console}</h3>
                             <h4>{game.year}</h4>
                             <h2>{game.price}</h2>
-                            <AddToCartButton data={games} userData={userData}/>
+                            <AddToCartButton data={game} userData={userData}/>
                         </div>
                     ))
                 )}

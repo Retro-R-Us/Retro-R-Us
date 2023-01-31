@@ -17,21 +17,20 @@ import { fetchAllAccessories } from "../api/accessories";
 import Home from "./home";
 import Cart from "./Cart";
 
-const localStorageCart = JSON.parse(localStorage.getItem("cart") || "[]")
-
 const App = () => {
     const [APIHealth, setAPIHealth] = useState("");
     const [token, setToken] = useState(window.localStorage.getItem("token") || null);
     const [username, setUsername] = useState(window.localStorage.getItem("username") || null);
-    const [userData, setUserData] = useState();
-    const [userOrders, setUserOrders] = useState();
+    const [userData, setUserData] = useState(undefined);
+    const [userOrders, setUserOrders] = useState(undefined);
     const [modalTrigger, setModalTrigger] = useState(false);
     const [action, setAction] = useState(null);
     const [games, setGames] = useState([]);
     const [consoles, setConsoles] = useState([]);
     const [collectibles, setCollectibles] = useState([]);
     const [accessories, setAccessories] = useState([]);
-    const [cart, setCart] = useState(localStorageCart)
+    const [cart, setCart] = useState(JSON.parse(window.localStorage.getItem("cart")) || undefined);
+    const [cartItem, setCartItem] = useState()
 
     const history = useNavigate();
 
@@ -48,6 +47,25 @@ const App = () => {
         // invoke it immediately after its declaration, inside the useEffect callback
         getAPIStatus();
     }, []);
+
+    useEffect(() => {
+        if (!cartItem) {
+            return;
+        }
+        const cartAr = JSON.parse(window.localStorage.getItem("cart"));
+        if (!cartAr) {
+            const newCart = [];
+            newCart.push(cartItem)
+            window.localStorage.setItem("cart", JSON.stringify(newCart))
+            setCart(JSON.parse(window.localStorage.getItem("cart")));
+        } else {
+            cartAr.push(cartItem);
+            window.localStorage.setItem("cart", JSON.stringify(cartAr))
+            setCart(JSON.parse(window.localStorage.getItem("cart")));
+        }
+        
+        window.localStorage.removeItem("cartItem")
+    }, [cartItem]);
 
     useEffect(() => {
         const getGames = async () => {
@@ -90,13 +108,20 @@ const App = () => {
                 if (data.Success) {
                     window.localStorage.setItem("username", userInfo.username);
                     setUserData(userInfo);
-                    setUserOrders(orders);
+                    if (orders === undefined) {
+                        setUserOrders(undefined)
+                    } else {
+                        setUserOrders(orders);
+                    }
+                    
                 }
             };
             getUserData();
         } else {
             window.localStorage.removeItem("token");
             window.localStorage.removeItem("username");
+            setUserData(undefined);
+            setUserOrders(undefined)
         }
     }, [token]);
 
@@ -135,14 +160,14 @@ const App = () => {
             <Routes>
                 <Route exact path="/" element={<Home />} />
                 <Route path="/user/cart" element={<Cart cart={cart} setCart={setCart}/>} />
-                <Route path="/consoles" element={<Consoles consoles={consoles} userData={userData}/>} />
-                <Route path="/games" element={<Games games={games} userData={userData}/>} />
+                <Route path="/consoles" element={<Consoles consoles={consoles} userData={userData} setCartItem={setCartItem}/>} />
+                <Route path="/games" element={<Games games={games} userData={userData} setCartItem={setCartItem}/>} />
                 <Route
                     path="/collectibles"
-                    element={<Collectibles collectibles={collectibles} userData={userData}/>}
+                    element={<Collectibles collectibles={collectibles} userData={userData}setCartItem={setCartItem}/>}
                 />
-                <Route path="/account" element={<Account userData={userData} token={token} userOrders={userOrders} />} />
-                <Route path="/accessories" element={<Accessories accessories={accessories} userData={userData}/>} />
+                <Route path="/account" element={<Account userData={userData} token={token} userOrders={userOrders}/>} />
+                <Route path="/accessories" element={<Accessories accessories={accessories} userData={userData} setCartItem={setCartItem}/>} />
             </Routes>
 
             {/* <Footer /> */}
