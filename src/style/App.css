@@ -108,18 +108,4 @@ ul {
 #root {
   width: 100%;
   height: 100%;
-
-.Cart {
-  background-image: url("https://wallpapers.com/images/featured/rkp03okh2d43ik06.jpg");
-  color: rgb(16, 15, 15);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  max-width: 100vw;
-  min-height: 100vh;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content:space-around;
-  align-items: center;
-  flex-direction: column;
-  flex-grow: 1;
 }
