@@ -5,6 +5,7 @@ import "../style/cart.css"
 const Cart = ({ cart, setCart }) => {
     const [quantities, setQuantities] = useState([]);
 
+
     const handleCheckout = () => {
         return;
         // setCart([]);

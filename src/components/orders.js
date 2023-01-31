@@ -6,7 +6,6 @@ const MyOrders = ({ setOrdersTrigger, userData, userOrders }) => {
         userOrders = [userOrders];
     }
 
-    console.log("USER ORDERS:", userOrders);
 
     return (
         <div id="modal">

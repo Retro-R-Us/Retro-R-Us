@@ -55,13 +55,13 @@ async function getCollectiblesByConsole(console) {
     }
 };
 
-async function createCollectibleListing({ title, description, console, price }) {
+async function createCollectibleListing({ title, description, console, price, image }) {
     try {
         const { rows: [collectibles] } = await client.query(`
-            INSERT INTO collectibles (title, description, console, price)
-            VALUES($1, $2, $3, $4)
+            INSERT INTO collectibles (title, description, console, price, image)
+            VALUES($1, $2, $3, $4, $5)
             RETURNING *;
-        `, [title, description, console, price]);
+        `, [title, description, console, price, image]);
 
         return collectibles;
     } catch (error) {
