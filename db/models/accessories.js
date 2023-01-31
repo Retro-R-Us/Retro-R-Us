@@ -61,13 +61,13 @@ async function getAccessoriesByConsole(console) {
 }
 
 // create an accessory listing, returns the new accessory
-async function createAccessoryListing({ title, description, console, price }) {
+async function createAccessoryListing({ title, description, console, price, image }) {
     try {
         const { rows: [accessory] } = await client.query(`
-            INSERT INTO accessories(title, description, console, price)
-            VALUES($1, $2, $3, $4)
+            INSERT INTO accessories(title, description, console, price, image)
+            VALUES($1, $2, $3, $4, $5)
             RETURNING *;
-        `, [title, description, console, price]);
+        `, [title, description, console, price, image]);
 
         return accessory;
     } catch (error) {

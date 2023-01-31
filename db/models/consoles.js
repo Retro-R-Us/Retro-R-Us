@@ -57,13 +57,13 @@ async function getConsolesByYear(year) {
     }
 };
 
-async function createConsoleListing({ title, description, year, price }) {
+async function createConsoleListing({ title, description, year, price, image }) {
     try {
         const { rows: [consoles] } = await client.query(`
-            INSERT INTO consoles (title, description, year, price)
-            VALUES($1, $2, $3, $4)
+            INSERT INTO consoles (title, description, year, price, image)
+            VALUES($1, $2, $3, $4, $5)
             RETURNING *;
-        `, [title, description, year, price]);
+        `, [title, description, year, price, image]);
  
         return consoles;
     } catch (error) {

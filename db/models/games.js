@@ -73,13 +73,13 @@ async function getGamesByYear(year) {
 }
 
 // create new game listing
-async function createGameListing({ title, description, console, year, price }) {
+async function createGameListing({ title, description, console, year, price, image }) {
     try {
         const { rows: [game] } = await client.query(`
-            INSERT INTO games(title, description, console, year, price)
-            VALUES($1, $2, $3, $4, $5)
+            INSERT INTO games(title, description, console, year, price, image)
+            VALUES($1, $2, $3, $4, $5, $6)
             RETURNING *;
-        `, [title, description, console, year, price]);
+        `, [title, description, console, year, price, image]);
 
         return game;
     } catch (error) {
