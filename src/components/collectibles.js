@@ -9,6 +9,7 @@ const Collectibles = ({setCartItem, userData, collectibles }) => {
         <div className='collectiblesPage'>
         <div className='collectiblesContainer'>
         <Search data={collectibles} setFilteredData={setFilteredData} />
+        {filteredData.length > 0 ? (<h1>Showing {filteredData.length} result(s)</h1>) : null}
                 {filteredData.length > 0 ? (
                     filteredData.map((collectible, index) => (
                         <div className='collectibleCard' key={index}>

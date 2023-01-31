@@ -8,7 +8,8 @@ const Accessories = ({setCartItem, accessories, userData }) => {
     return (
         <div className="accesoriesPage">
             <div className="accesoriesContainer">
-            <Search data={accessories} setFilteredData={setFilteredData} />
+                <Search data={accessories} setFilteredData={setFilteredData} />
+                {filteredData.length > 0 ? (<h1>Showing {filteredData.length} result(s)</h1>) : null}
                 {filteredData.length > 0 ? (
                     filteredData.map((accessory, index) => (
                         <div className="accessoryCard" key={index}>

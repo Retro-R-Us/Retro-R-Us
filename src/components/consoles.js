@@ -11,6 +11,7 @@ const Consoles = ({ setCartItem, userData, consoles }) => {
         <div className='consolesPage'>
         <div className='consolesContainer'>
         <Search data={consoles} setFilteredData={setFilteredData} />
+            {filteredData.length > 0 ? (<h1>Showing {filteredData.length} result(s)</h1>) : null}
                 {filteredData.length > 0 ? (
                     filteredData.map((console, index) => (
                         <div className='consoleCard' key={index}>
