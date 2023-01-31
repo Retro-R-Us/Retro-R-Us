@@ -1,6 +1,7 @@
 import React from 'react';
 import Search from './Search';
 import AddToCartButton from './AddToCartButton';
+import ps2 from "./Product_Images/ps2.png"
 import "../style/cards.css"
 
 
@@ -41,7 +42,7 @@ const Consoles = ({ setCartItem, userData, consoles }) => {
                         : consoles.map((console, index) => (
                               <div className="card conCard" key={index} style={{background: "none", backgroundColor: "rgba(138,192,240,.8)"}}>
                                   <div className="image" style={{marginRight: "30px"}} >
-                                      <img src="" />
+                                      <img src={ps2} />
                                   </div>
                                   <div className="content">
                                       <div className="header">{console.title}</div>
