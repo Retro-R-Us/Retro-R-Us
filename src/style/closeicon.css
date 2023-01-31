@@ -1,0 +1,15 @@
+.close-icon {
+    content: 'x';
+    cursor: pointer;
+    position: fixed;
+    right: calc(15% - 30px);
+    top: calc(100vh - 85vh - 33px);
+    background: #ededed;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    line-height: 20px;
+    text-align: center;
+    border: 2px solid rgb(31, 29, 29);
+    font-size: 20px;
+  }

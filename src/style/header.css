@@ -1,0 +1,15 @@
+.altheader {
+    display: flex;
+    align-items: right;
+    justify-content: center;
+}
+
+.header {
+    display: flex;
+    align-items: left;
+    justify-content: center;
+}
+
+.authbar {
+    margin-right: 20px;
+}

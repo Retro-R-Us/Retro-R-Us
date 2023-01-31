@@ -1,0 +1,17 @@
+img {
+    max-width: 300px;
+    max-height: 300px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 1;
+    margin: 15px;
+    padding: 15px;
+}
+
+.logo {
+    display: block;
+    margin-left: 100vmax;
+    margin-right: 100vmax;
+    margin-bottom: -200px;
+}
