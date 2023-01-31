@@ -9,8 +9,8 @@ const Consoles = ({ setCartItem, userData, consoles }) => {
 
     return (
         <div className='consolesPage'>
-        <div className='consolesContainer'>
-        <Search data={consoles} setFilteredData={setFilteredData} />
+            <Search data={consoles} setFilteredData={setFilteredData} />
+            <div className='consolesContainer'>
                 {filteredData.length > 0 ? (
                     filteredData.map((console, index) => (
                         <div className='consoleCard' key={index}>
