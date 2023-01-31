@@ -1,23 +1,9 @@
-.consolesContainer,
-.gamesContainer,
-.accesoriesContainer,
-.collectiblesContainer,
 body {
   background-color: rgba(136, 152, 172, 0.708);
-  color: white;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   min-height: 100vh;
-}
-
-.gamesPage,
-.consolesPage,
-.collectiblesPage,
-.accesoriesPage {
-  background-image: url("https://pbs.twimg.com/media/DqvmspaWkAAQ28a.jpg:large");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
 }
 
 .cb-slideshow,
@@ -109,27 +95,6 @@ body {
 
 h2 {
   color: white;
-}
-
-.accessoryCard,
-.consoleCard,
-.gameCard,
-.collectibleCard {
-  background-color: rgba(138, 192, 240, 0.666);
-  color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  flex-grow: 1;
-  margin: 5px;
-  padding: 10px;
-  margin-left: 10px;
-  max-width: 300px;
-  min-height: 150px;
-  max-height: 500px;
-  border: 2px solid black;
-  border-radius: 15px;
 }
 
 ul {
