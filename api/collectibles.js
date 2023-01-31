@@ -7,7 +7,6 @@ collectiblesRouter.get('/', async(request, response, next) => {
     try {
         const allCollectibles = await Collectibles.getAllCollectibles()
         response.send(allCollectibles)
-        console.log("An error occured while getting all collectibles!")
     } catch (error) {
         next(error)
     }
@@ -18,7 +17,6 @@ collectiblesRouter.post('/', async (request, response, next) => {
         const newCollectible = await Collectibles.createCollectibleListing(request.body);
         response.send(newCollectible);
     } catch (error) {
-        console.log("An error occured while creating a new collectible listing");
         next(error);
     }
 });
@@ -28,7 +26,6 @@ collectiblesRouter.get('/:collectibleId', async (request, response, next) => {
         const collectible = await Collectibles.getCollectibleById(request.params.collectibleId);
         response.send(collectible);
     } catch (error) {
-        console.log("An error occured while getting a collectible by that ID");
         next(error);
     }
 });
@@ -46,7 +43,6 @@ collectiblesRouter.patch('/:collectibleId', async (request, response, next) => {
         const updatedCollectible = await Collectibles.updateCollectiblesListing(request.params.collectibleId, request.body);
         response.send(updatedCollectible);
     } catch (error) {
-        console.log("An error occured while updating a collectible listing");
         next(error);
     }
     });
@@ -73,7 +69,6 @@ collectiblesRouter.get('/console/:console', async (request, response, next) => {
         const collectibles = await Collectibles.getCollectiblesByConsole(request.params.console);
         response.send(collectibles);
     } catch (error) {
-        console.log("An error occured while getting collectibles by that console");
         next(error);
     }
 });
