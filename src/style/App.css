@@ -199,3 +199,7 @@ img {
   align-items: left;
   justify-content: center;
 }
+
+.authbar {
+  margin-right: 20px;
+}
