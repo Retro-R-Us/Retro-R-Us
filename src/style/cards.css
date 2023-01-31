@@ -1,0 +1,29 @@
+.accessoryCard,
+.consoleCard,
+.gameCard,
+.collectibleCard {
+    background-color: rgba(138, 192, 240, 0.666);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5px;
+    padding: 10px;
+    max-width: 300px;
+    max-height: 400px;
+    min-height: 150px;
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+.accessoriesContainer {
+  min-height: 100vh;
+}
+
+.accCard {
+    align-items: center;
+}
+
+.cards {
+    justify-content: center;
+}
