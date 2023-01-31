@@ -16,6 +16,13 @@ img {
     margin-bottom: 20px;
 }
 
+.homeContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
 .homecard {
     background-color: rgba(138, 192, 240, 0.666);
     display: flex;
@@ -29,11 +36,4 @@ img {
     min-height: 200px;
     border: 2px solid black;
     border-radius: 15px;
-}
-
-.homeContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
 }
