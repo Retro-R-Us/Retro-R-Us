@@ -1,5 +1,6 @@
 .search {
-    display: block;
-    margin-left: 100vmax;
-    margin-right: 100vmax;
+    align-items: center;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
   }
