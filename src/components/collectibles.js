@@ -17,7 +17,7 @@ const Collectibles = ({ userData, collectibles }) => {
                             <h3>{collectible.console}</h3>
                             <h4>{collectible.year}</h4>
                             <h2>{collectible.price}</h2>
-                            <AddToCartButton data={collectibles} userData={userData}/>
+                            <AddToCartButton data={collectible} userData={userData}/>
                         </div>
                     ))
                 ) : (
@@ -28,7 +28,7 @@ const Collectibles = ({ userData, collectibles }) => {
                             <h3>{collectible.console}</h3>
                             <h4>{collectible.year}</h4>
                             <h2>{collectible.price}</h2>
-                            <AddToCartButton data={collectibles} userData={userData}/>
+                            <AddToCartButton data={collectible} userData={userData}/>
                         </div>
                     ))
                 )}

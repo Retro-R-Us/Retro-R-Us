@@ -1,39 +1,169 @@
+.homeContainer,
+.consolesContainer,
+.gamesContainer,
+.accesoriesContainer,
+.collectiblesContainer,
+.Cart,
 body {
+  background-color: rgba(136, 152, 172, 0.708);
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-around;
+  max-width: 100vw;
+  min-height: 100vh;
+}
+
+.gamesPage,
+.consolesPage,
+.collectiblesPage,
+.accesoriesPage {
   background-image: url("https://pbs.twimg.com/media/DqvmspaWkAAQ28a.jpg:large");
   background-repeat: no-repeat;
   background-attachment: fixed;
-  margin: 0 auto;
-  background-position: center;
-  background-size: cover;
-  background-color: beige;
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
+}
+
+.cb-slideshow,
+.cb-slideshow:after { 
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 35px;
+    left: 0px;
+    z-index: 0; 
+}
+
+.cb-slideshow:after { 
+    content: ''; 
+}
+
+.cb-slideshow li span { 
   width: 100%;
   height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  color: transparent;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: none;
+  opacity: 0;
+  z-index: 1;
+  animation: imageAnimation 36s linear infinite 0s; 
+}
+
+.cb-slideshow li div { 
+  z-index: 1000;
+  position: absolute;
+  bottom: 30px;
+  left: 0px;
+  width: 100%;
+  text-align: center;
+  opacity: 0;
+  color: #fff;
+  animation: titleAnimation 36s linear infinite 0s; 
+}
+.cb-slideshow li:nth-child(1) span { 
+  background-image: url("https://c4.wallpaperflare.com/wallpaper/591/113/210/resident-evil-resident-evil-4-leon-s-kennedy-hd-wallpaper-preview.jpg") 
+}
+.cb-slideshow li:nth-child(2) span { 
+  background-image: url("https://images.alphacoders.com/113/thumb-1920-1131277.png");
+  animation-delay: 6s; 
+}
+.cb-slideshow li:nth-child(3) span { 
+  background-image: url("https://cdn.mos.cms.futurecdn.net/qWCCuEFjdYfdrVvE8d5dHV.jpg");
+  animation-delay: 12s; 
+}
+.cb-slideshow li:nth-child(4) span { 
+  background-image: url("https://www.pixelstalk.net/wp-content/uploads/images1/Tetris-Logo-Wallpaper.jpg");
+  animation-delay: 18s; 
+}
+.cb-slideshow li:nth-child(5) span { 
+  background-image: url("https://images2.alphacoders.com/897/897160.jpg");
+  animation-delay: 24s; 
+}
+.cb-slideshow li:nth-child(6) span { 
+  background-image: url("https://pbs.twimg.com/media/FZEFtFyWQAYDKpx?format=jpg&name=large");
+  animation-delay: 30s; 
+}
+
+.cb-slideshow li:nth-child(2) div { 
+  animation-delay: 6s; 
+}
+.cb-slideshow li:nth-child(3) div { 
+  animation-delay: 12s; 
+}
+.cb-slideshow li:nth-child(4) div { 
+  animation-delay: 18s; 
+}
+.cb-slideshow li:nth-child(5) div { 
+  animation-delay: 24s; 
+}
+.cb-slideshow li:nth-child(6) div { 
+  animation-delay: 30s; 
+}
+@keyframes imageAnimation { 
+  0% { opacity: 0; animation-timing-function: ease-in; }
+  8% { opacity: 0.15; animation-timing-function: ease-out; }
+  17% { opacity: 0.15 }
+  25% { opacity: 0 }
+  100% { opacity: 0 }
 }
 
 h1 {
-  color: black;
+  color: white;
+  font-size: 4rem;
   padding: 1rem;
+}
+
+.logo {
+  display: block;
+  margin-left: 100vmax;
+  margin-right: 100vmax;
+  margin-bottom: -200px;
+}
+
+.search {
+  display: block;
+  margin-left: 100vmax;
+  margin-right: 100vmax;
 }
 
 .card,
 .accessoryCard,
 .consoleCard,
-.gameCard {
-  background-color: rgb(135, 184, 226);
+.gameCard,
+.collectibleCard {
+  background-color: rgba(138, 192, 240, 0.666);
   color: black;
   display: flex;
   align-items: center;
   flex-direction: column;
   flex-grow: 1;
-  margin: 15px;
-  padding: 25px;
-  max-width: 350px;
+  margin: 5px;
+  padding: 20px;
+  margin-left: 30px;
+  max-width: 400px;
   min-height: 300px;
-  border: 1px solid black;
-  border-radius: 33px;
+  max-height: 600px;
+  border: 3px solid black;
+  border-radius: 55px;
+}
+
+.close-icon {
+  content: 'x';
+  cursor: pointer;
+  position: fixed;
+  right: calc(15% - 30px);
+  top: calc(100vh - 85vh - 33px);
+  background: #ededed;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  line-height: 20px;
+  text-align: center;
+  border: 2px solid rgb(31, 29, 29);
+  font-size: 20px;
 }
 
 ul {
@@ -50,6 +180,12 @@ nav {
 img {
   max-width: 300px;
   max-height: 300px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-grow: 1;
+  margin: 15px;
+  padding: 15px;
 }
 
 .altheader {
