@@ -19,6 +19,7 @@ const Header = () => {
                         return;
                     }
                     nav(e.target.value)
+                    e.target.value = '';
                 }}>
                     <option value="">Browse</option>
                     {categories.map((cat, index) => {
