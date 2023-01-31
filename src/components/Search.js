@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import "../style/search.css"
 
 const Search = ({ data , setFilteredData }) => {
     const [search, setSearch] = React.useState("");
@@ -42,9 +43,9 @@ const Search = ({ data , setFilteredData }) => {
                 }}
                 
             />
-            <i class="search icon"></i>
+            <i className="search icon"></i>
             <button onClick={handleSearch}>
-                <i class="arrow circle right icon"></i>
+                <i className="arrow circle right icon"></i>
             </button>
             {lastSearch && <h2>{hasResults ? `Showing results for '${lastSearch}'` : `No search results for '${lastSearch}'`}</h2>}
         </div>
