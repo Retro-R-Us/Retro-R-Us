@@ -8,7 +8,6 @@ gamesRouter.get('/', async (req, res, next) => {
         const allGames = await Games.getAllGames();
         res.send(allGames);
     } catch (error) {
-        console.log("An error occured while retrieving all games");
         next(error);
     }
 });
@@ -19,7 +18,6 @@ gamesRouter.post('/', async (req, res, next) => {
         const newGame = await Games.createGameListing(req.body);
         res.send(newGame);
     } catch (error) {
-        console.log("An error occured while creating a new game listing");
         next(error);
     }
 });
@@ -38,7 +36,6 @@ gamesRouter.delete('/:gameId', async (req, res, next) => {
         const deletedGame = await Games.deleteGameListing(req.params.gameId);
         res.send(deletedGame);
     } catch (error) {
-        console.log("An error occured while deleting a game listing");
         next(error);
     }
 });
@@ -49,7 +46,6 @@ gamesRouter.get('/:gameId', async (req, res, next) => {
         const game = await Games.getGameById(req.params.gameId);
         res.send(game);
     } catch (error) {
-        console.log("An error occured while retrieving a game by that ID");
         next(error);
     }
 });
@@ -68,7 +64,6 @@ gamesRouter.patch('/:gameId', async (req, res, next) => {
         const updatedGame = await Games.updateGameListing(req.params.gameId, req.body);
         res.send(updatedGame);
     } catch (error) {
-        console.log("An error occured while updating a game listing");
         next(error);
     }
 });
@@ -79,7 +74,6 @@ gamesRouter.get('/console/:console', async (req, res, next) => {
         const games = await Games.getGamesByConsole(req.params.console);
         res.send(games);
     } catch (error) {
-        console.log("An error occured while gettings games by that console");
         next(error);
     }
 });
@@ -90,7 +84,6 @@ gamesRouter.get('/year/:year', async (req, res, next) => {
         const games = await Games.getGamesByYear(req.params.year);
         res.send(games);
     } catch (error) {
-        console.log("An error occured while gettings games by that year");
         next(error);
     }
 });
