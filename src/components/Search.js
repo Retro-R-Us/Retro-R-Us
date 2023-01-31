@@ -31,7 +31,7 @@ const Search = ({ data , setFilteredData }) => {
     }
 
     return (
-        <div className="search">
+        <div className="ui left icon input search">
             <input 
                 type="text" 
                 placeholder="Search..." 
@@ -40,8 +40,12 @@ const Search = ({ data , setFilteredData }) => {
                 onChange={(event) => {
                     setSearch(event.target.value);
                 }}
+                
             />
-            <button onClick={handleSearch}>Search</button>
+            <i class="search icon"></i>
+            <button onClick={handleSearch}>
+                <i class="arrow circle right icon"></i>
+            </button>
             {lastSearch && <h2>{hasResults ? `Showing results for '${lastSearch}'` : `No search results for '${lastSearch}'`}</h2>}
         </div>
     );
