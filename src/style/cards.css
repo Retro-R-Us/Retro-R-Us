@@ -1,24 +1,8 @@
-.accessoryCard,
-.consoleCard,
-.gameCard{
-    background-color: rgba(138, 192, 240, 0.666);
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    margin: 5px;
-    padding: 10px;
-    max-width: 300px;
-    max-height: 400px;
-    min-height: 150px;
-    border: 2px solid black;
-    border-radius: 15px;
-}
-
-.collectiblesContainer, .consolesContainer, .accessoriesContainer {
+.gamesContainer, .collectiblesContainer, .consolesContainer, .accessoriesContainer {
   min-height: 100vh;
 }
 
+.gameCard,
 .collCard,
 .accCard,
 .conCard {
@@ -27,4 +11,13 @@
 
 .cards {
     justify-content: center;
+}
+
+.gamesPage,
+.consolesPage,
+.collectiblesPage,
+.accesoriesPage {
+  background-image: url("https://pbs.twimg.com/media/DqvmspaWkAAQ28a.jpg:large");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
