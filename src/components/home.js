@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import logo from './/images/retro-r-us.png';
+import "../style/home.css"
 
 const Home = () => {
     return (
