@@ -1,14 +1,15 @@
 import React from 'react';
 import Search from './Search';
 import AddToCartButton from './AddToCartButton';
+import "../style/search.css"
 
 const Collectibles = ({setCartItem, userData, collectibles }) => {
     const [filteredData, setFilteredData] = React.useState([]);
 
     return (
         <div className='collectiblesPage'>
-        <div className='collectiblesContainer'>
-        <Search data={collectibles} setFilteredData={setFilteredData} />
+            <Search data={collectibles} setFilteredData={setFilteredData} />
+            <div className='collectiblesContainer'>
                 {filteredData.length > 0 ? (
                     filteredData.map((collectible, index) => (
                         <div className='collectibleCard' key={index}>
