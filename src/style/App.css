@@ -114,19 +114,6 @@ h2 {
   padding: 1rem;
 }
 
-.logo {
-  display: block;
-  margin-left: 100vmax;
-  margin-right: 100vmax;
-  margin-bottom: -200px;
-}
-
-.search {
-  display: block;
-  margin-left: 100vmax;
-  margin-right: 100vmax;
-}
-
 .card,
 .accessoryCard,
 .consoleCard,
@@ -148,22 +135,6 @@ h2 {
   border-radius: 55px;
 }
 
-.close-icon {
-  content: 'x';
-  cursor: pointer;
-  position: fixed;
-  right: calc(15% - 30px);
-  top: calc(100vh - 85vh - 33px);
-  background: #ededed;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  line-height: 20px;
-  text-align: center;
-  border: 2px solid rgb(31, 29, 29);
-  font-size: 20px;
-}
-
 ul {
   list-style: none;
 }
@@ -175,35 +146,7 @@ nav {
   height: 50%;
 }
 
-img {
-  max-width: 300px;
-  max-height: 300px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  flex-grow: 1;
-  margin: 15px;
-  padding: 15px;
-}
-
-.altheader {
-  display: flex;
-  align-items: right;
-  justify-content: center;
-}
-
-.header {
-  display: flex;
-  align-items: left;
-  justify-content: center;
-}
-
-.authbar {
-  margin-right: 20px;
-}
-
-.cart {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+#root {
+  width: 100%;
+  height: 100%;
 }
