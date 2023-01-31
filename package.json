@@ -18,16 +18,22 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
+    "bcrypt": "^5.1.0",
     "concurrently": "^7.0.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.17.1",
     "jest": "^24.9.0",
+    "jsonwebtoken": "^9.0.0",
     "morgan": "^1.10.0",
+    "node-time-ago": "^1.0.0",
     "pg": "^8.2.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "^5.0.1"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.6.2",
+    "react-scripts": "^5.0.1",
+    "react-slideshow-image": "^4.1.1",
+    "react-stripe-checkout": "^2.6.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.4",
