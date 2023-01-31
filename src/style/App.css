@@ -3,7 +3,6 @@
 .gamesContainer,
 .accesoriesContainer,
 .collectiblesContainer,
-.Cart,
 body {
   background-color: rgba(136, 152, 172, 0.708);
   color: white;
@@ -202,4 +201,12 @@ img {
 
 .authbar {
   margin-right: 20px;
+}
+
+.cart {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 15px;
+  padding: 15px;
 }
