@@ -32,7 +32,7 @@ const Search = ({ data , setFilteredData }) => {
     }
 
     return (
-        <div className="ui left icon input search">
+        <div className="ui action input search">
             <input 
                 type="text" 
                 placeholder="Search..." 
@@ -43,9 +43,8 @@ const Search = ({ data , setFilteredData }) => {
                 }}
                 
             />
-            <i className="search icon"></i>
-            <button onClick={handleSearch}>
-                <i className="arrow circle right icon"></i>
+            <button className="ui icon button" onClick={handleSearch}>
+                <i className="search icon"></i>
             </button>
             {lastSearch && <h2>{hasResults ? `Showing results for '${lastSearch}'` : `No search results for '${lastSearch}'`}</h2>}
         </div>
