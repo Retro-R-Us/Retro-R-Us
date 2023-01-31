@@ -21,8 +21,8 @@ const Games = ({setCartItem, games, userData }) => {
                 {filteredData.length > 0 ? (
                     filteredData.map((game, index) => (
                         <div className='gameCard' key={index}>
-                            <h1>{game.title}</h1>
-                            <h2>{game.description}</h2>
+                            <h2>{game.title}</h2>
+                            <h3>{game.description}</h3>
                             <h3>{game.console}</h3>
                             <h4>{game.year}</h4>
                             <h2>{game.price}</h2>
@@ -32,8 +32,8 @@ const Games = ({setCartItem, games, userData }) => {
                 ) : (
                     games.map((game, index) => (
                         <div className='gameCard' key={index}>
-                            <h1>{game.title}</h1>
-                            <h2>{game.description}</h2>
+                            <h2>{game.title}</h2>
+                            <h3>{game.description}</h3>
                             <h3>{game.console}</h3>
                             <h4>{game.year}</h4>
                             <h2>{game.price}</h2>

@@ -2,9 +2,7 @@
 .consolesContainer,
 .gamesContainer,
 .accesoriesContainer,
-.collectiblesContainer,
-.Cart,
-body {
+.collectiblesContainer {
   background-color: rgba(136, 152, 172, 0.708);
   color: white;
   display: flex;
@@ -111,7 +109,7 @@ body {
 }
 
 h1 {
-  color: white;
+  color: black;
   font-size: 4rem;
   padding: 1rem;
 }
@@ -202,4 +200,19 @@ img {
 
 .authbar {
   margin-right: 20px;
+}
+
+.Cart {
+  background-image: url("https://wallpapers.com/images/featured/rkp03okh2d43ik06.jpg");
+  color: rgb(16, 15, 15);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  max-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-around;
+  align-items: center;
+  flex-direction: column;
+  flex-grow: 1;
 }
