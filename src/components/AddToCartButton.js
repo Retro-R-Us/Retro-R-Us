@@ -18,7 +18,7 @@ const AddToCartButton = ({setCartItem, data, userData }) => {
         <div className="ui animated fade button" tabIndex="0" onClick={handleAddToCart}>
             <div className="visible content">Add To Cart</div>
             <div className="hidden content">
-                <i className="cart plus icon"></i>
+                <i className="cart plus icon" style={{backgroundImage: "none"}}></i>
             </div>
         </div>
     );
