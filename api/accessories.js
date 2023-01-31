@@ -8,7 +8,6 @@ accessoriesRouter.get('/', async (req, res, next) => {
         const allAccessories = await Acc.getAllAccessories();
         res.send(allAccessories);
     } catch (error) {
-        console.log("An error occured while retrieving all accessories");
         next(error);
     }
 });
@@ -18,8 +17,7 @@ accessoriesRouter.get('/:accessoryId', async (req, res, next) => {
     try {
         const accessory = await Acc.getAccessoryById(req.params.accessoryId);
         res.send(accessory);
-    } catch (error) {
-        console.log("An error occured while retrieving an accessory by that ID");
+    } catch (error) { 
         next(error);
     }
 });
@@ -30,7 +28,6 @@ accessoriesRouter.get('/console/:console', async (req, res, next) => {
         const accessories = await Acc.getAccessoriesByConsole(req.params.console);
         res.send(accessories);
     } catch (error) {
-        console.log("An error occured while retrieving accessories by that console");
         next(error);
     }
 });
@@ -41,7 +38,6 @@ accessoriesRouter.post('/', async (req, res, next) => {
         const newAccessory = await Acc.createAccessoryListing(req.body);
         res.send(newAccessory);
     } catch (error) {
-        console.log("An error occured while creating a new accessory listing");
         next(error);
     }
 });
