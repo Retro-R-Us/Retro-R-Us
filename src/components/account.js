@@ -49,8 +49,7 @@ export const Account = (props) => {
 
     return (
         <div id="accountContainer">
-            {/* { ordersTrigger === true ? <AccountSettings /> : null} */}
-            {/* { supportTrigger === true ? <AccountSettings /> : null} */}
+            
             <div className="ui link cards ">
                 <div className="card" onClick={() => setAccountTrigger(true)}>
                     <div className="image">

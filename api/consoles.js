@@ -8,7 +8,6 @@ consolesRouter.get('/', async(request, response, next) => {
     try {
         const allConsoles = await Consoles.getAllConsoles()
         response.send(allConsoles)
-        console.log("An error occured while getting all consoles!")
     } catch (error) {
         next(error)
     }
@@ -19,7 +18,6 @@ consolesRouter.post('/', async (request, response, next) => {
         const newConsole = await Consoles.createConsoleListing(request.body);
         response.send(newConsole);
     } catch (error) {
-        console.log("An error occured while creating a new console listing");
         next(error);
     }
 });
@@ -29,7 +27,6 @@ consolesRouter.get('/:consoleId', async (request, response, next) => {
         const console = await Consoles.getConsolesById(request.params.consoleId);
         response.send(console);
     } catch (error) {
-        console.log("An error occured while getting a console by that ID");
         next(error);
     }
 });
@@ -47,7 +44,6 @@ consolesRouter.patch('/:consoleId', async (request, response, next) => {
         const updatedConsole = await Consoles.updateConsoleListing(request.params.consoleId, request.body);
         response.send(updatedConsole);
     } catch (error) {
-        console.log("An error occured while updating a console listing");
         next(error);
     }
 });

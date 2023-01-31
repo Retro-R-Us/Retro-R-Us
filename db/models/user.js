@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 const SALT = 10;
 
 module.exports = {
-  // add your database adapter fns here
   getAllUsers,
   createUser,
   getUserByUsername,
@@ -42,7 +41,6 @@ async function createUser(userData) {
         }
       }
   } catch (error) {
-    console.log("Could not create user.");
     throw error;
   }
 }
@@ -73,7 +71,6 @@ async function userLogin ({username, password}) {
       };
     }
   } catch (error) {
-    console.log("Could not get user data.");
     throw error;
   }
 }
@@ -91,7 +88,6 @@ async function getAllUsers() {
     return rows;
 
   } catch (error) {
-    console.log("Could not get all users.")
     throw error;
   }
 }
@@ -122,7 +118,6 @@ async function getUserByUsername(name) {
     
 
   } catch (error) {
-    console.log("Could not get user by name.");
     throw error;
   }
 }
@@ -141,7 +136,6 @@ async function getUserById(id) {
     return user;
 
   } catch (error) {
-    console.log("Could not get user by id.");
     throw error;
   }
 }
@@ -206,7 +200,6 @@ async function newPassword ({username, oldPassword, newPassword}) {
     }
 
   } catch (error) {
-    console.log("Could not change the user's password.");
     throw error
   }
 }
