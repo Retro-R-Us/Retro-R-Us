@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, createPath } from "react-router-dom";
 import { getAPIHealth, getCurrentUser } from "../api";
 import AuthorizeUser from "./Auth";
 import { Account } from "./account";
@@ -16,6 +16,7 @@ import Accessories from "./accessories";
 import { fetchAllAccessories } from "../api/accessories";
 import Home from "./home";
 import Cart from "./Cart";
+import Admin from "./admin";
 
 const App = () => {
     const [APIHealth, setAPIHealth] = useState("");
@@ -166,8 +167,12 @@ const App = () => {
                     path="/collectibles"
                     element={<Collectibles collectibles={collectibles} userData={userData}setCartItem={setCartItem}/>}
                 />
-                <Route path="/account" element={<Account userData={userData} token={token} userOrders={userOrders}/>} />
-                <Route path="/accessories" element={<Accessories accessories={accessories} userData={userData} setCartItem={setCartItem}/>} />
+                <Route path="/account" element={<Account userData={userData} token={token} userOrders={userOrders} />} />
+                <Route path="/accessories" element={<Accessories accessories={accessories} userData={userData}/>} />
+                <Route 
+                    path="/admin" 
+                    element={<Admin games={games} consoles={consoles} collectibles={collectibles} accessories={accessories}/>} 
+                />
             </Routes>
 
             {/* <Footer /> */}
