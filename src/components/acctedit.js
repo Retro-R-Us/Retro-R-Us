@@ -15,7 +15,6 @@ export const PassChange = (props) => {
         event.preventDefault();
 
         try {
-            console.log("PASSWORDS:", oldPwd, newPwd, CnewPwd)
             const response = await updateUserPass(token, userData.username, oldPwd, newPwd)
             if (response.Success) {
                 setMessage(response.Message);
