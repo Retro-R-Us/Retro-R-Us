@@ -34,7 +34,7 @@ const Cart = ({ cart, setCart }) => {
     };
 
     return (
-        <div className="cart">
+        <div className="Cart">
             <h1>Cart</h1>
             {cart.length > 0 ? (
                 <table className="ui celled padded table">
