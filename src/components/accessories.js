@@ -14,6 +14,7 @@ const Accessories = ({setCartItem, accessories, userData }) => {
                     filteredData.map((accessory, index) => (
                         <div className="accessoryCard" key={index}>
                             <h2>{accessory.title}</h2>
+                            <img src={accessory.image}></img>
                             <h3>{accessory.description}</h3>
                             <h3>{accessory.console}</h3>
                             <h2>{accessory.price}</h2>
@@ -24,6 +25,7 @@ const Accessories = ({setCartItem, accessories, userData }) => {
                     accessories.map((accessory, index) => (
                         <div className="accessoryCard" key={index}>
                             <h2>{accessory.title}</h2>
+                            <img src={accessory.image}></img>
                             <h3>{accessory.description}</h3>
                             <h3>{accessory.console}</h3>
                             <h2>{accessory.price}</h2>

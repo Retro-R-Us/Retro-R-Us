@@ -140,10 +140,11 @@ h1 {
   flex-grow: 1;
   margin: 5px;
   padding: 20px;
+  margin-bottom: 30px;
   margin-left: 30px;
   max-width: 400px;
   min-height: 300px;
-  max-height: 600px;
+  max-height: 800px;
   border: 3px solid black;
   border-radius: 55px;
 }
@@ -202,7 +203,8 @@ img {
   margin-right: 20px;
 }
 
-.Cart {
+.Cart,
+.order-info  {
   background-image: url("https://wallpapers.com/images/featured/rkp03okh2d43ik06.jpg");
   color: rgb(16, 15, 15);
   background-repeat: no-repeat;

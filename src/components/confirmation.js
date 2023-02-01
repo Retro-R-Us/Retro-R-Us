@@ -1,55 +1,41 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import { userAction } from '../api';
 
-const orderConfirmation = () => {
-    document.addEventListener('DOMContentLoaded', async () => {
-        let urlParams = new URLSearchParams(window.location.search);
-        let sessionId = urlParams.get('session-id');
+const OrderConfirmation = ({ userData }) => {
+    const [code, setCode] = useState();
+    const [confUsername, setConfUsername] = useState(window.localStorage.getItem("username") || null);
+    const [confEmail, setConfEmail] = useState();
 
-        if (sessionId) {
-            const session = await fetch(`order-info/${sessionId}`).then((response) => response.json());
+    const givenSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
 
-            setText("customer-name", session.customer.name);
-            setText("customer-email", session.customer.email);
-            setText("payment-status", `Payment Status: ${session.payment_status}`);
+        useEffect(() => {
+            setConfEmail(userData.email)
+        }, []);
 
-            let currencyFormat = Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: `${session.currency}`,
-            });
-
-            setText("order-total", `Order Total: ${currencyFormat.format(session.amount_total / 100)}`);
-        }
-    });
-
-const setText = (elementId, text) => {
-    const element = document.querySelector(`#${elementId}`);
-    element.innerHTML = text;
-
-const givenSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
-
-let code = "";
-for (let i=0; i<5; i++) {
-    let pos = Math.floor(Math.random()*givenSet.length);
-    code += givenSet[pos]
-
-    return code;
-}
-}
+        useEffect(() => {
+            const confNum = () => {
+            let tempCode = "";
+                for (let i=0; i<5; i++) {
+                    let pos = Math.floor(Math.random()*givenSet.length);
+                    tempCode += givenSet[pos]   
+                }
+            setCode(tempCode);
+        }  
+            confNum()
+    }, []);
 
     return (
     <div className="order-info">
         <h1>Order Confirmed!</h1>
-            <ul>
-                <li>Confirmation Number:<span className="order"></span></li>
-                <li>Name:<span className="customer-name"></span></li>
-                <li>Email:<span className="customer-email"></span></li>
-                <li><span className="order-total"></span></li>
-                <li><span className="payment-status"></span></li>
-            </ul>
-        
-        <p>We appreciate your business!</p>
+                <h2>Please check your email for updates on your order.</h2>
+                <h3>Confirmation Number: {code} <span className="order"></span></h3>
+                <h3>Name: {confUsername} <span></span></h3>
+                <h3>Email: {confEmail} <span className="customer-email"></span></h3>
+                <img src="https://upload.wikimedia.org/wikipedia/en/2/2d/SSU_Kirby_artwork.png"></img>      
+        <h2 style={{color: "white" }}>We appreciate your business!</h2>
     </div>
     )
 }
 
-export default orderConfirmation;
+
+export default OrderConfirmation;
