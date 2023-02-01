@@ -1,6 +1,7 @@
 import React from 'react';
 import Search from './Search';
 import AddToCartButton from './AddToCartButton';
+// import { getGameById } from '../../db/models/games';
 
 const Games = ({setCartItem, games, userData }) => {
     const [filteredData, setFilteredData] = React.useState([]);
@@ -15,6 +16,7 @@ const Games = ({setCartItem, games, userData }) => {
                     filteredData.map((game, index) => (
                         <div className='gameCard' key={index}>
                             <h2>{game.title}</h2>
+                            <img src={game.image}></img>
                             <h3>{game.description}</h3>
                             <h3>{game.console}</h3>
                             <h4>{game.year}</h4>
@@ -26,6 +28,7 @@ const Games = ({setCartItem, games, userData }) => {
                     games.map((game, index) => (
                         <div className='gameCard' key={index}>
                             <h2>{game.title}</h2>
+                            <img src={game.image}></img>
                             <h3>{game.description}</h3>
                             <h3>{game.console}</h3>
                             <h4>{game.year}</h4>
@@ -34,6 +37,7 @@ const Games = ({setCartItem, games, userData }) => {
                         </div>
                     ))
                 )}
+                
             </div>
         </div>
     );

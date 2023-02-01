@@ -17,6 +17,7 @@ import { fetchAllAccessories } from "../api/accessories";
 import Home from "./home";
 import Cart from "./Cart";
 import Admin from "./admin";
+import OrderConfirmation from "./confirmation";
 
 const App = () => {
     const [APIHealth, setAPIHealth] = useState("");
@@ -31,7 +32,7 @@ const App = () => {
     const [collectibles, setCollectibles] = useState([]);
     const [accessories, setAccessories] = useState([]);
     const [cart, setCart] = useState(JSON.parse(window.localStorage.getItem("cart")) || undefined);
-    const [cartItem, setCartItem] = useState()
+    const [cartItem, setCartItem] = useState();
 
     const history = useNavigate();
 
@@ -168,10 +169,8 @@ const App = () => {
                     path="/admin" 
                     element={<Admin games={games} consoles={consoles} collectibles={collectibles} accessories={accessories}/>} 
                 />
+                <Route path="/confirmation" element={<OrderConfirmation userData={userData} />} />
             </Routes>
-
-            
-
         </div>
     );
 };
