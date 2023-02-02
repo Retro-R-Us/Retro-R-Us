@@ -20,5 +20,5 @@ export async function getAPIHealth() {
         return { healthy: false };
     }
 }
-
+console.log("APIURL", BASEURL)
 export default BASEURL;
