@@ -1,4 +1,4 @@
-const BASEURL = process.env.APIURL || "http://localhost:4000/api";
+const BASEURL = process.env.APIURL;
 
 import axios from 'axios';
 
