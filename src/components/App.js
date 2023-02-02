@@ -20,7 +20,7 @@ import Admin from "./admin";
 import OrderConfirmation from "./confirmation";
 
 const App = () => {
-    const [APIHealth, setAPIHealth] = useState("");
+//     const [APIHealth, setAPIHealth] = useState("");
     const [token, setToken] = useState(window.localStorage.getItem("token") || null);
     const [username, setUsername] = useState(window.localStorage.getItem("username") || null);
     const [userData, setUserData] = useState(undefined);
@@ -36,14 +36,14 @@ const App = () => {
 
     const history = useNavigate();
 
-    useEffect(() => {
-        const getAPIStatus = async () => {
-            const { healthy } = await getAPIHealth();
-            setAPIHealth(healthy ? "api is up! :D" : "api is down :/");
-        };
+//     useEffect(() => {
+//         const getAPIStatus = async () => {
+//             const { healthy } = await getAPIHealth();
+//             setAPIHealth(healthy ? "api is up! :D" : "api is down :/");
+//         };
 
-        getAPIStatus();
-    }, []);
+//         getAPIStatus();
+//     }, []);
 
     useEffect(() => {
         if (!cartItem) {
